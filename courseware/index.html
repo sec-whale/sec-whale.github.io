@@ -360,6 +360,15 @@
             line-height: 1.6
         }
 
+        .empty-row {
+            padding: 26px 10px;
+            color: #9ecfe0;
+            font-size: 22px;
+            font-weight: 800;
+            text-align: center;
+            border-bottom: 1px solid #b9efff18
+        }
+
         .resource-actions {
             display: flex;
             gap: 14px;
@@ -395,6 +404,11 @@
 
         .asset-material {
             background: linear-gradient(135deg, #ffc400, #ffab00)
+        }
+
+        /* 模板：练习按钮，想加练习时在 assets 里写 type: "practice" */
+        .asset-practice {
+            background: linear-gradient(135deg, #22c55e, #16a34a)
         }
 
         @media(max-width:720px) {
@@ -612,15 +626,73 @@
             { label: "公开课", url: "#" }
         ];
         const courses = [
-            { title: "C++基础", url: "#" },
-            { title: "普及组J1", url: "#" },
-            { title: "初赛J", url: "#" },
-            { title: "普及组J2", url: "#" },
-            { title: "提高组S1", url: "#" },
-            { title: "提高组S2", url: "#" },
-            { title: "普及组J3", url: "#" },
+            {
+                title: "C++基础", children: []
+            },
+            {
+                title: "普及组J1", children: [
+                    {
+                        title: "课件-深度优先搜索-基础算法-V1.4",
+                        desc: "深度优先搜索原理和应用讲解",
+                        assets: [
+                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQCjahNNL2oKRLlq0l3sgeF9AR0S5pPQZMjCPBm4HGxfTto?resid=346D6399EC5AB93F!s4d136aa36a2f440ab96ad25dec81e17d&ithint=file%2Cpptx&e=XbTcCl&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQ2phaE5OTDJvS1JMbHEwbDNzZ2VGOUFSMFM1cFBRWk1qQ1BCbTRIR3hmVHRvP2U9WGJUY0Ns" },
+                            { type: "practice", text: "练习", url: "https://onedrive.live.com/:w:/g/personal/346D6399EC5AB93F/IQCew0wJ32xgT6ClkNKZROOkAa6hyoKObsBiz1v49xDYXXY?resid=346D6399EC5AB93F!s094cc39e6cdf4f60a0a590d29944e3a4&ithint=file%2Cdocx&e=y6ZHsF&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3cvYy8zNDZENjM5OUVDNUFCOTNGL0lRQ2V3MHdKMzJ4Z1Q2Q2xrTktaUk9Pa0FhNmh5b0tPYnNCaXoxdjQ5eERZWFhZP2U9eTZaSHNG" }
+                        ]
+                    },
+                    {
+                        title: "课件-广度优先搜索-基础算法-V1.4",
+                        desc: "广度优先搜索原理和应用 ",
+                        assets: [
+                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQC3CYKSstUdT7QDSghcrU28AZCvH44PBquAxmud_DU_IWg?resid=346D6399EC5AB93F!s928209b7d5b24f1db4034a085cad4dbc&ithint=file%2Cpptx&e=028AlS&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQzNDWUtTc3RVZFQ3UURTZ2hjclUyOEFaQ3ZINDRQQnF1QXhtdWRfRFVfSVdnP2U9MDI4QWxT" },
+                            { type: "practice", text: "练习", url: "https://onedrive.live.com/:w:/g/personal/346D6399EC5AB93F/IQBbQzKbpIu1QoVzOHoS-iu-Ab1MzRWwqO6m_k2FYI9OiDs?resid=346D6399EC5AB93F!s9b32435b8ba442b58573387a12fa2bbe&ithint=file%2Cdocx&e=2dDMu2&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3cvYy8zNDZENjM5OUVDNUFCOTNGL0lRQmJRekticEl1MVFvVnpPSG9TLWl1LUFiMU16Uld3cU82bV9rMkZZSTlPaURzP2U9MmRETXUy" }
+                        ]
+                    }
+                ]
+            },
+            {
+                title: "初赛J", children: []
+            },
+            {
+                title: "普及组J2", children: [
+                ]
+            },
+            {
+                title: "提高组S1", children: [
+                ]
+            },
+            {
+                title: "提高组S2", children: [
+
+                ]
+            },
+            {
+                title: "普及组J3", children: [
+
+                ]
+            },
             {
                 title: "普及组J4", children: [
+                    {
+                        title: "课件-分治算法-算法优化-V1.4",
+                        desc: "分治算法讲解",
+                        assets: [
+                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQB4H_BKa5P5Sa4pk5c2rS58AWzE7Mvliq4nMunmiAJixjk?resid=346D6399EC5AB93F!s4af01f78936b49f9ae29939736ad2e7c&ithint=file%2Cpptx&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQjRIX0JLYTVQNVNhNHBrNWMyclM1OEFXekU3TXZsaXE0bk11bm1pQUppeGpr" }
+                        ]
+                    },
+                    {
+                        title: "课件-排序提高-算法优化-V1.5",
+                        desc: "归并排序、快速排序、基数排序、技术排序、希尔排序、竞标赛排序",
+                        assets: [
+                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQB2xJ10VxZdSJOzz35OiZb8ARx6He38MJIUjyI55a9iaYY?resid=346D6399EC5AB93F!s749dc4761657485d93b3cf7e4e8996fc&ithint=file%2Cpptx&e=53FIz4&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQjJ4SjEwVnhaZFNKT3p6MzVPaVpiOEFSeDZIZTM4TUpJVWp5STU1YTlpYVlZP2U9NTNGSXo0" }
+                        ]
+                    },
+                    {
+                        title: "课件-前缀和-算法优化-V1.3",
+                        desc: "一维前缀和、二维前缀和、后缀和讲解",
+                        assets: [
+                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQAUAl6BJDwZQKIeZyeL8l7-Ad_cj6poNNLvP0Ln71tkFzU?resid=346D6399EC5AB93F!s815e02143c244019a21e67278bf25efe&ithint=file%2Cpptx&e=GeT6Y3&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQVVBbDZCSkR3WlFLSWVaeWVMOGw3LUFkX2NqNnBvTk5MdlAwTG43MXRrRnpVP2U9R2VUNlkz" }
+                        ]
+                    },
                     {
                         title: "课件-二分法和尺取法-算法优化-V1.1",
                         desc: "二分答案、双指针、尺取法讲解",
@@ -636,11 +708,20 @@
                         ]
                     },
                     {
+                        title: "课件-技巧-算法优化-V1.0",
+                        desc: "时间复杂度优化、空间复杂度优化、程序调试方法",
+                        assets: [
+                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQA4PtZCxykgQKLw8l7fr2EgAR3N8mMeE5sg_25lpBvYX4g?resid=346D6399EC5AB93F!s42d63e3829c74020a2f0f25edfaf6120&ithint=file%2Cpptx&e=5INM9r%25u3001&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQTRQdFpDeHlrZ1FLTHc4bDdmcjJFZ0FSM044bU1lRTVzZ18yNWxwQnZZWDRnP2U9NUlOTTlyJXUzMDAx" },
+                            { type: "video", text: "视频", url: "https://cdn.singera.cn/www.singera.cn/uploads/a311d64c-2837-4e97-bd31-ceb748a7731b.mp4" },
+                            { type: "material", text: "素材", url: "https://cyberwhale.net/courseware/素材-技巧-算法优化-V1.0.zip" }
+                        ]
+                    },
+                    {
                         title: "课件-对拍-工具-V2.0",
                         desc: "对拍方法讲解",
                         assets: [
                             { type: "course", text: "课件", url: "https://onedrive.live.com/personal/346D6399EC5AB93F/_layouts/15/Doc.aspx?sourcedoc=%7Be3f96a83-6e8f-4ed1-9991-f533a79a1fa6%7D&action=default&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQ0Rhdm5qajI3UlRwbVI5VE9ubWgtbUFjME5WZjVKZHF1Rlhkb0UxRkx5c29NP2U9WjM3cUho&slrid=83f610a2-70c2-d000-2448-b3e975d90986&originalPath=aHR0cHM6Ly9vbmVkcml2ZS5saXZlLmNvbS86cDovZy9wZXJzb25hbC8zNDZENjM5OUVDNUFCOTNGL0lRQ0Rhdm5qajI3UlRwbVI5VE9ubWgtbUFjME5WZjVKZHF1Rlhkb0UxRkx5c29NP3J0aW1lPTlObksxMm1yM2tnJnJlZGVlbT1hSFIwY0hNNkx5OHhaSEoyTG0xekwzQXZZeTh6TkRaRU5qTTVPVVZETlVGQ09UTkdMMGxSUTBSaGRtNXFhakkzVWxSd2JWSTVWRTl1YldndGJVRmpNRTVXWmpWS1pIRjFSbGhrYjBVeFJreDVjMjlOUDJVOVdqTTNjVWhv&CID=8b97c941-bac9-41c6-94d6-94f7aed6b85c&_SRM=0%3AG%3A57&file=%E8%AF%BE%E4%BB%B6-%E5%AF%B9%E6%8B%8D-%E5%B7%A5%E5%85%B7-V2.0.pptx" },
-                            { type: "material", text: "素材", url: "#" }
+                            { type: "material", text: "素材", url: "https://cyberwhale.net/courseware/素材-对拍-工具-V2.0.zip" }
                         ]
                     },
                     {
@@ -652,9 +733,13 @@
                     },
                 ]
             },
-            { title: "初赛S", url: "#" },
-            { title: "省选", url: "#" }
+            { title: "初赛S", children: [] },
+            { title: "省选", children: [] }
         ];
+        /*
+        练习按钮模板，不会显示，只有你复制到某个课件的 assets 里才会出现：
+        { type: "practice", text: "练习", url: "练习链接" }
+        */
         const links = [
             { icon: "🐋", tag: "主页", title: "CyberWhale", text: "你的主站入口。", url: "https://cyberwhale.net" },
             { icon: "📦", tag: "下载", title: "软件下载", text: "这里改成你的下载页面。", url: "https://cyberwhale.net/download" },
@@ -666,11 +751,11 @@
         function renderCourses() {
             courseTabs.innerHTML = nav.map((x, i) => `<button class="${i === 1 ? 'active' : ''}">${x.label}</button>`).join("");
             courseList.innerHTML = courses.map((x, i) => {
-                if (x.children && x.children.length) {
+                if (Array.isArray(x.children)) {
                     return `<li class="course-item has-children">
 <button class="course-main" type="button" data-index="${i}"><span>${x.title}</span><span class="arrow">›</span></button>
 <ul class="sub-list" id="sub-${i}">
-${x.children.map(c => `<li class="resource-row"><div><div class="resource-title">${c.title}</div><div class="resource-desc">${c.desc || ""}</div></div><div class="resource-actions">${(c.assets || [{ type: "course", text: "课件", url: c.url }]).map(a => `<a class="asset-btn asset-${a.type}" href="${a.url}" target="_blank">【${a.text}】</a>`).join("")}</div></li>`).join("")}
+${x.children.length ? x.children.map(c => `<li class="resource-row"><div><div class="resource-title">${c.title}</div><div class="resource-desc">${c.desc || ""}</div></div><div class="resource-actions">${(c.assets || [{ type: "course", text: "课件", url: c.url }]).map(a => `<a class="asset-btn asset-${a.type}" href="${a.url}" target="_blank">【${a.text}】</a>`).join("")}</div></li>`).join("") : `<li class="empty-row">暂无内容</li>`}
 </ul>
 </li>`;
                 }
