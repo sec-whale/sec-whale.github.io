@@ -246,6 +246,7 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -253,8 +254,15 @@
         }
 
         @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(8px); }
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(8px);
+            }
         }
 
         @media (max-width: 700px) {
@@ -262,10 +270,12 @@
                 flex-direction: column;
                 align-items: center;
             }
+
             .nav-links {
                 gap: 1rem;
                 justify-content: center;
             }
+
             .hero-title {
                 font-size: 2.4rem;
             }
@@ -291,7 +301,8 @@
     </div>
 
     <div class="ocean-wrapper">
-        <canvas id="whaleCanvas" class="whale-canvas" style="position: absolute; top:0; left:0; width:100%; height:100%; pointer-events: none;"></canvas>
+        <canvas id="whaleCanvas" class="whale-canvas"
+            style="position: absolute; top:0; left:0; width:100%; height:100%; pointer-events: none;"></canvas>
         <div class="wave-bg"></div>
 
         <div class="hero-content">
@@ -438,7 +449,7 @@
             let isPlaying = false;
             const soundBtn = document.getElementById('soundToggleBtn');
             let soundActive = false;
-            
+
             if (soundBtn) {
                 soundBtn.addEventListener('click', (e) => {
                     e.preventDefault();
