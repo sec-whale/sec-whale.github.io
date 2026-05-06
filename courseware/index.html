@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>CyberWhale · 深海课件</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: "Microsoft YaHei", system-ui, sans-serif;
+            color: #eafcff;
+            background: #020817;
+            overflow-x: hidden
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit
+        }
+
+        .bg {
+            position: fixed;
+            inset: 0;
+            z-index: -3;
+            background: radial-gradient(circle at 18% 18%, #064c7a 0, #061d3a 28%, transparent 48%), radial-gradient(circle at 78% 8%, #20d7ff44 0, transparent 28%), linear-gradient(180deg, #06102b 0, #051729 45%, #020713 100%)
+        }
+
+        .bg:before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(#7df9ff10 1px, transparent 1px), linear-gradient(90deg, #7df9ff0c 1px, transparent 1px);
+            background-size: 42px 42px;
+            mask-image: linear-gradient(to bottom, #000 0%, transparent 78%)
+        }
+
+        .bubbles {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            pointer-events: none;
+            overflow: hidden
+        }
+
+        .bubbles span {
+            position: absolute;
+            bottom: -80px;
+            border-radius: 50%;
+            background: #7df9ff55;
+            box-shadow: 0 0 18px #7df9ff;
+            animation: rise linear infinite
+        }
+
+        @keyframes rise {
+            to {
+                transform: translateY(-115vh) scale(1.8);
+                opacity: 0
+            }
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 9;
+            background: #071d35cc;
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid #7df9ff26;
+            box-shadow: 0 8px 32px #0006
+        }
+
+        .nav-inner {
+            width: min(1120px, 94%);
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0
+        }
+
+        .logo {
+            font-weight: 900;
+            letter-spacing: .08em;
+            color: #bdfcff;
+            text-shadow: 0 0 16px #00eaff
+        }
+
+        .navlinks {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: flex-end
+        }
+
+        .navlinks a {
+            padding: 8px 12px;
+            border-radius: 999px;
+            color: #d9fbff;
+            background: #ffffff08;
+            border: 1px solid #ffffff12;
+            transition: .25s
+        }
+
+        .navlinks a:hover,
+        .navlinks a.active {
+            color: #07111e;
+            background: #9dfaff;
+            box-shadow: 0 0 22px #00eaff88;
+            transform: translateY(-2px)
+        }
+
+        header {
+            min-height: 62vh;
+            display: grid;
+            place-items: center;
+            text-align: center;
+            padding: 70px 24px 45px;
+            position: relative
+        }
+
+        .hero {
+            max-width: 960px
+        }
+
+        .whale {
+            font-size: 78px;
+            filter: drop-shadow(0 0 24px #00eaff);
+            margin-bottom: 14px;
+            animation: swim 5s ease-in-out infinite
+        }
+
+        @keyframes swim {
+            50% {
+                transform: rotate(-4deg) translateX(10px)
+            }
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 18px;
+            padding: 10px 16px;
+            border: 1px solid #7df9ff55;
+            border-radius: 999px;
+            background: #062541aa;
+            color: #adf8ff;
+            box-shadow: 0 0 22px #00eaff33
+        }
+
+        h1 {
+            font-size: clamp(38px, 7vw, 86px);
+            line-height: 1.04;
+            letter-spacing: .04em;
+            text-shadow: 0 0 22px #00eaff, 0 0 70px #236dff
+        }
+
+        .subtitle {
+            margin: 20px auto 0;
+            max-width: 760px;
+            font-size: clamp(16px, 2.2vw, 22px);
+            color: #c4efff;
+            line-height: 1.8
+        }
+
+        .actions {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap
+        }
+
+        .btn {
+            padding: 13px 24px;
+            border-radius: 999px;
+            border: 1px solid #77f8ff66;
+            background: linear-gradient(135deg, #00eaff33, #376cff55);
+            box-shadow: 0 0 28px #00eaff33;
+            color: #fff;
+            font-weight: 800;
+            transition: .25s
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 40px #00eaff88
+        }
+
+        .btn.secondary {
+            background: #ffffff0d
+        }
+
+        section {
+            padding: 70px 24px;
+            max-width: 1120px;
+            margin: auto
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 32px
+        }
+
+        .title small {
+            color: #7df9ff;
+            letter-spacing: .2em;
+            text-transform: uppercase
+        }
+
+        .title h2 {
+            font-size: clamp(28px, 5vw, 48px);
+            margin-top: 10px;
+            text-shadow: 0 0 24px #00eaff66
+        }
+
+        .course-shell {
+            border: 1px solid #7df9ff2d;
+            border-radius: 30px;
+            background: linear-gradient(145deg, #071d35dd, #071126dd);
+            box-shadow: 0 22px 70px #0009, inset 0 0 40px #ffffff06;
+            overflow: hidden
+        }
+
+        .course-tabs {
+            display: flex;
+            gap: 0;
+            overflow-x: auto;
+            background: #d9f5ff12;
+            border-bottom: 1px solid #7df9ff26
+        }
+
+        .course-tabs button {
+            white-space: nowrap;
+            border: 0;
+            background: transparent;
+            color: #d8f8ff;
+            padding: 17px 26px;
+            font-size: 16px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: .25s
+        }
+
+        .course-tabs button:hover,
+        .course-tabs button.active {
+            color: #ff4f82;
+            border-bottom-color: #ff4f82;
+            background: #ffffff0c
+        }
+
+        .course-body {
+            padding: 16px 28px 30px
+        }
+
+        .course-list {
+            list-style: none
+        }
+
+        .course-list li {
+            border-bottom: 1px solid #b9efff18
+        }
+
+        .course-main {
+            width: 100%;
+            border: 0;
+            background: transparent;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            padding: 15px 10px;
+            font-size: clamp(24px, 3.4vw, 38px);
+            font-weight: 900;
+            color: #dffbff;
+            text-shadow: 0 0 18px #00eaff45;
+            transition: .2s;
+            cursor: pointer;
+            font-family: inherit
+        }
+
+        .course-main:hover {
+            padding-left: 22px;
+            color: #9dfaff;
+            background: #ffffff08
+        }
+
+        .arrow {
+            font-size: 26px;
+            color: #9befff;
+            transition: .25s
+        }
+
+        .course-item.open>.course-main .arrow {
+            transform: rotate(90deg)
+        }
+
+        .sub-list {
+            display: none;
+            list-style: none;
+            margin: 0 0 10px 34px;
+            border-left: 2px solid #7df9ff33
+        }
+
+        .course-item.open>.sub-list {
+            display: block
+        }
+
+        .sub-link {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            padding: 13px 18px !important;
+            font-size: 21px !important;
+            font-weight: 800 !important;
+            color: #9dfaff !important;
+            text-shadow: none !important
+        }
+
+        .sub-link:hover {
+            background: #00eaff14 !important;
+            padding-left: 28px !important
+        }
+
+        /* 修改：把折叠内容改成类似原站的“课件/视频/素材”附件列表 */
+        .sub-list {
+            margin: 0 0 12px 34px;
+            padding: 6px 0 8px 18px;
+            border-left: 2px solid #7df9ff33
+        }
+
+        .resource-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 18px;
+            align-items: center;
+            padding: 18px 10px;
+            border-bottom: 1px solid #b9efff18
+        }
+
+        .resource-title {
+            font-size: clamp(20px, 2.4vw, 30px);
+            font-weight: 800;
+            color: #eafcff;
+            margin-bottom: 8px
+        }
+
+        .resource-desc {
+            color: #b9dce8;
+            font-size: 17px;
+            line-height: 1.6
+        }
+
+        .resource-actions {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            justify-content: flex-end
+        }
+
+        .asset-btn {
+            min-width: 92px;
+            text-align: center;
+            padding: 13px 18px;
+            border-radius: 8px;
+            color: #fff !important;
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: .05em;
+            box-shadow: 0 0 20px #0003;
+            transition: .22s
+        }
+
+        .asset-btn:hover {
+            transform: translateY(-3px);
+            filter: brightness(1.08)
+        }
+
+        .asset-course {
+            background: linear-gradient(135deg, #ff6f75, #ff4c6f)
+        }
+
+        .asset-video {
+            background: linear-gradient(135deg, #8e4dff, #7a2cff)
+        }
+
+        .asset-material {
+            background: linear-gradient(135deg, #ffc400, #ffab00)
+        }
+
+        @media(max-width:720px) {
+            .resource-row {
+                grid-template-columns: 1fr;
+                gap: 12px
+            }
+
+            .resource-actions {
+                justify-content: flex-start
+            }
+
+            .asset-btn {
+                font-size: 17px;
+                min-width: 82px
+            }
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
+            gap: 22px
+        }
+
+        .card {
+            position: relative;
+            min-height: 210px;
+            padding: 24px;
+            border: 1px solid #80f7ff2d;
+            border-radius: 28px;
+            background: linear-gradient(145deg, #0b2a4bcc, #09152bcc);
+            box-shadow: 0 18px 55px #0008, inset 0 0 32px #ffffff06;
+            overflow: hidden;
+            transition: .3s
+        }
+
+        .card:before {
+            content: "";
+            position: absolute;
+            inset: -60px;
+            background: radial-gradient(circle, #00eaff22, transparent 55%);
+            opacity: 0;
+            transition: .3s
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: #80f7ff88;
+            box-shadow: 0 22px 70px #00eaff20
+        }
+
+        .card:hover:before {
+            opacity: 1
+        }
+
+        .card>* {
+            position: relative
+        }
+
+        .icon {
+            font-size: 38px;
+            margin-bottom: 15px
+        }
+
+        .tag {
+            display: inline-block;
+            margin-bottom: 12px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: #00eaff18;
+            color: #aafaff;
+            border: 1px solid #00eaff33;
+            font-size: 13px
+        }
+
+        .card h3 {
+            font-size: 24px;
+            margin-bottom: 12px
+        }
+
+        .card p {
+            color: #c9e9f4;
+            line-height: 1.75
+        }
+
+        .link {
+            display: inline-block;
+            margin-top: 18px;
+            color: #85f8ff;
+            font-weight: 800
+        }
+
+        .panel {
+            padding: 30px;
+            border-radius: 32px;
+            border: 1px solid #7df9ff33;
+            background: linear-gradient(135deg, #071e3acc, #10274bcc);
+            box-shadow: 0 0 50px #00eaff18;
+            text-align: center
+        }
+
+        .panel h2 {
+            font-size: clamp(28px, 5vw, 52px);
+            margin-bottom: 14px
+        }
+
+        .panel p {
+            color: #d7f7ff;
+            line-height: 1.8;
+            max-width: 780px;
+            margin: 0 auto 26px
+        }
+
+        footer {
+            text-align: center;
+            padding: 42px 20px;
+            color: #fff;
+            background: #241808;
+            border-top: 1px solid #ffffff10
+        }
+
+        footer .slogan {
+            font-size: 25px;
+            font-weight: 900;
+            margin-bottom: 22px
+        }
+
+        footer .line {
+            display: inline-block;
+            width: 90px;
+            height: 2px;
+            background: #fff;
+            margin: 0 24px 8px
+        }
+
+        @media(max-width:720px) {
+            .nav-inner {
+                align-items: flex-start;
+                gap: 10px;
+                flex-direction: column
+            }
+
+            .navlinks {
+                justify-content: flex-start
+            }
+
+            header {
+                padding-top: 45px
+            }
+
+            .whale {
+                font-size: 64px
+            }
+
+            .course-body {
+                padding: 10px 14px 24px
+            }
+
+            .course-list a {
+                font-size: 26px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg"></div>
+    <div class="bubbles" id="bubbles"></div>
+    <nav>
+        <div class="nav-inner">
+            <div class="logo">CyberWhale</div>
+            <div class="navlinks" id="navlinks"></div>
+        </div>
+    </nav>
+    <header id="top">
+        <div class="hero">
+            <div class="whale">🐋</div>
+            <div class="badge">✦ 深海课件 · Cyber Learning Deck ✦</div>
+            <h1>赛博深潜课件</h1>
+            <p class="subtitle">在数据的深海中，把知识拆成清晰的航线；每一个标签，都是通往下一片海域的传送门。</p>
+            <div class="actions">
+                <a class="btn" href="#chapters">开始学习</a>
+                <a class="btn secondary" href="#links">查看链接</a>
+            </div>
+        </div>
+    </header>
+    <section id="chapters">
+        <div class="title"><small>Information Olympiad</small>
+            <h2>信息学奥赛课程目录</h2>
+        </div>
+        <div class="course-shell">
+            <div class="course-tabs" id="courseTabs"></div>
+            <div class="course-body">
+                <ul class="course-list" id="courseList"></ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="links">
+        <div class="panel">
+            <h2>数字北极星</h2>
+            <p>这里放你自己的课件链接、OJ链接、下载链接、GitHub链接或任意资源。只需要改下面 JS 里的 links / chapters / steps 数组。</p>
+            <div class="grid" id="linkGrid"></div>
+        </div>
+    </section>
+    <footer>
+        <div class="slogan"><span class="line"></span>探索信息学本质，培养信息学人才<span class="line"></span></div>
+        <p>© 2026 CyberWhale · 深海漫游者 | 遨游比特之海</p>
+    </footer>
+    <script>
+        const nav = [
+            { label: "Python", url: "#" },
+            { label: "信息学奥赛", url: "#chapters" },
+            { label: "AI人工智能", url: "#" },
+            { label: "公开课", url: "#" }
+        ];
+        const courses = [
+            { title: "C++基础", url: "#" },
+            { title: "普及组J1", url: "#" },
+            { title: "初赛J", url: "#" },
+            { title: "普及组J2", url: "#" },
+            { title: "提高组S1", url: "#" },
+            { title: "提高组S2", url: "#" },
+            { title: "普及组J3", url: "#" },
+            {
+                title: "普及组J4", children: [
+                    {
+                        title: "课件-二分法和尺取法-算法优化-V1.1",
+                        desc: "二分答案、双指针、尺取法讲解",
+                        assets: [
+                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQDxKsu0I6QgRrh57WbE9xuAAVyGipYlf5Vhyxc1ZFlwcCs?resid=346D6399EC5AB93F!sb4cb2af1a4234620b879ed66c4f71b80&ithint=file%2Cpptx&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRRHhLc3UwSTZRZ1JyaDU3V2JFOXh1QUFWeUdpcFlsZjVWaHl4YzFaRmx3Y0Nz" }
+                        ]
+                    },
+                    {
+                        title: "课件-差分-算法优化-V1.5 2",
+                        desc: "一维差分、二维差分讲解",
+                        assets: [
+                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQA2vmHo_kgCTbYL6Hzzvmo5ASF9iB1Th-fqCPaOK8XoDno?resid=346D6399EC5AB93F!se861be3648fe4d02b60be87cf3be6a39&ithint=file%2Cpptx&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQTJ2bUhvX2tnQ1RiWUw2SHp6dm1vNUFTRjlpQjFUaC1mcUNQYU9LOFhvRG5v" }
+                        ]
+                    },
+                    {
+                        title: "课件-对拍-工具-V2.0",
+                        desc: "对拍方法讲解",
+                        assets: [
+                            { type: "course", text: "课件", url: "https://onedrive.live.com/personal/346D6399EC5AB93F/_layouts/15/Doc.aspx?sourcedoc=%7Be3f96a83-6e8f-4ed1-9991-f533a79a1fa6%7D&action=default&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQ0Rhdm5qajI3UlRwbVI5VE9ubWgtbUFjME5WZjVKZHF1Rlhkb0UxRkx5c29NP2U9WjM3cUho&slrid=83f610a2-70c2-d000-2448-b3e975d90986&originalPath=aHR0cHM6Ly9vbmVkcml2ZS5saXZlLmNvbS86cDovZy9wZXJzb25hbC8zNDZENjM5OUVDNUFCOTNGL0lRQ0Rhdm5qajI3UlRwbVI5VE9ubWgtbUFjME5WZjVKZHF1Rlhkb0UxRkx5c29NP3J0aW1lPTlObksxMm1yM2tnJnJlZGVlbT1hSFIwY0hNNkx5OHhaSEoyTG0xekwzQXZZeTh6TkRaRU5qTTVPVVZETlVGQ09UTkdMMGxSUTBSaGRtNXFhakkzVWxSd2JWSTVWRTl1YldndGJVRmpNRTVXWmpWS1pIRjFSbGhrYjBVeFJreDVjMjlOUDJVOVdqTTNjVWhv&CID=8b97c941-bac9-41c6-94d6-94f7aed6b85c&_SRM=0%3AG%3A57&file=%E8%AF%BE%E4%BB%B6-%E5%AF%B9%E6%8B%8D-%E5%B7%A5%E5%85%B7-V2.0.pptx" },
+                            { type: "material", text: "素材", url: "#" }
+                        ]
+                    },
+                    {
+                        title: "课件-表达式运算-数据结构-V1.1",
+                        desc: "前缀表达式、中缀表达式、后缀表达式运算及相互转换",
+                        assets: [
+                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQBtrpyXV3C_SJEIGXkzvW0bAbKBtmRc3nV1ijxlRG38k_k?resid=346D6399EC5AB93F!s979cae6d705748bf9108197933bd6d1b&ithint=file%2Cpptx&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQnRycHlYVjNDX1NKRUlHWGt6dlcwYkFiS0J0bVJjM25WMWlqeGxSRzM4a19r" }
+                        ]
+                    },
+                ]
+            },
+            { title: "初赛S", url: "#" },
+            { title: "省选", url: "#" }
+        ];
+        const links = [
+            { icon: "🐋", tag: "主页", title: "CyberWhale", text: "你的主站入口。", url: "https://cyberwhale.net" },
+            { icon: "📦", tag: "下载", title: "软件下载", text: "这里改成你的下载页面。", url: "https://cyberwhale.net/download" },
+            { icon: "⚙️", tag: "OJ", title: "练习题入口", text: "这里改成你的 OJ 或题单链接。", url: "#" }
+        ];
+        function renderNav() {
+            navlinks.innerHTML = nav.map((x, i) => `<a class="${i === 1 ? 'active' : ''}" href="${x.url}">${x.label}</a>`).join("");
+        }
+        function renderCourses() {
+            courseTabs.innerHTML = nav.map((x, i) => `<button class="${i === 1 ? 'active' : ''}">${x.label}</button>`).join("");
+            courseList.innerHTML = courses.map((x, i) => {
+                if (x.children && x.children.length) {
+                    return `<li class="course-item has-children">
+<button class="course-main" type="button" data-index="${i}"><span>${x.title}</span><span class="arrow">›</span></button>
+<ul class="sub-list" id="sub-${i}">
+${x.children.map(c => `<li class="resource-row"><div><div class="resource-title">${c.title}</div><div class="resource-desc">${c.desc || ""}</div></div><div class="resource-actions">${(c.assets || [{ type: "course", text: "课件", url: c.url }]).map(a => `<a class="asset-btn asset-${a.type}" href="${a.url}" target="_blank">【${a.text}】</a>`).join("")}</div></li>`).join("")}
+</ul>
+</li>`;
+                }
+                return `<li class="course-item"><a class="course-main" href="${x.url}"><span>${x.title}</span><span class="arrow">›</span></a></li>`;
+            }).join("");
+            document.querySelectorAll('.course-main[data-index]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    let li = btn.closest('.course-item');
+                    li.classList.toggle('open');
+                });
+            });
+        }
+        function card(x) { return `<a class="card" href="${x.url}" target="${x.url.startsWith('#') ? '_self' : '_blank'}"><div class="icon">${x.icon}</div><span class="tag">${x.tag}</span><h3>${x.title}</h3><p>${x.text}</p><span class="link">进入海域 →</span></a>` }
+        function renderCards() { linkGrid.innerHTML = links.map(card).join("") }
+        function makeBubbles() { for (let i = 0; i < 36; i++) { let s = document.createElement('span'); s.style.left = Math.random() * 100 + '%'; s.style.animationDuration = 6 + Math.random() * 10 + 's'; s.style.animationDelay = Math.random() * 8 + 's'; s.style.width = s.style.height = 4 + Math.random() * 12 + 'px'; bubbles.appendChild(s) } }
+        renderNav(); renderCourses(); renderCards(); makeBubbles();
+    </script>
+</body>
+
+</html>
