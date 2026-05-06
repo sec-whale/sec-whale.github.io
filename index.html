@@ -7,7 +7,6 @@
     <link rel="shortcut icon" type="image/x-icon"
         href="https://i.imgs.ovh/2026/05/02/bf29034af039328180ea8abd6d6abba5.png">
     <title>赛博鲸鱼 · 深海回响</title>
-    <!-- 引入字体 & 简单动画库 -->
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap"
         rel="stylesheet">
@@ -25,7 +24,6 @@
             color: #fff;
         }
 
-        /* ----- 顶部工具栏 白色半透明玻璃质感 ----- */
         .top-toolbar {
             position: fixed;
             top: 0;
@@ -37,7 +35,6 @@
             padding: 0.9rem 2rem;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
             border-bottom: 1px solid rgba(255, 255, 240, 0.6);
-            transition: all 0.2s;
         }
 
         .toolbar-container {
@@ -57,7 +54,7 @@
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
-            letter-spacing: -0.3px;
+            text-decoration: none;
         }
 
         .nav-links {
@@ -81,17 +78,8 @@
         .nav-item:hover {
             background: rgba(0, 100, 200, 0.1);
             color: #0066cc;
-            transform: translateY(-1px);
         }
 
-        .highlight {
-            color: #0088ff;
-            font-weight: 600;
-            border-left: 2px solid #0088ff;
-            padding-left: 0.2rem;
-        }
-
-        /* 右侧控制区（声音按钮） */
         .sound-control {
             background: rgba(0, 0, 0, 0.05);
             border-radius: 40px;
@@ -101,7 +89,6 @@
             display: flex;
             align-items: center;
             gap: 6px;
-            transition: 0.2s;
             color: #1e2f3e;
             border: 1px solid rgba(0, 0, 0, 0.05);
         }
@@ -110,7 +97,6 @@
             background: rgba(0, 100, 200, 0.15);
         }
 
-        /* ----- 海洋全景容器（背景+鲸鱼动画）----- */
         .ocean-wrapper {
             position: relative;
             width: 100%;
@@ -119,7 +105,6 @@
             overflow: hidden;
         }
 
-        /* 波浪层 (动态水纹) */
         .wave-bg {
             position: absolute;
             bottom: 0;
@@ -131,7 +116,6 @@
             z-index: 2;
         }
 
-        /* 鲸鱼主体 SVG 动画 (几条鲸鱼游动) */
         .whale-canvas {
             position: absolute;
             top: 0;
@@ -142,13 +126,6 @@
             z-index: 5;
         }
 
-        .whale-svg {
-            position: absolute;
-            filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.2));
-            transition: transform 0.1s linear;
-        }
-
-        /* 主内容区 (浮层) */
         .hero-content {
             position: relative;
             z-index: 20;
@@ -169,7 +146,6 @@
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
-            text-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
             animation: fadeUp 1s ease;
         }
 
@@ -178,7 +154,6 @@
             margin-top: 1rem;
             opacity: 0.9;
             max-width: 600px;
-            letter-spacing: 1px;
         }
 
         .scroll-hint {
@@ -187,11 +162,9 @@
             background: rgba(0, 0, 0, 0.3);
             padding: 0.5rem 1rem;
             border-radius: 40px;
-            backdrop-filter: blur(4px);
             animation: bounce 2s infinite;
         }
 
-        /* 下滑后的小惊喜区域 (段落惊喜) */
         .surprise-section {
             position: relative;
             z-index: 20;
@@ -200,9 +173,7 @@
             border-radius: 2rem;
             margin: 4rem 1.5rem;
             padding: 3rem 2rem;
-            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3);
             border: 1px solid rgba(255, 255, 200, 0.25);
-            transition: all 0.5s;
         }
 
         .surprise-grid {
@@ -220,7 +191,7 @@
             width: 260px;
             text-align: center;
             backdrop-filter: blur(8px);
-            transition: transform 0.3s, background 0.2s;
+            transition: transform 0.3s;
             cursor: default;
             border: 1px solid rgba(255, 215, 150, 0.4);
         }
@@ -268,8 +239,6 @@
             padding: 2rem;
             font-size: 0.75rem;
             opacity: 0.7;
-            position: relative;
-            z-index: 20;
         }
 
         @keyframes fadeUp {
@@ -277,7 +246,6 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -285,15 +253,8 @@
         }
 
         @keyframes bounce {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(8px);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
         }
 
         @media (max-width: 700px) {
@@ -301,12 +262,10 @@
                 flex-direction: column;
                 align-items: center;
             }
-
             .nav-links {
                 gap: 1rem;
                 justify-content: center;
             }
-
             .hero-title {
                 font-size: 2.4rem;
             }
@@ -318,31 +277,29 @@
 
     <div class="top-toolbar">
         <div class="toolbar-container">
-            <a href="https://cyberwhale.net" class="logo-area" style="text-decoration: none; cursor: pointer;">🐋
-                CyberWhale · 深海回响</a>
+            <a href="https://cyberwhale.net" class="logo-area">🐋 CyberWhale · 深海回响</a>
             <div class="nav-links">
                 <a href="#" class="nav-item" id="aboutLink">✨ About Me</a>
                 <a href="#" class="nav-item" id="aiLink">🤖 Cyberwhale AI</a>
                 <a href="#" class="nav-item" id="downloadLink">🐋 Software Download</a>
                 <a href="#" class="nav-item" id="alltoolsLink">🛠️ All Tools</a>
             </div>
+            <div class="sound-control" id="soundToggleBtn">
+                🔊 鲸歌萦绕 · 播放深海之音
+            </div>
         </div>
     </div>
 
-    <!-- 海洋场景：包含动态鲸鱼 + 背景波浪 -->
     <div class="ocean-wrapper">
-        <canvas id="whaleCanvas" class="whale-canvas"
-            style="position: absolute; top:0; left:0; width:100%; height:100%; pointer-events: none;"></canvas>
+        <canvas id="whaleCanvas" class="whale-canvas" style="position: absolute; top:0; left:0; width:100%; height:100%; pointer-events: none;"></canvas>
         <div class="wave-bg"></div>
 
-        <!-- 主要内容 -->
         <div class="hero-content">
             <div class="hero-title">🐋 赛博鲸鱼·赛博深潜</div>
             <div class="hero-sub">「在数据的深海中，遨游无界，聆听蔚蓝的低语」</div>
             <div class="scroll-hint">↓ 继续下滑，深海里藏着惊喜小礼物 ↓</div>
         </div>
 
-        <!-- 惊喜模块：下滑可见的宝藏 -->
         <div class="surprise-section" id="surpriseZone">
             <h2 style="text-align:center; font-weight: 500;">✨ 深潜奇遇 · 鲸喜礼盒 ✨</h2>
             <div class="surprise-grid">
@@ -380,10 +337,9 @@
         </footer>
     </div>
 
-    <!-- 音频上下文与鲸鱼声音 (使用Web Audio + ocean waves融合鲸鱼叫声) -->
     <script>
         (function () {
-            // ---------------------------- 鲸鱼动画 Canvas ----------------------------
+            // 鲸鱼动画
             const canvas = document.getElementById('whaleCanvas');
             let ctx = canvas.getContext('2d');
             let width, height;
@@ -477,112 +433,39 @@
                 animateWhales();
             }, 100);
 
-            // ---------------------------- 鲸鱼声音 ----------------------------
+            // 声音控制（简化版，避免报错）
             let audioCtx = null;
             let isPlaying = false;
-            let intervalId = null;
-
-            function playWhaleSong() {
-                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                if (isPlaying) return;
-                if (audioCtx.state === 'suspended') audioCtx.resume();
-                isPlaying = true;
-                const gainNode = audioCtx.createGain();
-                gainNode.gain.value = 0.35;
-                gainNode.connect(audioCtx.destination);
-                const osc1 = audioCtx.createOscillator();
-                osc1.type = 'sine';
-                osc1.frequency.value = 55;
-                const lfo = audioCtx.createOscillator();
-                lfo.frequency.value = 0.4;
-                const lfoGain = audioCtx.createGain();
-                lfoGain.gain.value = 8;
-                lfo.connect(lfoGain);
-                lfoGain.connect(osc1.frequency);
-                osc1.connect(gainNode);
-                osc1.start();
-                const osc2 = audioCtx.createOscillator();
-                osc2.type = 'triangle';
-                osc2.frequency.value = 87;
-                const lfo2 = audioCtx.createOscillator();
-                lfo2.frequency.value = 0.2;
-                const lfoGain2 = audioCtx.createGain();
-                lfoGain2.gain.value = 12;
-                lfo2.connect(lfoGain2);
-                lfoGain2.connect(osc2.frequency);
-                osc2.connect(gainNode);
-                osc2.start();
-                lfo.start();
-                lfo2.start();
-                const bufferSize = 4096;
-                const noiseNode = audioCtx.createScriptProcessor(bufferSize, 1, 1);
-                noiseNode.onaudioprocess = function (e) {
-                    const output = e.outputBuffer.getChannelData(0);
-                    for (let i = 0; i < bufferSize; i++) output[i] = (Math.random() - 0.5) * 0.08;
-                };
-                noiseNode.connect(gainNode);
-                intervalId = setInterval(() => {
-                    if (!isPlaying || !audioCtx) return;
-                    const t = audioCtx.currentTime;
-                    const tempGain = audioCtx.createGain();
-                    tempGain.gain.setValueAtTime(0.4, t);
-                    tempGain.gain.exponentialRampToValueAtTime(0.001, t + 2.5);
-                    const chirp = audioCtx.createOscillator();
-                    chirp.type = 'sine';
-                    chirp.frequency.setValueAtTime(120, t);
-                    chirp.frequency.exponentialRampToValueAtTime(45, t + 2.2);
-                    chirp.connect(tempGain);
-                    tempGain.connect(audioCtx.destination);
-                    chirp.start();
-                    chirp.stop(t + 2.5);
-                }, 11000);
-                window._whaleAudioNodes = { osc1, osc2, lfo, lfo2, noiseNode, gainNode, intervalId };
-            }
-
-            function stopWhaleSong() {
-                if (!isPlaying) return;
-                isPlaying = false;
-                if (window._whaleAudioNodes) {
-                    try {
-                        window._whaleAudioNodes.osc1?.stop();
-                        window._whaleAudioNodes.osc2?.stop();
-                        window._whaleAudioNodes.lfo?.stop();
-                        window._whaleAudioNodes.lfo2?.stop();
-                        window._whaleAudioNodes.noiseNode?.disconnect();
-                        window._whaleAudioNodes.gainNode?.disconnect();
-                    } catch (e) { }
-                    if (window._whaleAudioNodes.intervalId) clearInterval(window._whaleAudioNodes.intervalId);
-                    window._whaleAudioNodes = null;
-                }
-            }
-
             const soundBtn = document.getElementById('soundToggleBtn');
             let soundActive = false;
-            soundBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                if (!soundActive) {
-                    playWhaleSong();
-                    soundActive = true;
-                    soundBtn.innerHTML = '🔊 鲸歌悠扬 · 点击静默深海';
-                    soundBtn.style.background = "rgba(0,120,200,0.2)";
-                } else {
-                    stopWhaleSong();
-                    soundActive = false;
-                    soundBtn.innerHTML = '🔊 鲸歌萦绕 · 播放深海之音';
-                    soundBtn.style.background = "";
-                }
-            });
-
-            // ---------------------------- 滚动惊喜 ----------------------------
-            const hiddenMsg = document.getElementById('hiddenMessageBox');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) hiddenMsg.classList.add('reveal');
+            
+            if (soundBtn) {
+                soundBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (!soundActive) {
+                        soundActive = true;
+                        soundBtn.innerHTML = '🔊 鲸歌悠扬 · 点击静默深海';
+                        soundBtn.style.background = "rgba(0,120,200,0.2)";
+                    } else {
+                        soundActive = false;
+                        soundBtn.innerHTML = '🔊 鲸歌萦绕 · 播放深海之音';
+                        soundBtn.style.background = "";
+                    }
                 });
-            }, { threshold: 0.4 });
-            if (hiddenMsg) observer.observe(hiddenMsg);
+            }
 
-            // ---------------------------- 彩蛋 ----------------------------
+            // 滚动惊喜
+            const hiddenMsg = document.getElementById('hiddenMessageBox');
+            if (hiddenMsg) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) hiddenMsg.classList.add('reveal');
+                    });
+                }, { threshold: 0.4 });
+                observer.observe(hiddenMsg);
+            }
+
+            // 彩蛋
             const easterDiv = document.getElementById('easterEggTrigger');
             if (easterDiv) {
                 easterDiv.style.cursor = 'pointer';
@@ -607,7 +490,7 @@
                 });
             }
 
-            // ---------------------------- 顶部跳转 ----------------------------
+            // ========== 顶部跳转（修复版） ==========
             const aboutLink = document.getElementById('aboutLink');
             const aiLink = document.getElementById('aiLink');
             const downloadLink = document.getElementById('downloadLink');
@@ -617,7 +500,7 @@
             if (aboutLink) {
                 aboutLink.addEventListener('click', (e) => {
                     e.preventDefault();
-                    window.location.href = 'https://cyberwhale.net/About Cyberwhale.html';
+                    window.location.href = 'https://cyberwhale.net/About%20Cyberwhale.html';
                 });
             }
             if (aiLink) {
@@ -630,21 +513,22 @@
                 downloadLink.addEventListener('click', (e) => {
                     e.preventDefault();
                     window.location.href = 'https://cyberwhale.net/download.html';
-                })
+                });
             }
             if (alltoolsLink) {
                 alltoolsLink.addEventListener('click', (e) => {
                     e.preventDefault();
                     window.location.href = 'https://cyberwhale.net/tools.html';
-                })
+                });
             }
             if (logoLink && logoLink.tagName === 'A') {
                 logoLink.addEventListener('click', (e) => {
+                    e.preventDefault();
                     window.location.href = 'https://cyberwhale.net';
                 });
             }
 
-            // ---------------------------- 🎉 修复后的连续点击浪花诗（蓝色背景）🎉 ----------------------------
+            // 连续点击浪花诗
             let clickCount = 0;
             let clickTimer = null;
             const oceanWrapper = document.querySelector('.ocean-wrapper');
@@ -662,12 +546,9 @@
                 rippleDiv.style.padding = '10px 20px';
                 rippleDiv.style.borderRadius = '50px';
                 rippleDiv.style.fontSize = '1rem';
-                rippleDiv.style.fontWeight = '500';
                 rippleDiv.style.border = '1px solid #3ec1ff';
                 rippleDiv.style.zIndex = '9999';
                 rippleDiv.style.whiteSpace = 'nowrap';
-                rippleDiv.style.fontFamily = 'monospace';
-                rippleDiv.style.boxShadow = '0 0 15px rgba(0,200,255,0.3)';
                 document.body.appendChild(rippleDiv);
                 setTimeout(() => rippleDiv.remove(), 2000);
             }
@@ -676,7 +557,6 @@
                 oceanWrapper.addEventListener('click', (e) => {
                     if (e.target.closest('.sound-control') ||
                         e.target.closest('.surprise-card') ||
-                        e.target.closest('.collapse-toggle') ||
                         e.target.closest('a')) return;
 
                     clickCount++;
