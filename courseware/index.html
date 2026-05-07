@@ -331,7 +331,6 @@
             padding-left: 28px !important
         }
 
-        /* 修改：把折叠内容改成类似原站的“课件/视频/素材”附件列表 */
         .sub-list {
             margin: 0 0 12px 34px;
             padding: 6px 0 8px 18px;
@@ -406,7 +405,6 @@
             background: linear-gradient(135deg, #ffc400, #ffab00)
         }
 
-        /* 模板：练习按钮，想加练习时在 assets 里写 type: "practice" */
         .asset-practice {
             background: linear-gradient(135deg, #22c55e, #16a34a)
         }
@@ -596,8 +594,8 @@
         </div>
     </header>
     <section id="chapters">
-        <div class="title"><small>Information Olympiad</small>
-            <h2>信息学奥赛课程目录</h2>
+        <div class="title"><small>Courseware</small>
+            <h2>课程目录</h2>
         </div>
         <div class="course-shell">
             <div class="course-tabs" id="courseTabs"></div>
@@ -610,7 +608,7 @@
     <section id="links">
         <div class="panel">
             <h2>数字北极星</h2>
-            <p>这里放你自己的课件链接、OJ链接、下载链接、GitHub链接或任意资源。只需要改下面 JS 里的 links / chapters / steps 数组。</p>
+            <p>这里放你自己的课件链接、OJ链接、下载链接、GitHub链接或任意资源。</p>
             <div class="grid" id="linkGrid"></div>
         </div>
     </section>
@@ -619,16 +617,9 @@
         <p>© 2026 CyberWhale · 深海漫游者 | 遨游比特之海</p>
     </footer>
     <script>
-        const nav = [
-            { label: "Python", url: "#" },
-            { label: "信息学奥赛", url: "#chapters" },
-            { label: "AI人工智能", url: "#" },
-            { label: "公开课", url: "#" }
-        ];
+        // ========== 信息学奥赛的实际课程数据（必须先定义） ==========
         const courses = [
-            {
-                title: "C++基础", children: []
-            },
+            { title: "C++基础", children: [] },
             {
                 title: "普及组J1", children: [
                     {
@@ -649,27 +640,126 @@
                     }
                 ]
             },
-            {
-                title: "初赛J", children: []
-            },
+            { title: "初赛J", children: [] },
             {
                 title: "普及组J2", children: [
+                    {
+                        title: "课件-指针变量-数据结构-V1.2",
+                        desc: "指针变量",
+                        assets: [
+                            { type: "course", text: "课件", url: "https://onedrive.live.com/personal/346D6399EC5AB93F/_layouts/15/Doc.aspx?sourcedoc=%7Bf2d93851-196e-48e5-833d-f1d1f021fabf%7D&action=default&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQlJPTm55YmhubFNJTTk4ZEh3SWZxX0FWQVJDVURpMFlrM1B1cmhJTFdCZC1rP2U9M1VxZTZ1&slrid=3a4611a2-80be-c000-fa8a-b5f94252d4b2&originalPath=aHR0cHM6Ly9vbmVkcml2ZS5saXZlLmNvbS86cDovZy9wZXJzb25hbC8zNDZENjM5OUVDNUFCOTNGL0lRQlJPTm55YmhubFNJTTk4ZEh3SWZxX0FWQVJDVURpMFlrM1B1cmhJTFdCZC1rP3J0aW1lPW1MQ0ZkU3lzM2tnJnJlZGVlbT1hSFIwY0hNNkx5OHhaSEoyTG0xekwzQXZZeTh6TkRaRU5qTTVPVVZETlVGQ09UTkdMMGxSUWxKUFRtNTVZbWh1YkZOSlRUazRaRWgzU1daeFgwRldRVkpEVlVScE1GbHJNMUIxY21oSlRGZENaQzFyUDJVOU0xVnhaVFox&CID=a2276f24-aa0f-4134-8766-cd6d8f7679ea&_SRM=0%3AG%3A52&file=%E8%AF%BE%E4%BB%B6-%E6%8C%87%E9%92%88%E5%8F%98%E9%87%8F-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-V1.2%20.pptx" }
+                        ]
+                    },
+                    {
+                        title: "课件-指针与数组-数据结构-V1.4",
+                        desc: "指针与数组",
+                        assets: [
+                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQCHTUhgiaXPTr-_MR9vdnexATZKdA-OE4XrTBC-0Wpn2uI?resid=346D6399EC5AB93F!s60484d87a5894ecfbfbf311f6f7677b1&ithint=file%2Cpptx&e=eBcHr2&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQ0hUVWhnaWFYUFRyLV9NUjl2ZG5leEFUWktkQS1PRTRYclRCQy0wV3BuMnVJP2U9ZUJjSHIy" }
+                        ]
+                    },
+                    {
+                        title: "课件-指针与数组-数据结构-V1.4",
+                        desc: "指针与数组",
+                        assets: [
+                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQCHTUhgiaXPTr-_MR9vdnexATZKdA-OE4XrTBC-0Wpn2uI?resid=346D6399EC5AB93F!s60484d87a5894ecfbfbf311f6f7677b1&ithint=file%2Cpptx&e=eBcHr2&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQ0hUVWhnaWFYUFRyLV9NUjl2ZG5leEFUWktkQS1PRTRYclRCQy0wV3BuMnVJP2U9ZUJjSHIy" }
+                        ]
+                    },
+                    {
+                        title: "课件-指针与函数-数据结构-V1.1-2",
+                        desc: "指针与函数",
+                        assets: [
+                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQCvelNJ1rTCT5V7fFEJhrvCAYMJJyj6Gdl6eEGMRwPZqg0?resid=346D6399EC5AB93F!s49537aafb4d64fc2957b7c510986bbc2&ithint=file%2Cpptx&e=gCH1bz&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQ3ZlbE5KMXJUQ1Q1VjdmRkVKaHJ2Q0FZTUpKeWo2R2RsNmVFR01Sd1BacWcwP2U9Z0NIMWJ6" }
+                        ]
+                    },
+                    {
+                        title: "课件-指针与结构体-数据结构-V1.1",
+                        desc: "指针与结构体",
+                        assets: [
+                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQAnO3wiJB8PS7n6Fjbg2S6TAZxzefWlgV5xu1KwVtikO2U?resid=346D6399EC5AB93F!s227c3b271f244b0fb9fa1636e0d92e93&ithint=file%2Cpptx&e=gC7oRF&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQW5PM3dpSkI4UFM3bjZGamJnMlM2VEFaeHplZldsZ1Y1eHUxS3dWdGlrTzJVP2U9Z0M3b1JG" }
+                        ]
+                    },
+                    {
+                        title: "课件-线性表-数据结构-V1.2",
+                        desc: "线性表",
+                        assets: [
+                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQDlSqgyv1GmSr6dLT4dv2dpAcru2UswXms4m9XhoNUCh_g?resid=346D6399EC5AB93F!s32a84ae551bf4aa6be9d2d3e1dbf6769&ithint=file%2Cpptx&e=pvuNVa&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRRGxTcWd5djFHbVNyNmRMVDRkdjJkcEFjcnUyVXN3WG1zNG05WGhvTlVDaF9nP2U9cHZ1TlZh" }
+                        ]
+                    },
+                    {
+                        title: "课件-树-数据结构-V1.4",
+                        desc: "树的基础介绍",
+                        assets: [
+                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQA4s-iemCrfS55Ne3mtVKXFAWq6RC-d4cqAjueyRU98JQo?resid=346D6399EC5AB93F!s9ee8b3382a984bdf9e4d7b79ad54a5c5&ithint=file%2Cpptx&e=earPdo&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQTRzLWllbUNyZlM1NU5lM210VktYRkFXcTZSQy1kNGNxQWp1ZXlSVTk4SlFvP2U9ZWFyUGRv" }
+                        ]
+                    },
+                    {
+                        title: "课件-二叉树-数据结构-V1.3",
+                        desc: "二叉树性质",
+                        assets: [
+                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQAOsmrlvd4DS5hdT0t-buUvARpAi4s09aboR_DGffiit-U?resid=346D6399EC5AB93F!se56ab20edebd4b03985d4f4b7e6ee52f&ithint=file%2Cpptx&e=hF5CgF&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQU9zbXJsdmQ0RFM1aGRUMHQtYnVVdkFScEFpNHMwOWFib1JfREdmZmlpdC1VP2U9aEY1Q2dG" }
+                        ]
+                    },
+                    {
+                        title: "课件-二叉搜索树-数据结构-V1.2",
+                        desc: "BST构建及应用",
+                        assets: [
+                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQBFwUh1sG5jSZYwue_2mZIAAd3W27TCN9BjsH31z3CKAiw?resid=346D6399EC5AB93F!s7548c1456eb049639630b9eff6999200&ithint=file%2Cpptx&e=lk1QrT&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQkZ3VWgxc0c1alNaWXd1ZV8ybVpJQUFkM1cyN1RDTjlCanNIMzF6M0NLQWl3P2U9bGsxUXJU" }
+                        ]
+                    },
+                    {
+                        title: "课件-树的应用-数据结构-V1.4",
+                        desc: "堆排序，优先队列，哈夫曼树，哈夫曼编码",
+                        assets: [
+                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQD_fhYDhfdaTKCgxFlpOucDAUMgN1WYgI1rD5cytTiBy0s?resid=346D6399EC5AB93F!s03167efff7854c5aa0a0c459693ae703&ithint=file%2Cpptx&e=Pb3sWq&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRRF9maFlEaGZkYVRLQ2d4RmxwT3VjREFVTWdOMVdZZ0kxckQ1Y3l0VGlCeTBzP2U9UGIzc1dx" }
+                        ]
+                    },
+                    {
+                        title: "课件-树的应用-数据结构-V1.4",
+                        desc: "堆排序，优先队列，哈夫曼树，哈夫曼编码",
+                        assets: [
+                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQD_fhYDhfdaTKCgxFlpOucDAUMgN1WYgI1rD5cytTiBy0s?resid=346D6399EC5AB93F!s03167efff7854c5aa0a0c459693ae703&ithint=file%2Cpptx&e=Pb3sWq&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRRF9maFlEaGZkYVRLQ2d4RmxwT3VjREFVTWdOMVdZZ0kxckQ1Y3l0VGlCeTBzP2U9UGIzc1dx" }
+                        ]
+                    },
+                    {
+                        title: "课件-表达式运算-数据结构-V1.0",
+                        desc: "表达式运算",
+                        assets: [
+                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQBdwsKJS5xmQaDgmZLr_77sATCG7l458dAncRooQgC2Dgs?resid=346D6399EC5AB93F!s89c2c25d9c4b4166a0e09992ebffbeec&ithint=file%2Cpptx&e=57gpbZ&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQmR3c0tKUzV4bVFhRGdtWkxyXzc3c0FUQ0c3bDQ1OGRBbmNSb29RZ0MyRGdzP2U9NTdncGJa" }
+                        ]
+                    },
+                    {
+                        title: "课件-格雷码-数据结构-V1.0",
+                        desc: "格雷码介绍",
+                        assets: [
+                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQDPRtJsV5AfTqrSznEwoZD1AYBRsjWlhqru1H0Ecb-HwHk?resid=346D6399EC5AB93F!s6cd246cf90574e1faad2ce7130a190f5&ithint=file%2Cpptx&e=hLfZxP&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRRFBSdEpzVjVBZlRxclN6bkV3b1pEMUFZQlJzaldsaHFydTFIMEVjYi1Id0hrP2U9aExmWnhQ" }
+                        ]
+                    },
+                    {
+                        title: "课件-散列表-数据结构-V1.0",
+                        desc: "hash函数及hash应用介绍",
+                        assets: [
+                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQAB4Z79iF7nRpLZ5vCW4XeTAfcQ4XTZMhD9hzx9gNn1Sb0?resid=346D6399EC5AB93F!sfd9ee1015e8846e792d9e6f096e17793&ithint=file%2Cpptx&e=3AhFBs&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQUI0Wjc5aUY3blJwTFo1dkNXNFhlVEFmY1E0WFRaTWhEOWh6eDlnTm4xU2IwP2U9M0FoRkJz" }
+                        ]
+                    },
+                    {
+                        title: "课件-集合-数据结构-V2.1",
+                        desc: "集合 map set介绍",
+                        assets: [
+                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQA4_JCLmt-oRbg5B7En-rI8AXYM3Ziw56k0f7Qj-R4oITY?resid=346D6399EC5AB93F!s8b90fc38df9a45a8b83907b127fab23c&ithint=file%2Cpptx&e=V20vwd&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQTRfSkNMbXQtb1JiZzVCN0VuLXJJOEFYWU0zWml3NTZrMGY3UWotUjRvSVRZP2U9VjIwdndk" }
+                        ]
+                    },
+                    {
+                        title: "课件-图-数据结构-V1.4",
+                        desc: "图的概念，图的存储及图的遍历",
+                        assets: [
+                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQBTxBU0TjhuQYz3uUe4Nf6AAf2Mp5BDYv1pACRxozVLYS8?resid=346D6399EC5AB93F!s3415c453384e416e8cf7b947b835fe80&ithint=file%2Cpptx&e=urvNGX&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQlR4QlUwVGpodVFZejN1VWU0TmY2QUFmMk1wNUJEWXYxcEFDUnhvelZMWVM4P2U9dXJ2TkdY" }
+                        ]
+                    },
                 ]
             },
-            {
-                title: "提高组S1", children: [
-                ]
-            },
-            {
-                title: "提高组S2", children: [
-
-                ]
-            },
-            {
-                title: "普及组J3", children: [
-
-                ]
-            },
+            { title: "提高组S1", children: [] },
+            { title: "提高组S2", children: [] },
+            { title: "普及组J3", children: [] },
             {
                 title: "普及组J4", children: [
                     {
@@ -736,31 +826,102 @@
             { title: "初赛S", children: [] },
             { title: "省选", children: [] }
         ];
-        /*
-        练习按钮模板，不会显示，只有你复制到某个课件的 assets 里才会出现：
-        { type: "practice", text: "练习", url: "练习链接" }
-        */
-        const links = [
-            { icon: "🐋", tag: "主页", title: "CyberWhale", text: "你的主站入口。", url: "https://cyberwhale.net" },
-            { icon: "📦", tag: "下载", title: "软件下载", text: "这里改成你的下载页面。", url: "https://cyberwhale.net/download" },
-            { icon: "⚙️", tag: "OJ", title: "练习题入口", text: "这里改成你的 OJ 或题单链接。", url: "#" }
+        // ========== 分类标签 ==========
+        const categories = [
+            { label: "Python", type: "empty", short: "高级", message: "暂无数据" },
+            { label: "信息学奥赛", type: "default", content: courses },
+            { label: "AI人工智能", type: "empty", short: "暂无数据", message: "暂无数据" },
+            { label: "公开课", type: "empty", short: "公开课", message: "暂无数据" }
         ];
+
+        // ========== 顶部导航 ==========
+        const nav = [
+            { label: "首页", url: "#top", active: true },
+            { label: "课程目录", url: "#chapters", active: false },
+            { label: "资源链接", url: "#links", active: false }
+        ];
+
+        const links = [
+            { icon: "🐋", tag: "主页", title: "CyberWhale", text: "赛博鲸鱼", url: "https://cyberwhale.net" },
+            { icon: "📦", tag: "下载", title: "软件下载", text: "赛博鲸鱼软件下载中心", url: "https://cyberwhale.net/download" },
+            { icon: "⚙️", tag: "工具", title: "所有工具", text: "赛博鲸鱼工具集", url: "https://cyberwhale.net/tools" }
+        ];
+
+        // 渲染顶部导航
         function renderNav() {
-            navlinks.innerHTML = nav.map((x, i) => `<a class="${i === 1 ? 'active' : ''}" href="${x.url}">${x.label}</a>`).join("");
+            const navlinks = document.getElementById('navlinks');
+            navlinks.innerHTML = nav.map(x => `<a class="${x.active ? 'active' : ''}" href="${x.url}">${x.label}</a>`).join("");
         }
+
+        // 渲染分类标签和内容
         function renderCourses() {
-            courseTabs.innerHTML = nav.map((x, i) => `<button class="${i === 1 ? 'active' : ''}">${x.label}</button>`).join("");
-            courseList.innerHTML = courses.map((x, i) => {
+            const courseTabs = document.getElementById('courseTabs');
+            const courseList = document.getElementById('courseList');
+
+            // 渲染标签按钮
+            courseTabs.innerHTML = categories.map((cat, idx) => `<button class="${idx === 1 ? 'active' : ''}" data-cat-idx="${idx}">${cat.label}</button>`).join("");
+
+            // 渲染默认内容（信息学奥赛）
+            renderCategoryContent(1);
+
+            // 绑定标签切换事件
+            document.querySelectorAll('#courseTabs button').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('#courseTabs button').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const idx = parseInt(btn.getAttribute('data-cat-idx'));
+                    renderCategoryContent(idx);
+                });
+            });
+        }
+
+        // 根据分类索引渲染内容
+        function renderCategoryContent(idx) {
+            const courseList = document.getElementById('courseList');
+            const cat = categories[idx];
+
+            if (cat.type === 'empty') {
+                if (cat.label === 'AI人工智能') {
+                    courseList.innerHTML = `<li class="course-item">
+                        <div class="course-main" style="cursor:default;">
+                            <span>暂无数据</span>
+                        </div>
+                    </li>`;
+                } else {
+                    courseList.innerHTML = `<li class="course-item has-children">
+                        <button class="course-main" type="button" data-empty="1">
+                            <span>${cat.short || cat.label}</span>
+                            <span class="arrow">›</span>
+                        </button>
+                        <ul class="sub-list">
+                            <li class="empty-row">暂无数据</li>
+                        </ul>
+                    </li>`;
+                    document.querySelectorAll('.course-main[data-empty]').forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            let li = btn.closest('.course-item');
+                            li.classList.toggle('open');
+                        });
+                    });
+                }
+                return;
+            }
+
+            // 正常渲染课程数据
+            const coursesData = cat.content;
+            courseList.innerHTML = coursesData.map((x, i) => {
                 if (Array.isArray(x.children)) {
                     return `<li class="course-item has-children">
-<button class="course-main" type="button" data-index="${i}"><span>${x.title}</span><span class="arrow">›</span></button>
-<ul class="sub-list" id="sub-${i}">
-${x.children.length ? x.children.map(c => `<li class="resource-row"><div><div class="resource-title">${c.title}</div><div class="resource-desc">${c.desc || ""}</div></div><div class="resource-actions">${(c.assets || [{ type: "course", text: "课件", url: c.url }]).map(a => `<a class="asset-btn asset-${a.type}" href="${a.url}" target="_blank">【${a.text}】</a>`).join("")}</div></li>`).join("") : `<li class="empty-row">暂无内容</li>`}
-</ul>
-</li>`;
+                        <button class="course-main" type="button" data-index="${i}"><span>${x.title}</span><span class="arrow">›</span></button>
+                        <ul class="sub-list" id="sub-${i}">
+                            ${x.children.length ? x.children.map(c => `<li class="resource-row"><div><div class="resource-title">${c.title}</div><div class="resource-desc">${c.desc || ""}</div></div><div class="resource-actions">${(c.assets || [{ type: "course", text: "课件", url: c.url }]).map(a => `<a class="asset-btn asset-${a.type}" href="${a.url}" target="_blank">【${a.text}】</a>`).join("")}</div></li>`).join("") : `<li class="empty-row">暂无数据</li>`}
+                        </ul>
+                    </li>`;
                 }
                 return `<li class="course-item"><a class="course-main" href="${x.url}"><span>${x.title}</span><span class="arrow">›</span></a></li>`;
             }).join("");
+
+            // 绑定折叠事件
             document.querySelectorAll('.course-main[data-index]').forEach(btn => {
                 btn.addEventListener('click', () => {
                     let li = btn.closest('.course-item');
@@ -768,10 +929,30 @@ ${x.children.length ? x.children.map(c => `<li class="resource-row"><div><div cl
                 });
             });
         }
-        function card(x) { return `<a class="card" href="${x.url}" target="${x.url.startsWith('#') ? '_self' : '_blank'}"><div class="icon">${x.icon}</div><span class="tag">${x.tag}</span><h3>${x.title}</h3><p>${x.text}</p><span class="link">进入海域 →</span></a>` }
-        function renderCards() { linkGrid.innerHTML = links.map(card).join("") }
-        function makeBubbles() { for (let i = 0; i < 36; i++) { let s = document.createElement('span'); s.style.left = Math.random() * 100 + '%'; s.style.animationDuration = 6 + Math.random() * 10 + 's'; s.style.animationDelay = Math.random() * 8 + 's'; s.style.width = s.style.height = 4 + Math.random() * 12 + 'px'; bubbles.appendChild(s) } }
-        renderNav(); renderCourses(); renderCards(); makeBubbles();
+
+        // 渲染底部链接卡片
+        function renderCards() {
+            const linkGrid = document.getElementById('linkGrid');
+            linkGrid.innerHTML = links.map(x => `<a class="card" href="${x.url}" target="${x.url.startsWith('#') ? '_self' : '_blank'}"><div class="icon">${x.icon}</div><span class="tag">${x.tag}</span><h3>${x.title}</h3><p>${x.text}</p><span class="link">进入海域 →</span></a>`).join("");
+        }
+
+        // 气泡特效
+        function makeBubbles() {
+            const bubbles = document.getElementById('bubbles');
+            for (let i = 0; i < 36; i++) {
+                let s = document.createElement('span');
+                s.style.left = Math.random() * 100 + '%';
+                s.style.animationDuration = 6 + Math.random() * 10 + 's';
+                s.style.animationDelay = Math.random() * 8 + 's';
+                s.style.width = s.style.height = 4 + Math.random() * 12 + 'px';
+                bubbles.appendChild(s);
+            }
+        }
+
+        renderNav();
+        renderCourses();
+        renderCards();
+        makeBubbles();
     </script>
 </body>
 
