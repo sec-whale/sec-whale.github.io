@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <link rel="icon" type="image/png" href="https://i.imgs.ovh/2026/05/02/bf29034af039328180ea8abd6d6abba5.png">
+    <title>下载中心 · CyberWhale</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f7fb;
+            color: #1a2c3e;
+        }
+
+        .top-toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(12px);
+            z-index: 100;
+            padding: 0.7rem 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .toolbar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .logo-area {
+            font-weight: 700;
+            font-size: 1.3rem;
+            background: linear-gradient(135deg, #0066cc, #0099ff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: #4a5568;
+            padding: 0.3rem 0.6rem;
+            border-radius: 40px;
+            transition: all 0.2s;
+        }
+
+        .nav-item:hover {
+            background: rgba(0, 100, 200, 0.08);
+            color: #0066cc;
+        }
+
+        .nav-item.active {
+            color: #0066cc;
+            background: rgba(0, 100, 200, 0.1);
+        }
+
+        .user-area {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            flex-wrap: nowrap;
+        }
+
+        .user-info {
+            font-size: 0.8rem;
+            color: #1e2f3e;
+            background: rgba(0, 100, 200, 0.08);
+            padding: 0.25rem 0.8rem;
+            border-radius: 40px;
+            white-space: nowrap;
+        }
+
+        .admin-btn {
+            background: #0066cc;
+            color: white;
+            border: none;
+            padding: 0.25rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .admin-btn:hover {
+            background: #0052a3;
+            transform: translateY(-1px);
+        }
+
+        .user-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 0.25rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .user-btn:hover {
+            background: #218838;
+            transform: translateY(-1px);
+        }
+
+        .logout-btn {
+            background: transparent;
+            color: #6c86a3;
+            border: 1px solid #e2e8f0;
+            padding: 0.25rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .logout-btn:hover {
+            background: #e53e3e;
+            color: white;
+            border-color: #e53e3e;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 300;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            width: 90%;
+            max-width: 650px;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #1a2c3e;
+        }
+
+        .modal input,
+        .modal select {
+            width: 100%;
+            padding: 0.6rem 0.8rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.6rem;
+            font-size: 0.85rem;
+            margin-bottom: 0.6rem;
+            outline: none;
+        }
+
+        .modal input:focus,
+        .modal select:focus {
+            border-color: #0066cc;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 1rem;
+        }
+
+        .modal-buttons button {
+            padding: 0.5rem 1.2rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            border: none;
+            font-size: 0.85rem;
+        }
+
+        .modal-confirm {
+            background: #0066cc;
+            color: white;
+        }
+
+        .modal-cancel {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .user-list,
+        .app-list {
+            margin: 1rem 0;
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.6rem;
+        }
+
+        .user-item,
+        .app-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 1rem;
+            border-bottom: 1px solid #edf2f7;
+        }
+
+        .app-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .app-category {
+            font-size: 0.7rem;
+            color: #6c86a3;
+            margin-left: 0.5rem;
+        }
+
+        .app-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .edit-app-btn,
+        .delete-app-btn,
+        .delete-user-btn,
+        .edit-pwd-btn,
+        .edit-role-btn {
+            background: #0066cc;
+            color: white;
+            border: none;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+
+        .delete-app-btn,
+        .delete-user-btn {
+            background: #e53e3e;
+        }
+
+        .edit-pwd-btn {
+            background: #ffc107;
+            color: #1a2c3e;
+        }
+
+        .edit-role-btn {
+            background: #17a2b8;
+        }
+
+        .edit-pwd-btn:hover {
+            background: #e0a800;
+        }
+
+        .edit-role-btn:hover {
+            background: #138496;
+        }
+
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #f5f7fb;
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1.5rem;
+            text-align: center;
+            width: 90%;
+            max-width: 360px;
+            border: 1px solid #e9edf2;
+        }
+
+        .login-card h2 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-card p {
+            color: #6c86a3;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.8rem;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            outline: none;
+        }
+
+        .login-btn {
+            width: 100%;
+            background: #0066cc;
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 0.8rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .error-msg {
+            color: #e53e3e;
+            font-size: 0.8rem;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .main-content {
+            display: none;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 6rem 2rem 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+
+        .subtitle {
+            color: #6c86a3;
+            font-size: 0.85rem;
+        }
+
+        .category {
+            margin-bottom: 2rem;
+            background: white;
+            border-radius: 1rem;
+            overflow-x: auto;
+            border: 1px solid #e9edf2;
+        }
+
+        .category-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 0.8rem 1.2rem;
+            background: #f8fafc;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .software-table {
+            width: 100%;
+            min-width: 800px;
+            border-collapse: collapse;
+        }
+
+        .software-table th {
+            text-align: left;
+            padding: 0.7rem 0.6rem;
+            background: #f9fafb;
+            font-weight: 600;
+            font-size: 0.7rem;
+            color: #4a5568;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .software-table td {
+            padding: 0.7rem 0.6rem;
+            border-bottom: 1px solid #edf2f7;
+            font-size: 0.8rem;
+        }
+
+        .software-name {
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .download-btn {
+            background: #0066cc;
+            color: white;
+            border: none;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.65rem;
+            cursor: pointer;
+        }
+
+        .download-btn.mac-intel {
+            background: #5a67d8;
+        }
+
+        .download-btn.mac-apple {
+            background: #805ad5;
+        }
+
+        .download-btn.linux {
+            background: #2b6cb0;
+        }
+
+        .version-badge {
+            background: #e2e8f0;
+            color: #2d3748;
+            padding: 0.15rem 0.5rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            white-space: nowrap;
+        }
+
+        .date-text {
+            font-size: 0.7rem;
+            color: #6c86a3;
+        }
+
+        .source-link {
+            color: #6c86a3;
+            text-decoration: none;
+            font-size: 0.7rem;
+        }
+
+        .source-link:hover {
+            color: #0066cc;
+            text-decoration: underline;
+        }
+
+        .back-link {
+            margin-top: 1.5rem;
+            display: inline-block;
+            color: #6c86a3;
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+
+        .back-link:hover {
+            color: #0066cc;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.65rem;
+            color: #8a9bb0;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 950px) {
+            .toolbar-container {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .user-area {
+                gap: 0.4rem;
+            }
+
+            .admin-btn,
+            .user-btn,
+            .logout-btn,
+            .user-info {
+                padding: 0.2rem 0.5rem;
+                font-size: 0.65rem;
+            }
+
+            .logo-area {
+                font-size: 1.1rem;
+            }
+
+            .nav-links {
+                gap: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="top-toolbar">
+        <div class="toolbar-container">
+            <a href="https://cyberwhale.net" class="logo-area">🐋 CyberWhale · 深海回响</a>
+            <div class="nav-links">
+                <a href="https://cyberwhale.net" class="nav-item">🏠 首页</a>
+                <a href="https://about.cyberwhale.net" class="nav-item">✨ About Me</a>
+                <a href="https://cyberwhale.net/ai" class="nav-item">🤖 Cyberwhale AI</a>
+                <a href="#" class="nav-item active">📦 下载中心</a>
+            </div>
+            <div class="user-area" id="userArea"></div>
+        </div>
+    </div>
+
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-card">
+            <h2>🔐 身份验证</h2>
+            <p>请输入用户名和密码访问下载中心</p>
+            <input type="text" class="login-input" id="usernameInput" placeholder="用户名">
+            <input type="password" class="login-input" id="passwordInput" placeholder="密码">
+            <button class="login-btn" id="loginBtn">验证登录</button>
+            <div class="error-msg" id="errorMsg">用户名或密码错误，请重试</div>
+        </div>
+    </div>
+
+    <div class="main-content" id="mainContent">
+        <div class="container" id="appContainer"></div>
+        <footer>© 2026 CyberWhale · 深海漫游者 | 下载链接均为官方渠道</footer>
+    </div>
+
+    <script>
+        // ==================== GitHub 数据同步配置 ====================
+        // 数据文件地址（公开读取，不需要 token）
+        const DATA_URL = 'https://raw.githubusercontent.com/sec-whale/cyberwhale.github.io/main/data.json';
+
+        // 全局数据
+        let appData = {
+            categories: ['应用', 'ISO'],
+            apps: []
+        };
+        let usersData = [];
+
+        // ==================== 从 GitHub 读取数据 ====================
+        async function loadDataFromGitHub() {
+            try {
+                const response = await fetch(DATA_URL);
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.apps) appData.apps = data.apps;
+                    if (data.users) usersData = data.users;
+                    if (data.categories) appData.categories = data.categories;
+                    return true;
+                } else {
+                    console.log('读取失败，使用默认数据');
+                    useDefaultData();
+                    return false;
+                }
+            } catch (e) {
+                console.log('网络错误，使用默认数据', e);
+                useDefaultData();
+                return false;
+            }
+        }
+
+        function useDefaultData() {
+            usersData = [
+                { username: 'admin', password: 'admin', role: 'admin' }
+            ];
+            appData.apps = [
+                { id: '1', name: 'VS Code', type: 'app', category: '应用', version: '1.99.0', date: '2025-04', source: 'Microsoft', sourceUrl: 'https://code.visualstudio.com/', win: 'https://code.visualstudio.com/download#windows', macIntel: 'https://code.visualstudio.com/download#macos-intel', macApple: 'https://code.visualstudio.com/download#macos-arm', linux: 'https://code.visualstudio.com/download#linux', iso: '', icon: '💻' },
+                { id: '2', name: 'Python', type: 'app', category: '应用', version: '3.13.2', date: '2025-02', source: 'Python.org', sourceUrl: 'https://python.org/', win: 'https://www.python.org/downloads/windows/', macIntel: 'https://www.python.org/downloads/macos/', macApple: 'https://www.python.org/downloads/macos/', linux: 'https://www.python.org/downloads/source/', iso: '', icon: '🐍' },
+                { id: '3', name: 'Git', type: 'app', category: '应用', version: '2.49.0', date: '2025-01', source: 'Git SCM', sourceUrl: 'https://git-scm.com/', win: 'https://git-scm.com/download/win', macIntel: 'https://git-scm.com/download/mac', macApple: 'https://git-scm.com/download/mac', linux: 'https://git-scm.com/download/linux', iso: '', icon: '📦' },
+                { id: '4', name: 'Dev-C++', type: 'app', category: '应用', version: '5.11', date: '2015-04', source: 'SourceForge', sourceUrl: 'https://sourceforge.net/projects/orwelldevcpp/', win: 'https://sourceforge.net/projects/orwelldevcpp/files/Release%20Setup/Dev-Cpp%205.11%20TDM-GCC%204.9.2%20Setup.exe/download', macIntel: '', macApple: '', linux: '', iso: '', icon: '📝' },
+                { id: '5', name: '7-Zip', type: 'app', category: '应用', version: '24.09', date: '2024-11', source: '7-zip.org', sourceUrl: 'https://7-zip.org/', win: 'https://www.7-zip.org/download.html', macIntel: '', macApple: '', linux: 'https://www.7-zip.org/download.html', iso: '', icon: '🗜️' },
+                { id: '6', name: 'OBS Studio', type: 'app', category: '应用', version: '31.0.2', date: '2025-03', source: 'OBS Project', sourceUrl: 'https://obsproject.com/', win: 'https://obsproject.com/download#windows', macIntel: 'https://obsproject.com/download#macos', macApple: 'https://obsproject.com/download#macos', linux: 'https://obsproject.com/download#linux', iso: '', icon: '🎥' },
+                { id: '7', name: 'Everything', type: 'app', category: '应用', version: '1.4.1', date: '2024-12', source: 'voidtools', sourceUrl: 'https://voidtools.com/', win: 'https://www.voidtools.com/downloads/', macIntel: '', macApple: '', linux: '', iso: '', icon: '🔍' },
+                { id: '8', name: 'Ubuntu 24.04 LTS', type: 'iso', category: 'ISO', version: '24.04', date: '2025-04', source: 'Ubuntu', sourceUrl: 'https://ubuntu.com/', win: '', macIntel: '', macApple: '', linux: '', iso: 'https://releases.ubuntu.com/24.04/ubuntu-24.04-desktop-amd64.iso', icon: '🖥️' },
+                { id: '9', name: 'Windows 11', type: 'iso', category: 'ISO', version: '23H2', date: '2025-02', source: 'Microsoft', sourceUrl: 'https://www.microsoft.com/', win: '', macIntel: '', macApple: '', linux: '', iso: 'https://www.microsoft.com/software-download/windows11', icon: '🪟' },
+                { id: '10', name: 'Debian 12', type: 'iso', category: 'ISO', version: '12.5', date: '2025-03', source: 'Debian', sourceUrl: 'https://www.debian.org/', win: '', macIntel: '', macApple: '', linux: '', iso: 'https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-12.5.0-amd64-netinst.iso', icon: '🐧' }
+            ];
+        }
+
+        // 获取用户列表
+        function getUsers() { return usersData; }
+        function validateUser(username, password) { return usersData.find(u => u.username === username && u.password === password) || null; }
+
+        // 注意：以下修改功能需要手动编辑 data.json 文件
+        // 因为 GitHub Pages 不能直接写入文件
+        function addUser(username, password, role) {
+            alert('⚠️ 提示：添加用户需要手动编辑 data.json 文件\n\n请在 GitHub 仓库中找到 data.json，添加以下内容：\n{"username":"' + username + '","password":"' + password + '","role":"' + role + '"}');
+            return false;
+        }
+        function deleteUser(username) {
+            if (username === 'admin') { alert('不能删除 admin 账号'); return false; }
+            alert('⚠️ 提示：删除用户需要手动编辑 data.json 文件\n\n请在 GitHub 仓库中删除该用户的信息');
+            return false;
+        }
+        function changePassword(username, newPassword) {
+            alert('⚠️ 提示：修改密码需要手动编辑 data.json 文件\n\n请在 GitHub 仓库中找到用户 ' + username + '，修改 password 字段');
+            return false;
+        }
+        function changeRole(username, newRole) {
+            alert('⚠️ 提示：修改角色需要手动编辑 data.json 文件\n\n请在 GitHub 仓库中找到用户 ' + username + '，修改 role 字段');
+            return false;
+        }
+
+        // 渲染页面
+        function renderMainPage() {
+            const container = document.getElementById('appContainer');
+            if (!container) return;
+
+            const appApps = appData.apps.filter(a => a.type === 'app');
+            const isoApps = appData.apps.filter(a => a.type === 'iso');
+
+            let html = `<div class="page-header"><h1>📦 下载中心</h1><div class="subtitle">赛博鲸鱼百宝箱</div></div>`;
+
+            if (appApps.length > 0) {
+                html += `<div class="category"><div class="category-title">📱 应用</div>`;
+                html += `<table class="software-table"><thead><tr>
+                    <th>软件</th><th>版本</th><th>更新日期</th><th>来源</th>
+                    <th>Windows</th><th>macOS Intel</th><th>macOS Apple</th><th>Linux</th>
+                </tr></thead><tbody>`;
+                for (let app of appApps) {
+                    html += `<tr>
+                        <td class="software-name">${app.icon || '📎'} ${app.name}</td>
+                        <td><span class="version-badge">${app.version}</span></td>
+                        <td class="date-text">${app.date}</td>
+                        <td><a href="#" class="source-link" data-url="${app.sourceUrl}">${app.source}</a></td>
+                        <td>${app.win ? `<button class="download-btn" data-url="${app.win}">Win</button>` : '<span class="version-badge">—</span>'}</td>
+                        <td>${app.macIntel ? `<button class="download-btn mac-intel" data-url="${app.macIntel}">macOS Intel</button>` : '<span class="version-badge">—</span>'}</td>
+                        <td>${app.macApple ? `<button class="download-btn mac-apple" data-url="${app.macApple}">macOS Apple</button>` : '<span class="version-badge">—</span>'}</td>
+                        <td>${app.linux ? `<button class="download-btn linux" data-url="${app.linux}">Linux</button>` : '<span class="version-badge">—</span>'}</td>
+                    </tr>`;
+                }
+                html += `</tbody></table></div>`;
+            }
+
+            if (isoApps.length > 0) {
+                html += `<div class="category"><div class="category-title">💿 ISO 镜像</div>`;
+                html += `<table class="software-table"><thead><tr>
+                    <th>名称</th><th>版本</th><th>更新日期</th><th>来源</th>
+                    <th>ISO 下载</th>
+                </tr></thead><tbody>`;
+                for (let app of isoApps) {
+                    html += `<tr>
+                        <td class="software-name">${app.icon || '💿'} ${app.name}</td>
+                        <td><span class="version-badge">${app.version}</span></td>
+                        <td class="date-text">${app.date}</td>
+                        <td><a href="#" class="source-link" data-url="${app.sourceUrl}">${app.source}</a></td>
+                        <td>${app.iso ? `<button class="download-btn" data-url="${app.iso}">ISO</button>` : '<span class="version-badge">—</span>'}</td>
+                    </tr>`;
+                }
+                html += `</tbody></table></div>`;
+            }
+
+            html += `<a href="https://cyberwhale.net" class="back-link">← 返回首页</a>`;
+            container.innerHTML = html;
+            document.querySelectorAll('.download-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => { e.preventDefault(); const url = btn.getAttribute('data-url'); if (url) window.open(url, '_blank'); });
+            });
+            document.querySelectorAll('.source-link').forEach(link => {
+                link.addEventListener('click', (e) => { e.preventDefault(); const url = link.getAttribute('data-url'); if (url) window.open(url, '_blank'); });
+            });
+        }
+
+        // ==================== 用户登录 ====================
+        let currentUser = null;
+        const loginOverlay = document.getElementById('loginOverlay');
+        const mainContent = document.getElementById('mainContent');
+        const usernameInput = document.getElementById('usernameInput');
+        const passwordInput = document.getElementById('passwordInput');
+        const loginBtn = document.getElementById('loginBtn');
+        const errorMsg = document.getElementById('errorMsg');
+        const userArea = document.getElementById('userArea');
+
+        function renderUserArea() {
+            if (!currentUser) return;
+            const isAdmin = currentUser.role === 'admin';
+            userArea.innerHTML = `
+                <span class="user-info">👤 ${currentUser.username}${isAdmin ? '(管理员)' : ''}</span>
+                ${!isAdmin ? '<button class="user-btn" id="changePwdBtn">🔑 修改密码</button>' : ''}
+                <button class="logout-btn" id="logoutBtn">🚪 退出</button>
+            `;
+            if (!isAdmin) {
+                document.getElementById('changePwdBtn')?.addEventListener('click', () => alert('修改密码需要手动编辑 data.json 文件'));
+            }
+            document.getElementById('logoutBtn')?.addEventListener('click', logout);
+        }
+
+        function logout() {
+            currentUser = null;
+            sessionStorage.removeItem('cyberwhale_current_user');
+            loginOverlay.style.display = 'flex';
+            mainContent.style.display = 'none';
+            if (usernameInput) usernameInput.value = '';
+            if (passwordInput) passwordInput.value = '';
+            if (errorMsg) errorMsg.style.display = 'none';
+        }
+
+        function doLogin() {
+            const user = validateUser(usernameInput.value.trim(), passwordInput.value);
+            if (user) {
+                currentUser = user;
+                sessionStorage.setItem('cyberwhale_current_user', JSON.stringify(user));
+                loginOverlay.style.display = 'none';
+                mainContent.style.display = 'block';
+                renderUserArea();
+                errorMsg.style.display = 'none';
+            } else {
+                errorMsg.style.display = 'block';
+                usernameInput.value = ''; passwordInput.value = ''; usernameInput.focus();
+            }
+        }
+
+        // ==================== 初始化 ====================
+        async function init() {
+            // 显示加载提示
+            const container = document.getElementById('appContainer');
+            if (container) container.innerHTML = '<div style="text-align:center; padding:3rem;">📡 正在加载数据...</div>';
+
+            await loadDataFromGitHub();
+            renderMainPage();
+
+            const savedUser = sessionStorage.getItem('cyberwhale_current_user');
+            if (savedUser) {
+                try {
+                    const user = JSON.parse(savedUser);
+                    if (validateUser(user.username, user.password)) {
+                        currentUser = user;
+                        loginOverlay.style.display = 'none';
+                        mainContent.style.display = 'block';
+                        renderUserArea();
+                    } else { loginOverlay.style.display = 'flex'; }
+                } catch (e) { loginOverlay.style.display = 'flex'; }
+            } else { loginOverlay.style.display = 'flex'; }
+        }
+
+        if (loginBtn) loginBtn.addEventListener('click', doLogin);
+        if (usernameInput) usernameInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') doLogin(); });
+        if (passwordInput) passwordInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') doLogin(); });
+
+        init();
+    </script>
+</body>
+
+</html>
