@@ -1,233 +1,106 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>CyberWhale 工具集</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap"
-        rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background: linear-gradient(135deg, #0a2f44 0%, #022b3f 100%);
-            min-height: 100vh;
-            color: #fff;
-        }
-
-        .top-toolbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(12px);
-            z-index: 100;
-            padding: 0.8rem 1.5rem;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .toolbar-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .logo-area {
-            font-weight: 700;
-            font-size: 1.3rem;
-            background: linear-gradient(135deg, #0066cc, #0099ff);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .nav-item {
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.9rem;
-            color: #4a5568;
-            padding: 0.3rem 0.6rem;
-            border-radius: 40px;
-            transition: all 0.2s;
-        }
-
-        .nav-item:hover {
-            background: rgba(0, 100, 200, 0.08);
-            color: #0066cc;
-        }
-
-        .nav-item.active {
-            color: #0066cc;
-            background: rgba(0, 100, 200, 0.1);
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 6rem 1.5rem 3rem;
-        }
-
-        .page-header {
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
-
-        h1 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #FFE6C7, #C0F0FF, #7FDBFF);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            margin-bottom: 0.5rem;
-        }
-
-        .subtitle {
-            color: #b9e2ff;
-            font-size: 0.9rem;
-        }
-
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 1rem;
-        }
-
-        .tool-card {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
-            border-radius: 1rem;
-            padding: 1rem 1.2rem;
-            transition: all 0.25s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-decoration: none;
-            color: white;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-
-        .tool-card:hover {
-            background: rgba(255, 255, 255, 0.18);
-            transform: translateY(-2px);
-            border-color: #3cc5ff;
-        }
-
-        .tool-icon {
-            font-size: 1.8rem;
-            min-width: 42px;
-            text-align: center;
-        }
-
-        .tool-info {
-            flex: 1;
-        }
-
-        .tool-name {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 0.2rem;
-        }
-
-        .tool-desc {
-            font-size: 0.7rem;
-            opacity: 0.7;
-        }
-
-        .footer-note {
-            text-align: center;
-            padding: 2rem;
-            font-size: 0.7rem;
-            color: #8a9bb0;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 2rem;
-        }
-
-        @media (max-width: 600px) {
-            .container {
-                padding: 5rem 1rem 2rem;
-            }
-
-            .tools-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<title>CyberWhale · 工具箱</title>
+<link rel="shortcut icon" type="image/x-icon" href="https://i.imgs.ovh/2026/05/02/bf29034af039328180ea8abd6d6abba5.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:#061827;color:#fff;min-height:100vh;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+.page-bg{position:fixed;inset:0;z-index:-2;background:radial-gradient(circle at 50% 18%,rgba(0,190,255,.28),transparent 34%),radial-gradient(circle at 85% 75%,rgba(120,90,255,.12),transparent 28%),linear-gradient(145deg,#083d5a,#031827 78%)}
+.grid-bg{position:fixed;inset:0;z-index:-1;background-image:linear-gradient(rgba(120,220,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(120,220,255,.06) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,transparent,black 15%,black 85%,transparent)}
+.top-toolbar{position:fixed;top:0;left:0;width:100%;z-index:100;padding:.85rem 2rem;background:rgba(240,250,255,.9);backdrop-filter:blur(16px);box-shadow:0 4px 26px rgba(0,0,0,.12);border-bottom:1px solid rgba(150,220,255,.25)}
+.toolbar-container{max-width:1300px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.logo-area{font-weight:800;font-size:1.35rem;background:linear-gradient(135deg,#008cff,#00d9ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.nav-links{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.nav-item{font-size:.95rem;font-weight:600;padding:.45rem .9rem;border-radius:999px;color:#17384a;transition:.25s}
+.nav-item:hover,.nav-item.active{background:rgba(0,140,255,.12);color:#0070d8}
+.container{max-width:1120px;margin:0 auto;padding:7rem 1.5rem 3rem}
+.page-header{text-align:center;margin-bottom:2.4rem}
+.badge{display:inline-block;font-size:.82rem;padding:.45rem .9rem;border:1px solid rgba(130,230,255,.35);border-radius:999px;background:rgba(0,30,50,.4);color:#c5f6ff;margin-bottom:1rem}
+h1{font-size:3rem;font-weight:800;background:linear-gradient(135deg,#ffe6c7,#b8f2ff,#70d8ff);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:.7rem}
+.subtitle{color:#c8f4ff;font-size:1rem;opacity:.85}
+.panel{background:rgba(10,40,55,.62);backdrop-filter:blur(18px);border-radius:2rem;border:1px solid rgba(160,230,255,.18);padding:2rem}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem}
+.tool-card{position:relative;min-height:150px;background:rgba(255,255,255,.06);border:1px solid rgba(180,230,255,.16);border-radius:1.5rem;padding:1.4rem;transition:.3s;overflow:hidden}
+.tool-card:before{content:"";position:absolute;inset:auto -20% -45% auto;width:140px;height:140px;border-radius:50%;background:rgba(0,190,255,.12);transition:.3s}
+.tool-card:hover{transform:translateY(-8px);background:rgba(255,255,255,.1);border-color:rgba(140,230,255,.35)}
+.tool-card:hover:before{transform:scale(1.25)}
+.tool-icon{font-size:2.2rem;margin-bottom:.8rem}
+.tool-name{font-size:1.08rem;font-weight:700;margin-bottom:.45rem}
+.tool-desc{font-size:.9rem;line-height:1.6;opacity:.78}
+.tool-link{position:absolute;right:1.3rem;bottom:1.1rem;color:#9eeeff;font-size:.95rem}
+.footer-note{text-align:center;padding:2rem;font-size:.75rem;opacity:.68}
+@media(max-width:700px){
+.top-toolbar{padding:.8rem 1rem}
+.toolbar-container{flex-direction:column}
+.nav-links{justify-content:center;gap:.5rem}
+.container{padding:7.5rem 1rem 2rem}
+h1{font-size:2.3rem}
+.panel{padding:1rem}
+.tools-grid{grid-template-columns:1fr}
+}
+</style>
 </head>
-
 <body>
+<div class="page-bg"></div>
+<div class="grid-bg"></div>
 
-    <div class="top-toolbar">
-        <div class="toolbar-container">
-            <a href="https://cyberwhale.net" class="logo-area">🐋 CyberWhale · 深海回响</a>
-            <div class="nav-links">
-                <a href="https://cyberwhale.net" class="nav-item">🏠 首页</a>
-                <a href="https://cyberwhale.net/about" class="nav-item">✨ About Me</a>
-                <a href="https://cyberwhale.net/ai" class="nav-item">🤖 AI</a>
-                <a href="https://cyberwhale.net/download.html" class="nav-item">📦 下载</a>
-                <a href="#" class="nav-item active">🛠️ 工具</a>
-            </div>
-        </div>
-    </div>
+<header class="top-toolbar">
+<div class="toolbar-container">
+<a href="https://cyberwhale.net" class="logo-area">🐋 CyberWhale · 深海回响</a>
+<nav class="nav-links">
+<a href="https://cyberwhale.net" class="nav-item">🏠 首页</a>
+<a href="https://cyberwhale.net/about" class="nav-item">✨ About Me</a>
+<a href="https://cyberwhale.net/ai" class="nav-item">🤖 AI</a>
+<a href="https://cyberwhale.net/download.html" class="nav-item">📦 下载</a>
+<a href="https://cyberwhale.net/tools" class="nav-item active">🛠️ 工具</a>
+</nav>
+</div>
+</header>
 
-    <div class="container">
-        <div class="page-header">
-            <h1>🐋 CyberWhale 工具箱</h1>
-            <div class="subtitle">赛博鲸鱼的专属工具集</div>
-        </div>
+<main class="container">
+<section class="page-header">
+<div class="badge">CYBERWHALE.NET</div>
+<h1>🛠️ CyberWhale 工具箱</h1>
+<div class="subtitle">站点工具与页面入口</div>
+</section>
 
-        <div class="tools-grid" id="toolsContainer"></div>
-    </div>
+<section class="panel">
+<div class="tools-grid" id="toolsContainer"></div>
+</section>
+</main>
 
-    <div class="footer-note">
-        © 2026 CyberWhale · 深海漫游者 | 工具持续更新中
-    </div>
+<footer class="footer-note">© 2026 CyberWhale</footer>
 
-    <script>
-        // 你的 CyberWhale 工具列表
-        const tools = [
-            { name: "🏠 首页", desc: "cyberwhale.net 主页", url: "https://cyberwhale.net" },
-            { name: "✨ About Me", desc: "关于赛博鲸鱼", url: "https://cyberwhale.net/about" },
-            { name: "🤖 Cyberwhale AI", desc: "AI 助手入口（未开放）", url: "https://cyberwhale.net/ai" },
-            { name: "📦 下载中心", desc: "软件/ISO 下载", url: "https://cyberwhale.net/download" },
-            { name: "🛠️ 工具箱", desc: "当前页面", url: "https://cyberwhale.net/tools" },
-            { name: "📊 PPT课件", desc: "赛博深潜课件", url: "https://cyberwhale.net/courseware" }
-        ];
+<script>
+const tools=[
+{name:"🏠 首页",desc:"CyberWhale 主页。",url:"https://cyberwhale.net"},
+{name:"✨ About Me",desc:"个人页面。",url:"https://cyberwhale.net/about"},
+{name:"🤖 CyberWhale AI",desc:"AI 页面与相关内容。",url:"https://cyberwhale.net/ai"},
+{name:"📦 下载中心",desc:"软件下载页面。",url:"https://cyberwhale.net/download"},
+{name:"🛠️ 工具箱",desc:"工具集合页面。",url:"https://cyberwhale.net/tools"},
+{name:"📊 PPT 课件",desc:"课件页面。",url:"https://cyberwhale.net/courseware"}
+];
 
-        const container = document.getElementById('toolsContainer');
-        if (container) {
-            container.innerHTML = tools.map(tool => `
-                <a href="${tool.url}" class="tool-card" target="_blank" rel="noopener noreferrer">
-                    <div class="tool-icon">${tool.name.split(' ')[0]}</div>
-                    <div class="tool-info">
-                        <div class="tool-name">${tool.name}</div>
-                        <div class="tool-desc">${tool.desc}</div>
-                    </div>
-                    <div class="tool-link">→</div>
-                </a>
-            `).join('');
-        }
-    </script>
+const container=document.getElementById("toolsContainer");
+
+if(container){
+container.innerHTML=tools.map(tool=>{
+const icon=tool.name.split(" ")[0];
+return `
+<a href="${tool.url}" class="tool-card">
+<div class="tool-icon">${icon}</div>
+<div class="tool-name">${tool.name}</div>
+<div class="tool-desc">${tool.desc}</div>
+<div class="tool-link">打开 →</div>
+</a>
+`;
+}).join("");
+}
+</script>
 </body>
-
 </html>
