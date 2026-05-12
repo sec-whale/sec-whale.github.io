@@ -1,598 +1,237 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <link rel="shortcut icon" type="image/x-icon"
-        href="https://i.imgs.ovh/2026/05/02/bf29034af039328180ea8abd6d6abba5.png">
-    <title>赛博鲸鱼 · 深海回响</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap"
-        rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background: #0a2f44;
-            overflow-x: hidden;
-            color: #fff;
-        }
-
-        .top-toolbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(12px);
-            z-index: 100;
-            padding: 0.9rem 2rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            border-bottom: 1px solid rgba(255, 255, 240, 0.6);
-        }
-
-        .toolbar-container {
-            max-width: 1300px;
-            margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .logo-area {
-            font-weight: 700;
-            font-size: 1.4rem;
-            background: linear-gradient(135deg, #0066cc, #0099ff);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .nav-item {
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1rem;
-            color: #1e2f3e;
-            padding: 0.4rem 0.8rem;
-            border-radius: 40px;
-            transition: all 0.2s;
-            background: transparent;
-        }
-
-        .nav-item:hover {
-            background: rgba(0, 100, 200, 0.1);
-            color: #0066cc;
-        }
-
-        .sound-control {
-            background: rgba(0, 0, 0, 0.05);
-            border-radius: 40px;
-            padding: 0.3rem 1rem;
-            cursor: pointer;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            color: #1e2f3e;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .sound-control:hover {
-            background: rgba(0, 100, 200, 0.15);
-        }
-
-        .ocean-wrapper {
-            position: relative;
-            width: 100%;
-            min-height: 100vh;
-            background: linear-gradient(145deg, #0a4c6e 0%, #022b3f 100%);
-            overflow: hidden;
-        }
-
-        .wave-bg {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 25%;
-            background: repeating-linear-gradient(transparent 0px, transparent 29px, rgba(80, 180, 255, 0.2) 30px);
-            pointer-events: none;
-            z-index: 2;
-        }
-
-        .whale-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 5;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 20;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 6rem 1.5rem 4rem;
-            backdrop-filter: blur(3px);
-        }
-
-        .hero-title {
-            font-size: 4rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #FFE6C7, #C0F0FF, #7FDBFF);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            animation: fadeUp 1s ease;
-        }
-
-        .hero-sub {
-            font-size: 1.3rem;
-            margin-top: 1rem;
-            opacity: 0.9;
-            max-width: 600px;
-        }
-
-        .scroll-hint {
-            margin-top: 3rem;
-            font-size: 0.85rem;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 0.5rem 1rem;
-            border-radius: 40px;
-            animation: bounce 2s infinite;
-        }
-
-        .surprise-section {
-            position: relative;
-            z-index: 20;
-            background: rgba(10, 40, 55, 0.65);
-            backdrop-filter: blur(16px);
-            border-radius: 2rem;
-            margin: 4rem 1.5rem;
-            padding: 3rem 2rem;
-            border: 1px solid rgba(255, 255, 200, 0.25);
-        }
-
-        .surprise-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .surprise-card {
-            background: rgba(255, 255, 245, 0.1);
-            border-radius: 2rem;
-            padding: 1.8rem;
-            width: 260px;
-            text-align: center;
-            backdrop-filter: blur(8px);
-            transition: transform 0.3s;
-            cursor: default;
-            border: 1px solid rgba(255, 215, 150, 0.4);
-        }
-
-        .surprise-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 240, 200, 0.2);
-            border-color: #ffcf8a;
-        }
-
-        .emoji-big {
-            font-size: 3rem;
-            display: block;
-            margin-bottom: 0.8rem;
-        }
-
-        .secret-quote {
-            font-style: italic;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-            color: #e0f0ff;
-        }
-
-        .hidden-message {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s, transform 0.8s;
-            margin-top: 2rem;
-            text-align: center;
-            font-weight: 500;
-        }
-
-        .hidden-message.reveal {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        hr {
-            margin: 2rem 0;
-            border-color: rgba(255, 255, 200, 0.2);
-        }
-
-        footer {
-            text-align: center;
-            padding: 2rem;
-            font-size: 0.75rem;
-            opacity: 0.7;
-        }
-
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes bounce {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(8px);
-            }
-        }
-
-        @media (max-width: 700px) {
-            .toolbar-container {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .nav-links {
-                gap: 1rem;
-                justify-content: center;
-            }
-
-            .hero-title {
-                font-size: 2.4rem;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<title>CyberWhale · 深海回响</title>
+<link rel="shortcut icon" type="image/x-icon" href="./favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:#071f31;color:#fff;overflow-x:hidden}
+a{text-decoration:none}
+.top-toolbar{position:fixed;top:0;left:0;width:100%;z-index:100;padding:.9rem 2rem;background:rgba(255,255,255,.9);backdrop-filter:blur(14px);box-shadow:0 4px 24px rgba(0,0,0,.08);border-bottom:1px solid rgba(255,255,255,.55)}
+.toolbar-container{max-width:1300px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.logo-area{font-weight:800;font-size:1.35rem;background:linear-gradient(135deg,#0066cc,#00b7ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.nav-links{display:flex;align-items:center;gap:1.4rem;flex-wrap:wrap}
+.nav-item,.sound-control{color:#1e2f3e;border-radius:999px;transition:.25s}
+.nav-item{font-size:.98rem;font-weight:600;padding:.45rem .85rem}
+.nav-item:hover{background:rgba(0,100,200,.1);color:#0066cc}
+.sound-control{cursor:pointer;font-size:.9rem;padding:.4rem 1rem;background:rgba(0,0,0,.05);border:1px solid rgba(0,0,0,.05)}
+.sound-control:hover{background:rgba(0,120,200,.15)}
+.ocean-wrapper{position:relative;width:100%;min-height:100vh;overflow:hidden;background:radial-gradient(circle at 50% 25%,rgba(50,160,220,.32),transparent 38%),linear-gradient(145deg,#0a4c6e 0%,#022b3f 100%)}
+.whale-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:5}
+.wave-bg{position:absolute;left:0;bottom:0;width:100%;height:25%;z-index:2;pointer-events:none;background:repeating-linear-gradient(transparent 0,transparent 29px,rgba(80,180,255,.18) 30px)}
+.hero-content{position:relative;z-index:20;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:6rem 1.5rem 4rem;backdrop-filter:blur(3px)}
+.hero-title{font-size:4rem;font-weight:800;background:linear-gradient(135deg,#ffe6c7,#c0f0ff,#7fdbff);-webkit-background-clip:text;background-clip:text;color:transparent;animation:fadeUp 1s ease}
+.hero-sub{font-size:1.25rem;margin-top:1rem;opacity:.92;max-width:650px;line-height:1.8}
+.scroll-hint{margin-top:3rem;font-size:.85rem;background:rgba(0,0,0,.32);padding:.55rem 1.1rem;border-radius:999px;animation:bounce 2s infinite}
+.section{position:relative;z-index:20;max-width:1100px;margin:4rem auto;padding:3rem 2rem;background:rgba(10,40,55,.68);backdrop-filter:blur(18px);border-radius:2rem;border:1px solid rgba(255,255,220,.22)}
+.section-title{text-align:center;font-weight:600}
+.card-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:2rem;margin-top:2rem}
+.card{width:260px;text-align:center;padding:1.8rem;border-radius:2rem;background:rgba(255,255,245,.1);backdrop-filter:blur(10px);border:1px solid rgba(255,215,150,.35);transition:.3s}
+.card:hover{transform:translateY(-10px);background:rgba(255,240,200,.18);border-color:#ffcf8a}
+.emoji-big{display:block;font-size:3rem;margin-bottom:.8rem}
+.card p{font-size:.95rem;line-height:1.7;opacity:.9;margin-top:.55rem}
+.secret-quote{font-style:italic;font-size:.86rem;margin-top:.65rem;color:#dff5ff}
+.hidden-message{opacity:0;transform:translateY(20px);transition:.8s;margin-top:2rem;text-align:center;font-weight:600;line-height:1.8}
+.hidden-message.reveal{opacity:1;transform:translateY(0)}
+.tips{text-align:center;font-size:.85rem;opacity:.85;margin-top:2rem;padding-top:2rem;border-top:1px solid rgba(255,255,200,.18)}
+footer{text-align:center;padding:2rem;font-size:.75rem;opacity:.7}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+@media(max-width:700px){
+.top-toolbar{padding:.8rem 1rem}
+.toolbar-container{flex-direction:column}
+.nav-links{justify-content:center;gap:.7rem}
+.hero-title{font-size:2.4rem}
+.hero-sub{font-size:1rem}
+.section{margin:3rem 1rem;padding:2rem 1rem}
+}
+</style>
 </head>
-
 <body>
-
-    <div class="top-toolbar">
-        <div class="toolbar-container">
-            <a href="https://cyberwhale.net" class="logo-area">🐋 CyberWhale · 深海回响</a>
-            <div class="nav-links">
-                <a href="#" class="nav-item" id="aboutLink">✨ About Me</a>
-                <a href="#" class="nav-item" id="aiLink">🤖 Cyberwhale AI</a>
-                <a href="#" class="nav-item" id="downloadLink">🐋 Software Download</a>
-                <a href="#" class="nav-item" id="alltoolsLink">🛠️ All Tools</a>
-            </div>
-            <div class="sound-control" id="soundToggleBtn">
-                🔊 鲸歌萦绕 · 播放深海之音
-            </div>
-        </div>
-    </div>
-
-    <div class="ocean-wrapper">
-        <canvas id="whaleCanvas" class="whale-canvas"
-            style="position: absolute; top:0; left:0; width:100%; height:100%; pointer-events: none;"></canvas>
-        <div class="wave-bg"></div>
-
-        <div class="hero-content">
-            <div class="hero-title">🐋 赛博鲸鱼·赛博深潜</div>
-            <div class="hero-sub">「在数据的深海中，遨游无界，聆听蔚蓝的低语」</div>
-            <div class="scroll-hint">↓ 继续下滑，深海里藏着惊喜小礼物 ↓</div>
-        </div>
-
-        <div class="surprise-section" id="surpriseZone">
-            <h2 style="text-align:center; font-weight: 500;">✨ 深潜奇遇 · 鲸喜礼盒 ✨</h2>
-            <div class="surprise-grid">
-                <div class="surprise-card">
-                    <span class="emoji-big">🎐</span>
-                    <h3>鲸语回响</h3>
-                    <p>如果你听到鲸歌，那是海洋深处的记忆。CyberWhale 默默守护每一串数字浪花。</p>
-                    <div class="secret-quote">“低语似光，游弋成诗”</div>
-                </div>
-                <div class="surprise-card">
-                    <span class="emoji-big">🌌</span>
-                    <h3>数字北极星</h3>
-                    <p>你的短号 4122316.com 与 cyberwhale.net 化作永恒信标，指引航线。</p>
-                    <div class="secret-quote">✦ 每一次访问，都是星辰交汇 ✦</div>
-                </div>
-                <div class="surprise-card">
-                    <span class="emoji-big">🎁</span>
-                    <h3>潮汐盲盒</h3>
-                    <p>隐藏彩蛋 : 连续点击海面三次，会浮现赛博诗篇~</p>
-                    <div class="secret-quote" id="easterEggTrigger">🐙 戳我会有小小惊喜~</div>
-                </div>
-            </div>
-
-            <div class="hidden-message" id="hiddenMessageBox">
-                🌊✨ 恭喜你发现深海的密语 ✨🌊<br>
-                「 鲸从不焦虑，因为整片海洋都是它的游乐场 」
-            </div>
-            <hr>
-            <div style="text-align: center; font-size: 0.85rem;">
-                💡 小惊喜二：把鼠标/手指放在鲸鱼水花上，会泛起涟漪语
-            </div>
-        </div>
-        <footer>
-            © 2026 CyberWhale · 深海漫游者 | 数字信标: 4122316.com | 遨游比特之海
-        </footer>
-    </div>
-
-    <script>
-        (function () {
-            // 鲸鱼动画
-            const canvas = document.getElementById('whaleCanvas');
-            let ctx = canvas.getContext('2d');
-            let width, height;
-            let whales = [];
-
-            function initWhales() {
-                whales = [];
-                const whaleShapes = [
-                    { color: 'rgba(60,140,210,0.45)', size: 70, speedX: 0.2, speedY: 0.05 },
-                    { color: 'rgba(80,180,240,0.5)', size: 95, speedX: 0.15, speedY: -0.03 },
-                    { color: 'rgba(40,110,190,0.4)', size: 55, speedX: 0.25, speedY: 0.07 },
-                    { color: 'rgba(120,200,255,0.35)', size: 120, speedX: -0.1, speedY: 0.02 },
-                    { color: 'rgba(30,90,160,0.5)', size: 80, speedX: 0.18, speedY: -0.06 }
-                ];
-                for (let i = 0; i < whaleShapes.length; i++) {
-                    whales.push({
-                        x: Math.random() * 1.2,
-                        y: Math.random() * 0.9,
-                        size: whaleShapes[i].size,
-                        color: whaleShapes[i].color,
-                        speedX: whaleShapes[i].speedX,
-                        speedY: whaleShapes[i].speedY,
-                        phase: Math.random() * Math.PI * 2,
-                        tailAngle: 0
-                    });
-                }
-            }
-
-            function drawWhale(ctx, x, y, size, color, tailSwing) {
-                ctx.save();
-                ctx.translate(x, y);
-                ctx.beginPath();
-                ctx.ellipse(0, 0, size * 0.8, size * 0.5, 0, 0, Math.PI * 2);
-                ctx.fillStyle = color;
-                ctx.fill();
-                ctx.beginPath();
-                ctx.arc(size * 0.3, -size * 0.15, size * 0.07, 0, Math.PI * 2);
-                ctx.fillStyle = "#FFFFFF";
-                ctx.fill();
-                ctx.beginPath();
-                ctx.arc(size * 0.32, -size * 0.18, size * 0.03, 0, Math.PI * 2);
-                ctx.fillStyle = "#020B1A";
-                ctx.fill();
-                ctx.beginPath();
-                let tailX = -size * 0.7;
-                let tailY1 = -size * 0.3 + Math.sin(tailSwing) * size * 0.1;
-                let tailY2 = size * 0.3 + Math.cos(tailSwing) * size * 0.1;
-                ctx.moveTo(tailX, tailY1);
-                ctx.lineTo(tailX - size * 0.4, 0);
-                ctx.lineTo(tailX, tailY2);
-                ctx.fillStyle = color;
-                ctx.fill();
-                ctx.restore();
-            }
-
-            function animateWhales() {
-                if (!ctx) return;
-                ctx.clearRect(0, 0, width, height);
-                for (let w of whales) {
-                    w.x += w.speedX * 0.006;
-                    w.y += w.speedY * 0.004;
-                    if (w.x > 1.1) w.x = -0.2;
-                    if (w.x < -0.2) w.x = 1.1;
-                    if (w.y > 1.05) w.y = -0.05;
-                    if (w.y < -0.05) w.y = 1.05;
-                    const xPos = w.x * width;
-                    const yPos = w.y * height;
-                    w.tailAngle = (Date.now() * 0.003 + w.phase) % (Math.PI * 2);
-                    drawWhale(ctx, xPos, yPos, w.size, w.color, w.tailAngle);
-                }
-                requestAnimationFrame(animateWhales);
-            }
-
-            function resizeCanvas() {
-                const wrap = document.querySelector('.ocean-wrapper');
-                if (wrap) {
-                    width = wrap.clientWidth;
-                    height = wrap.clientHeight;
-                    canvas.width = width;
-                    canvas.height = height;
-                    canvas.style.width = width + 'px';
-                    canvas.style.height = height + 'px';
-                    ctx = canvas.getContext('2d');
-                }
-            }
-
-            window.addEventListener('resize', () => { resizeCanvas(); });
-            setTimeout(() => {
-                resizeCanvas();
-                initWhales();
-                animateWhales();
-            }, 100);
-
-            // 声音控制（简化版，避免报错）
-            let audioCtx = null;
-            let isPlaying = false;
-            const soundBtn = document.getElementById('soundToggleBtn');
-            let soundActive = false;
-
-            if (soundBtn) {
-                soundBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    if (!soundActive) {
-                        soundActive = true;
-                        soundBtn.innerHTML = '🔊 鲸歌悠扬 · 点击静默深海';
-                        soundBtn.style.background = "rgba(0,120,200,0.2)";
-                    } else {
-                        soundActive = false;
-                        soundBtn.innerHTML = '🔊 鲸歌萦绕 · 播放深海之音';
-                        soundBtn.style.background = "";
-                    }
-                });
-            }
-
-            // 滚动惊喜
-            const hiddenMsg = document.getElementById('hiddenMessageBox');
-            if (hiddenMsg) {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) hiddenMsg.classList.add('reveal');
-                    });
-                }, { threshold: 0.4 });
-                observer.observe(hiddenMsg);
-            }
-
-            // 彩蛋
-            const easterDiv = document.getElementById('easterEggTrigger');
-            if (easterDiv) {
-                easterDiv.style.cursor = 'pointer';
-                easterDiv.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    alert('🐋✨ 赛博诗篇 ✨🐋\n“鲸鱼在数据深海中筑巢，短号4122316.com是永恒的浮标，越过时间的潮汐，you are the cyber explorer.”');
-                    const floating = document.createElement('div');
-                    floating.innerText = '🌊 深海祝福 · 4122316.com 永恒坐标 🌊';
-                    floating.style.position = 'fixed';
-                    floating.style.bottom = '20%';
-                    floating.style.left = '50%';
-                    floating.style.transform = 'translateX(-50%)';
-                    floating.style.background = 'rgba(0,0,0,0.7)';
-                    floating.style.color = 'white';
-                    floating.style.padding = '12px 24px';
-                    floating.style.borderRadius = '60px';
-                    floating.style.zIndex = '9999';
-                    floating.style.fontSize = '0.9rem';
-                    floating.style.backdropFilter = 'blur(12px)';
-                    document.body.appendChild(floating);
-                    setTimeout(() => { floating.remove(); }, 3000);
-                });
-            }
-
-            // ========== 顶部跳转（修复版） ==========
-            const aboutLink = document.getElementById('aboutLink');
-            const aiLink = document.getElementById('aiLink');
-            const downloadLink = document.getElementById('downloadLink');
-            const alltoolsLink = document.getElementById('alltoolsLink');
-            const logoLink = document.querySelector('.logo-area');
-
-            if (aboutLink) {
-                aboutLink.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    window.location.href = 'https://cyberwhale.net/about';
-                });
-            }
-            if (aiLink) {
-                aiLink.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    window.location.href = 'https://cyberwhale.net/ai';
-                });
-            }
-            if (downloadLink) {
-                downloadLink.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    window.location.href = 'https://cyberwhale.net/download';
-                });
-            }
-            if (alltoolsLink) {
-                alltoolsLink.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    window.location.href = 'https://cyberwhale.net/tools';
-                });
-            }
-            if (logoLink && logoLink.tagName === 'A') {
-                logoLink.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    window.location.href = 'https://cyberwhale.net';
-                });
-            }
-
-            // 连续点击浪花诗
-            let clickCount = 0;
-            let clickTimer = null;
-            const oceanWrapper = document.querySelector('.ocean-wrapper');
-
-            function showRippleMessage(msg) {
-                const rippleDiv = document.createElement('div');
-                rippleDiv.innerText = msg;
-                rippleDiv.style.position = 'fixed';
-                rippleDiv.style.bottom = '30%';
-                rippleDiv.style.left = '50%';
-                rippleDiv.style.transform = 'translateX(-50%)';
-                rippleDiv.style.background = 'rgba(0, 30, 50, 0.85)';
-                rippleDiv.style.backdropFilter = 'blur(10px)';
-                rippleDiv.style.color = '#b0f0ff';
-                rippleDiv.style.padding = '10px 20px';
-                rippleDiv.style.borderRadius = '50px';
-                rippleDiv.style.fontSize = '1rem';
-                rippleDiv.style.border = '1px solid #3ec1ff';
-                rippleDiv.style.zIndex = '9999';
-                rippleDiv.style.whiteSpace = 'nowrap';
-                document.body.appendChild(rippleDiv);
-                setTimeout(() => rippleDiv.remove(), 2000);
-            }
-
-            if (oceanWrapper) {
-                oceanWrapper.addEventListener('click', (e) => {
-                    if (e.target.closest('.sound-control') ||
-                        e.target.closest('.surprise-card') ||
-                        e.target.closest('a')) return;
-
-                    clickCount++;
-                    if (clickTimer) clearTimeout(clickTimer);
-                    clickTimer = setTimeout(() => {
-                        clickCount = 0;
-                    }, 800);
-
-                    if (clickCount === 3) {
-                        const poems = [
-                            '🌊 浪花托起鲸歌，比特化作蔚蓝',
-                            '🐋 4122316.com 是数字海洋里的古老罗盘',
-                            '✨ 赛博深潜者永不迷航 ✨',
-                            '💧 水花四溅 · 鲸语低吟'
-                        ];
-                        const randomPoem = poems[Math.floor(Math.random() * poems.length)];
-                        showRippleMessage(randomPoem);
-                        clickCount = 0;
-                    }
-                });
-            }
-
-            console.log("%c🐋 Welcome to CyberWhale · 赛博深潜者", "color: #0af; font-size: 14px;");
-        })();
-    </script>
+<header class="top-toolbar">
+<div class="toolbar-container">
+<a href="#" class="logo-area" data-link="home">🐋 CyberWhale · 深海回响</a>
+<nav class="nav-links">
+<a href="#" class="nav-item" data-link="about">✨ About Me</a>
+<a href="#" class="nav-item" data-link="ai">🤖 CyberWhale AI</a>
+<a href="#" class="nav-item" data-link="download">🐋 Software Download</a>
+<a href="#" class="nav-item" data-link="tools">🛠️ All Tools</a>
+</nav>
+<div class="sound-control" id="soundToggleBtn">🔊 鲸歌萦绕 · 播放深海之音</div>
+</div>
+</header>
+<main class="ocean-wrapper">
+<canvas id="whaleCanvas" class="whale-canvas"></canvas>
+<div class="wave-bg"></div>
+<section class="hero-content">
+<h1 class="hero-title">🐋 赛博鲸鱼 · 赛博深潜</h1>
+<p class="hero-sub">「在数据的深海中，遨游无界，聆听蔚蓝的低语」</p>
+<div class="scroll-hint">↓ 继续下滑，深海里藏着惊喜小礼物 ↓</div>
+</section>
+<section class="section" id="surpriseZone">
+<h2 class="section-title">✨ 深潜奇遇 · 鲸喜礼盒 ✨</h2>
+<div class="card-grid">
+<div class="card">
+<span class="emoji-big">🎐</span>
+<h3>鲸语回响</h3>
+<p>如果你听到鲸歌，那是海洋深处的记忆。CyberWhale 默默守护每一串数字浪花。</p>
+<div class="secret-quote">“低语似光，游弋成诗”</div>
+</div>
+<div class="card">
+<span class="emoji-big">🌌</span>
+<h3>数字北极星</h3>
+<p>每一次访问，都是一次星辰交汇。愿你在信息海洋中保持方向感。</p>
+<div class="secret-quote">✦ 深海之上，也有星光 ✦</div>
+</div>
+<div class="card">
+<span class="emoji-big">🎁</span>
+<h3>潮汐盲盒</h3>
+<p>隐藏彩蛋：连续点击海面三次，会浮现一段赛博诗篇。</p>
+<div class="secret-quote" id="easterEggTrigger">🐙 戳我会有小小惊喜</div>
+</div>
+</div>
+<div class="hidden-message" id="hiddenMessageBox">
+🌊✨ 恭喜你发现深海的密语 ✨🌊<br>
+「鲸从不焦虑，因为整片海洋都是它的游乐场」
+</div>
+<div class="tips">💡 小惊喜：连续点击海面三次，会泛起涟漪语。</div>
+</section>
+<footer>© 2026 CyberWhale · 深海漫游者 | 遨游比特之海</footer>
+</main>
+<script>
+(function(){
+const SITE_CONFIG={
+home:"/",
+about:"/about",
+ai:"/ai",
+download:"/download",
+tools:"/tools"
+};
+const canvas=document.getElementById("whaleCanvas");
+const ctx=canvas.getContext("2d");
+let width=0,height=0,whales=[];
+function resizeCanvas(){
+const wrap=document.querySelector(".ocean-wrapper");
+width=wrap.clientWidth;
+height=wrap.clientHeight;
+canvas.width=width;
+canvas.height=height;
+}
+function initWhales(){
+const data=[
+["rgba(60,140,210,.45)",70,.2,.05],
+["rgba(80,180,240,.5)",95,.15,-.03],
+["rgba(40,110,190,.4)",55,.25,.07],
+["rgba(120,200,255,.35)",120,-.1,.02],
+["rgba(30,90,160,.5)",80,.18,-.06]
+];
+whales=data.map(item=>({
+color:item[0],size:item[1],speedX:item[2],speedY:item[3],
+x:Math.random()*1.2,y:Math.random()*.9,phase:Math.random()*Math.PI*2
+}));
+}
+function drawWhale(w){
+const x=w.x*width,y=w.y*height,s=w.size,t=Date.now()*.003+w.phase;
+ctx.save();
+ctx.translate(x,y);
+ctx.beginPath();
+ctx.ellipse(0,0,s*.8,s*.5,0,0,Math.PI*2);
+ctx.fillStyle=w.color;
+ctx.fill();
+ctx.beginPath();
+ctx.arc(s*.3,-s*.15,s*.07,0,Math.PI*2);
+ctx.fillStyle="#fff";
+ctx.fill();
+ctx.beginPath();
+ctx.arc(s*.32,-s*.18,s*.03,0,Math.PI*2);
+ctx.fillStyle="#020b1a";
+ctx.fill();
+ctx.beginPath();
+ctx.moveTo(-s*.7,-s*.3+Math.sin(t)*s*.1);
+ctx.lineTo(-s*1.1,0);
+ctx.lineTo(-s*.7,s*.3+Math.cos(t)*s*.1);
+ctx.fillStyle=w.color;
+ctx.fill();
+ctx.restore();
+}
+function animate(){
+ctx.clearRect(0,0,width,height);
+whales.forEach(w=>{
+w.x+=w.speedX*.006;
+w.y+=w.speedY*.004;
+if(w.x>1.1)w.x=-.2;
+if(w.x<-.2)w.x=1.1;
+if(w.y>1.05)w.y=-.05;
+if(w.y<-.05)w.y=1.05;
+drawWhale(w);
+});
+requestAnimationFrame(animate);
+}
+function bindLinks(){
+document.querySelectorAll("[data-link]").forEach(el=>{
+el.addEventListener("click",e=>{
+e.preventDefault();
+const key=el.dataset.link;
+location.href=SITE_CONFIG[key]||"/";
+});
+});
+}
+function bindSound(){
+const btn=document.getElementById("soundToggleBtn");
+let active=false;
+btn.addEventListener("click",e=>{
+e.preventDefault();
+active=!active;
+btn.textContent=active?"🔊 鲸歌悠扬 · 点击静默深海":"🔊 鲸歌萦绕 · 播放深海之音";
+btn.style.background=active?"rgba(0,120,200,.2)":"";
+});
+}
+function showToast(msg){
+const div=document.createElement("div");
+div.textContent=msg;
+div.style.cssText="position:fixed;left:50%;bottom:25%;transform:translateX(-50%);z-index:9999;padding:12px 24px;border-radius:999px;background:rgba(0,30,50,.86);color:#b0f0ff;border:1px solid #3ec1ff;backdrop-filter:blur(12px);white-space:nowrap";
+document.body.appendChild(div);
+setTimeout(()=>div.remove(),2300);
+}
+function bindEasterEggs(){
+const hidden=document.getElementById("hiddenMessageBox");
+new IntersectionObserver(entries=>{
+entries.forEach(e=>{if(e.isIntersecting)hidden.classList.add("reveal")});
+},{threshold:.4}).observe(hidden);
+document.getElementById("easterEggTrigger").addEventListener("click",e=>{
+e.stopPropagation();
+showToast("🐋 深海祝福：愿你永远保持探索欲");
+});
+let count=0,timer=null;
+document.querySelector(".ocean-wrapper").addEventListener("click",e=>{
+if(e.target.closest(".sound-control,.card,a"))return;
+count++;
+clearTimeout(timer);
+timer=setTimeout(()=>count=0,800);
+if(count===3){
+const poems=[
+"🌊 浪花托起鲸歌，比特化作蔚蓝",
+"🐋 数字海洋里，鲸鱼从不迷航",
+"✨ 赛博深潜者永不迷失方向",
+"💧 水花四溅，鲸语低吟"
+];
+showToast(poems[Math.floor(Math.random()*poems.length)]);
+count=0;
+}
+});
+}
+window.addEventListener("resize",resizeCanvas);
+resizeCanvas();
+initWhales();
+animate();
+bindLinks();
+bindSound();
+bindEasterEggs();
+console.log("%c🐋 Welcome to CyberWhale","color:#0af;font-size:14px;");
+})();
+</script>
 </body>
-
 </html>
