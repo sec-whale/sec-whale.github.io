@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>404 · CyberWhale</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, "Microsoft YaHei", sans-serif;
+            color: #eaf7ff;
+            background: radial-gradient(circle at top, #12304a 0%, #071827 45%, #02070d 100%);
+        }
+
+        nav {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 36px;
+            background: rgba(2, 8, 16, .42);
+            border-bottom: 1px solid rgba(120, 210, 255, .12);
+            backdrop-filter: blur(14px);
+        }
+
+        nav a {
+            color: #d8f4ff;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: #7ee7ff
+        }
+
+        main {
+            min-height: calc(100vh - 70px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .box {
+            width: min(980px, 100%);
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            margin-bottom: 24px;
+            padding: 9px 18px;
+            border: 1px solid rgba(120, 220, 255, .18);
+            border-radius: 999px;
+            color: #7ee7ff;
+            font-size: 13px;
+            letter-spacing: 3px;
+            background: rgba(120, 220, 255, .06);
+        }
+
+        h1 {
+            font-size: 56px;
+            margin-bottom: 16px;
+            font-weight: 800;
+            text-shadow: 0 0 28px rgba(80, 200, 255, .18);
+        }
+
+        .subtitle {
+            font-size: 22px;
+            color: #d8f6ff;
+            margin-bottom: 18px;
+        }
+
+        .desc {
+            color: #9eb8c8;
+            line-height: 1.9;
+            margin-bottom: 34px;
+        }
+
+        .btns {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 52px;
+        }
+
+        .btn {
+            padding: 13px 24px;
+            border-radius: 14px;
+            text-decoration: none;
+            color: #06111c;
+            font-weight: 700;
+            background: linear-gradient(135deg, #7ee7ff, #4e9cff);
+        }
+
+        .btn.dark {
+            color: #dff8ff;
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid rgba(120, 220, 255, .16);
+        }
+
+        .section-title {
+            text-align: left;
+            font-size: 24px;
+            margin-bottom: 18px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .card {
+            text-align: left;
+            padding: 22px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, .045);
+            border: 1px solid rgba(120, 220, 255, .12);
+        }
+
+        .num {
+            color: #7ee7ff;
+            font-weight: 800;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .card h3 {
+            font-size: 17px;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            color: #91aebe;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        footer {
+            margin-top: 42px;
+            color: #5d7b8d;
+            font-size: 14px;
+        }
+
+        @media(max-width:800px) {
+            nav {
+                gap: 16px;
+                font-size: 13px;
+                overflow-x: auto;
+                justify-content: flex-start;
+                padding: 0 20px
+            }
+
+            h1 {
+                font-size: 38px
+            }
+
+            .subtitle {
+                font-size: 18px
+            }
+
+            .grid {
+                grid-template-columns: 1fr
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="/">✨ About Me</a>
+        <a href="/ai">CyberWhale AI</a>
+        <a href="/software">Software Download</a>
+        <a href="/tools">🛠️ All Tools</a>
+    </nav>
+
+    <main>
+        <div class="box">
+            <div class="badge">CYBERWHALE.NET</div>
+            <h1>404 · 深海信号丢失</h1>
+            <div class="subtitle">你来到了没有海水的沙漠</div>
+            <p class="desc">
+                这里没有深海回响，也没有数字信标。<br>
+                这片坐标可能不存在，或者已经从 CyberWhale 的海域中消失。
+            </p>
+
+            <div class="btns">
+                <a class="btn" href="/">返回首页</a>
+                <a class="btn dark" href="/tools">进入工具</a>
+                <a class="btn dark" href="/software">软件下载</a>
+                <a class="btn dark" href="javascript:history.back()">返回上一页</a>
+            </div>
+
+            <h2 class="section-title">站点状态</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="num">01</div>
+                    <h3>页面不存在</h3>
+                    <p>当前访问的路径没有找到对应页面。</p>
+                </div>
+                <div class="card">
+                    <div class="num">02</div>
+                    <h3>主页在线</h3>
+                    <p>CyberWhale 根目录仍然可以正常访问。</p>
+                </div>
+                <div class="card">
+                    <div class="num">03</div>
+                    <h3>工具可用</h3>
+                    <p>你可以返回工具集合继续使用站点功能。</p>
+                </div>
+                <div class="card">
+                    <div class="num">04</div>
+                    <h3>深海连接稳定</h3>
+                    <p>只是这片区域没有海水。</p>
+                </div>
+            </div>
+
+            <footer>© 2026 CyberWhale</footer>
+        </div>
+    </main>
+</body>
+
+</html>
