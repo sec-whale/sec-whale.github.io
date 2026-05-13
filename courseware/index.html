@@ -232,6 +232,31 @@
             overflow: hidden
         }
 
+        .service-bar {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: #071d35aa;
+            border-bottom: 1px solid #7df9ff22;
+            color: #bdfcff;
+            font-size: 13px;
+            font-weight: 800
+        }
+
+        .service-bar select {
+            width: 118px;
+            padding: 6px 9px;
+            border-radius: 999px;
+            border: 1px solid #7df9ff55;
+            background: #061729;
+            color: #eafcff;
+            outline: none;
+            font: inherit;
+            cursor: pointer
+        }
+
         .course-tabs {
             display: flex;
             gap: 0;
@@ -598,6 +623,14 @@
             <h2>课程目录</h2>
         </div>
         <div class="course-shell">
+            <div class="service-bar">
+                <span>选择服务</span>
+                <select id="serviceSelect">
+                    <option value="tencent">腾讯文档</option>
+                    <option value="google">Google</option>
+                    <option value="microsoft" selected>Microsoft</option>
+                </select>
+            </div>
             <div class="course-tabs" id="courseTabs"></div>
             <div class="course-body">
                 <ul class="course-list" id="courseList"></ul>
@@ -625,16 +658,48 @@
                         title: "课件-深度优先搜索-基础算法-V1.4",
                         desc: "深度优先搜索原理和应用讲解",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQCjahNNL2oKRLlq0l3sgeF9AR0S5pPQZMjCPBm4HGxfTto?resid=346D6399EC5AB93F!s4d136aa36a2f440ab96ad25dec81e17d&ithint=file%2Cpptx&e=XbTcCl&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQ2phaE5OTDJvS1JMbHEwbDNzZ2VGOUFSMFM1cFBRWk1qQ1BCbTRIR3hmVHRvP2U9WGJUY0Ns" },
-                            { type: "practice", text: "练习", url: "https://onedrive.live.com/:w:/g/personal/346D6399EC5AB93F/IQCew0wJ32xgT6ClkNKZROOkAa6hyoKObsBiz1v49xDYXXY?resid=346D6399EC5AB93F!s094cc39e6cdf4f60a0a590d29944e3a4&ithint=file%2Cdocx&e=y6ZHsF&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3cvYy8zNDZENjM5OUVDNUFCOTNGL0lRQ2V3MHdKMzJ4Z1Q2Q2xrTktaUk9Pa0FhNmh5b0tPYnNCaXoxdjQ5eERZWFhZP2U9eTZaSHNG" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQCjahNNL2oKRLlq0l3sgeF9AR0S5pPQZMjCPBm4HGxfTto?resid=346D6399EC5AB93F!s4d136aa36a2f440ab96ad25dec81e17d&ithint=file%2Cpptx&e=XbTcCl&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQ2phaE5OTDJvS1JMbHEwbDNzZ2VGOUFSMFM1cFBRWk1qQ1BCbTRIR3hmVHRvP2U9WGJUY0Ns",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ1VkTFNRaFFHZFdn"
+                                }
+                            },
+                            {
+                                type: "practice",
+                                text: "练习",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:w:/g/personal/346D6399EC5AB93F/IQCew0wJ32xgT6ClkNKZROOkAa6hyoKObsBiz1v49xDYXXY?resid=346D6399EC5AB93F!s094cc39e6cdf4f60a0a590d29944e3a4&ithint=file%2Cdocx&e=y6ZHsF&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3cvYy8zNDZENjM5OUVDNUFCOTNGL0lRQ2V3MHdKMzJ4Z1Q2Q2xrTktaUk9Pa0FhNmh5b0tPYnNCaXoxdjQ5eERZWFhZP2U9eTZaSHNG",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ2FjWXNWeGZxTVZt"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-广度优先搜索-基础算法-V1.4",
                         desc: "广度优先搜索原理和应用 ",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQC3CYKSstUdT7QDSghcrU28AZCvH44PBquAxmud_DU_IWg?resid=346D6399EC5AB93F!s928209b7d5b24f1db4034a085cad4dbc&ithint=file%2Cpptx&e=028AlS&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQzNDWUtTc3RVZFQ3UURTZ2hjclUyOEFaQ3ZINDRQQnF1QXhtdWRfRFVfSVdnP2U9MDI4QWxT" },
-                            { type: "practice", text: "练习", url: "https://onedrive.live.com/:w:/g/personal/346D6399EC5AB93F/IQBbQzKbpIu1QoVzOHoS-iu-Ab1MzRWwqO6m_k2FYI9OiDs?resid=346D6399EC5AB93F!s9b32435b8ba442b58573387a12fa2bbe&ithint=file%2Cdocx&e=2dDMu2&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3cvYy8zNDZENjM5OUVDNUFCOTNGL0lRQmJRekticEl1MVFvVnpPSG9TLWl1LUFiMU16Uld3cU82bV9rMkZZSTlPaURzP2U9MmRETXUy" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQC3CYKSstUdT7QDSghcrU28AZCvH44PBquAxmud_DU_IWg?resid=346D6399EC5AB93F!s928209b7d5b24f1db4034a085cad4dbc&ithint=file%2Cpptx&e=028AlS&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQzNDWUtTc3RVZFQ3UURTZ2hjclUyOEFaQ3ZINDRQQnF1QXhtdWRfRFVfSVdnP2U9MDI4QWxT",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/doc/DQ0RGZkR6TGpZaHZT"
+                                }
+                            },
+                            {
+                                type: "practice",
+                                text: "练习",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:w:/g/personal/346D6399EC5AB93F/IQBbQzKbpIu1QoVzOHoS-iu-Ab1MzRWwqO6m_k2FYI9OiDs?resid=346D6399EC5AB93F!s9b32435b8ba442b58573387a12fa2bbe&ithint=file%2Cdocx&e=2dDMu2&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3cvYy8zNDZENjM5OUVDNUFCOTNGL0lRQmJRekticEl1MVFvVnpPSG9TLWl1LUFiMU16Uld3cU82bV9rMkZZSTlPaURzP2U9MmRETXUy",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/doc/DQ3BQQnNqUWxPcGdv"
+                                }
+                            }
                         ]
                     }
                 ]
@@ -646,112 +711,210 @@
                         title: "课件-指针变量-数据结构-V1.2",
                         desc: "指针变量",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/personal/346D6399EC5AB93F/_layouts/15/Doc.aspx?sourcedoc=%7Bf2d93851-196e-48e5-833d-f1d1f021fabf%7D&action=default&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQlJPTm55YmhubFNJTTk4ZEh3SWZxX0FWQVJDVURpMFlrM1B1cmhJTFdCZC1rP2U9M1VxZTZ1&slrid=3a4611a2-80be-c000-fa8a-b5f94252d4b2&originalPath=aHR0cHM6Ly9vbmVkcml2ZS5saXZlLmNvbS86cDovZy9wZXJzb25hbC8zNDZENjM5OUVDNUFCOTNGL0lRQlJPTm55YmhubFNJTTk4ZEh3SWZxX0FWQVJDVURpMFlrM1B1cmhJTFdCZC1rP3J0aW1lPW1MQ0ZkU3lzM2tnJnJlZGVlbT1hSFIwY0hNNkx5OHhaSEoyTG0xekwzQXZZeTh6TkRaRU5qTTVPVVZETlVGQ09UTkdMMGxSUWxKUFRtNTVZbWh1YkZOSlRUazRaRWgzU1daeFgwRldRVkpEVlVScE1GbHJNMUIxY21oSlRGZENaQzFyUDJVOU0xVnhaVFox&CID=a2276f24-aa0f-4134-8766-cd6d8f7679ea&_SRM=0%3AG%3A52&file=%E8%AF%BE%E4%BB%B6-%E6%8C%87%E9%92%88%E5%8F%98%E9%87%8F-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-V1.2%20.pptx" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQBRONnybhnlSIM98dHwIfq_AVARCUDi0Yk3PurhILWBd-k?resid=346D6399EC5AB93F!sf2d93851196e48e5833df1d1f021fabf&ithint=file%2Cpptx&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQlJPTm55YmhubFNJTTk4ZEh3SWZxX0FWQVJDVURpMFlrM1B1cmhJTFdCZC1r",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ0xkVmV4bnJvZG9V"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-指针与数组-数据结构-V1.4",
                         desc: "指针与数组",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQCHTUhgiaXPTr-_MR9vdnexATZKdA-OE4XrTBC-0Wpn2uI?resid=346D6399EC5AB93F!s60484d87a5894ecfbfbf311f6f7677b1&ithint=file%2Cpptx&e=eBcHr2&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQ0hUVWhnaWFYUFRyLV9NUjl2ZG5leEFUWktkQS1PRTRYclRCQy0wV3BuMnVJP2U9ZUJjSHIy" }
-                        ]
-                    },
-                    {
-                        title: "课件-指针与数组-数据结构-V1.4",
-                        desc: "指针与数组",
-                        assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQCHTUhgiaXPTr-_MR9vdnexATZKdA-OE4XrTBC-0Wpn2uI?resid=346D6399EC5AB93F!s60484d87a5894ecfbfbf311f6f7677b1&ithint=file%2Cpptx&e=eBcHr2&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQ0hUVWhnaWFYUFRyLV9NUjl2ZG5leEFUWktkQS1PRTRYclRCQy0wV3BuMnVJP2U9ZUJjSHIy" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQCHTUhgiaXPTr-_MR9vdnexATZKdA-OE4XrTBC-0Wpn2uI?resid=346D6399EC5AB93F!s60484d87a5894ecfbfbf311f6f7677b1&ithint=file%2Cpptx&e=eBcHr2&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQ0hUVWhnaWFYUFRyLV9NUjl2ZG5leEFUWktkQS1PRTRYclRCQy0wV3BuMnVJP2U9ZUJjSHIy",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ0F3TE5JZGd6Rkdi"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-指针与函数-数据结构-V1.1-2",
                         desc: "指针与函数",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQCvelNJ1rTCT5V7fFEJhrvCAYMJJyj6Gdl6eEGMRwPZqg0?resid=346D6399EC5AB93F!s49537aafb4d64fc2957b7c510986bbc2&ithint=file%2Cpptx&e=gCH1bz&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQ3ZlbE5KMXJUQ1Q1VjdmRkVKaHJ2Q0FZTUpKeWo2R2RsNmVFR01Sd1BacWcwP2U9Z0NIMWJ6" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQCvelNJ1rTCT5V7fFEJhrvCAYMJJyj6Gdl6eEGMRwPZqg0?resid=346D6399EC5AB93F!s49537aafb4d64fc2957b7c510986bbc2&ithint=file%2Cpptx&e=gCH1bz&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQ3ZlbE5KMXJUQ1Q1VjdmRkVKaHJ2Q0FZTUpKeWo2R2RsNmVFR01Sd1BacWcwP2U9Z0NIMWJ6",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ1dXbVRrTW5XcExC"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-指针与结构体-数据结构-V1.1",
                         desc: "指针与结构体",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQAnO3wiJB8PS7n6Fjbg2S6TAZxzefWlgV5xu1KwVtikO2U?resid=346D6399EC5AB93F!s227c3b271f244b0fb9fa1636e0d92e93&ithint=file%2Cpptx&e=gC7oRF&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQW5PM3dpSkI4UFM3bjZGamJnMlM2VEFaeHplZldsZ1Y1eHUxS3dWdGlrTzJVP2U9Z0M3b1JG" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQAnO3wiJB8PS7n6Fjbg2S6TAZxzefWlgV5xu1KwVtikO2U?resid=346D6399EC5AB93F!s227c3b271f244b0fb9fa1636e0d92e93&ithint=file%2Cpptx&e=gC7oRF&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQW5PM3dpSkI4UFM3bjZGamJnMlM2VEFaeHplZldsZ1Y1eHUxS3dWdGlrTzJVP2U9Z0M3b1JG",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ1dXbVRrTW5XcExC"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-线性表-数据结构-V1.2",
                         desc: "线性表",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQDlSqgyv1GmSr6dLT4dv2dpAcru2UswXms4m9XhoNUCh_g?resid=346D6399EC5AB93F!s32a84ae551bf4aa6be9d2d3e1dbf6769&ithint=file%2Cpptx&e=pvuNVa&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRRGxTcWd5djFHbVNyNmRMVDRkdjJkcEFjcnUyVXN3WG1zNG05WGhvTlVDaF9nP2U9cHZ1TlZh" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQDlSqgyv1GmSr6dLT4dv2dpAcru2UswXms4m9XhoNUCh_g?resid=346D6399EC5AB93F!s32a84ae551bf4aa6be9d2d3e1dbf6769&ithint=file%2Cpptx&e=pvuNVa&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRRGxTcWd5djFHbVNyNmRMVDRkdjJkcEFjcnUyVXN3WG1zNG05WGhvTlVDaF9nP2U9cHZ1TlZh",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ1pVZWJMQWFIWndt"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-树-数据结构-V1.4",
                         desc: "树的基础介绍",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQA4s-iemCrfS55Ne3mtVKXFAWq6RC-d4cqAjueyRU98JQo?resid=346D6399EC5AB93F!s9ee8b3382a984bdf9e4d7b79ad54a5c5&ithint=file%2Cpptx&e=earPdo&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQTRzLWllbUNyZlM1NU5lM210VktYRkFXcTZSQy1kNGNxQWp1ZXlSVTk4SlFvP2U9ZWFyUGRv" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQA4s-iemCrfS55Ne3mtVKXFAWq6RC-d4cqAjueyRU98JQo?resid=346D6399EC5AB93F!s9ee8b3382a984bdf9e4d7b79ad54a5c5&ithint=file%2Cpptx&e=earPdo&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQTRzLWllbUNyZlM1NU5lM210VktYRkFXcTZSQy1kNGNxQWp1ZXlSVTk4SlFvP2U9ZWFyUGRv",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ0hId0pyVkRPTGpz"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-二叉树-数据结构-V1.3",
                         desc: "二叉树性质",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQAOsmrlvd4DS5hdT0t-buUvARpAi4s09aboR_DGffiit-U?resid=346D6399EC5AB93F!se56ab20edebd4b03985d4f4b7e6ee52f&ithint=file%2Cpptx&e=hF5CgF&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQU9zbXJsdmQ0RFM1aGRUMHQtYnVVdkFScEFpNHMwOWFib1JfREdmZmlpdC1VP2U9aEY1Q2dG" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQAOsmrlvd4DS5hdT0t-buUvARpAi4s09aboR_DGffiit-U?resid=346D6399EC5AB93F!se56ab20edebd4b03985d4f4b7e6ee52f&ithint=file%2Cpptx&e=hF5CgF&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQU9zbXJsdmQ0RFM1aGRUMHQtYnVVdkFScEFpNHMwOWFib1JfREdmZmlpdC1VP2U9aEY1Q2dG",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ01YUWd1Tm1UQkN1"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-二叉搜索树-数据结构-V1.2",
                         desc: "BST构建及应用",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQBFwUh1sG5jSZYwue_2mZIAAd3W27TCN9BjsH31z3CKAiw?resid=346D6399EC5AB93F!s7548c1456eb049639630b9eff6999200&ithint=file%2Cpptx&e=lk1QrT&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQkZ3VWgxc0c1alNaWXd1ZV8ybVpJQUFkM1cyN1RDTjlCanNIMzF6M0NLQWl3P2U9bGsxUXJU" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQBFwUh1sG5jSZYwue_2mZIAAd3W27TCN9BjsH31z3CKAiw?resid=346D6399EC5AB93F!s7548c1456eb049639630b9eff6999200&ithint=file%2Cpptx&e=lk1QrT&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQkZ3VWgxc0c1alNaWXd1ZV8ybVpJQUFkM1cyN1RDTjlCanNIMzF6M0NLQWl3P2U9bGsxUXJU",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ1J0WU5ZVXpkc1Nk"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-树的应用-数据结构-V1.4",
                         desc: "堆排序，优先队列，哈夫曼树，哈夫曼编码",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQD_fhYDhfdaTKCgxFlpOucDAUMgN1WYgI1rD5cytTiBy0s?resid=346D6399EC5AB93F!s03167efff7854c5aa0a0c459693ae703&ithint=file%2Cpptx&e=Pb3sWq&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRRF9maFlEaGZkYVRLQ2d4RmxwT3VjREFVTWdOMVdZZ0kxckQ1Y3l0VGlCeTBzP2U9UGIzc1dx" }
-                        ]
-                    },
-                    {
-                        title: "课件-树的应用-数据结构-V1.4",
-                        desc: "堆排序，优先队列，哈夫曼树，哈夫曼编码",
-                        assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQD_fhYDhfdaTKCgxFlpOucDAUMgN1WYgI1rD5cytTiBy0s?resid=346D6399EC5AB93F!s03167efff7854c5aa0a0c459693ae703&ithint=file%2Cpptx&e=Pb3sWq&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRRF9maFlEaGZkYVRLQ2d4RmxwT3VjREFVTWdOMVdZZ0kxckQ1Y3l0VGlCeTBzP2U9UGIzc1dx" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQD_fhYDhfdaTKCgxFlpOucDAUMgN1WYgI1rD5cytTiBy0s?resid=346D6399EC5AB93F!s03167efff7854c5aa0a0c459693ae703&ithint=file%2Cpptx&e=Pb3sWq&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRRF9maFlEaGZkYVRLQ2d4RmxwT3VjREFVTWdOMVdZZ0kxckQ1Y3l0VGlCeTBzP2U9UGIzc1dx",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ0hZbXdpVmRjZG9Y"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-表达式运算-数据结构-V1.0",
                         desc: "表达式运算",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQBdwsKJS5xmQaDgmZLr_77sATCG7l458dAncRooQgC2Dgs?resid=346D6399EC5AB93F!s89c2c25d9c4b4166a0e09992ebffbeec&ithint=file%2Cpptx&e=57gpbZ&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQmR3c0tKUzV4bVFhRGdtWkxyXzc3c0FUQ0c3bDQ1OGRBbmNSb29RZ0MyRGdzP2U9NTdncGJa" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQBdwsKJS5xmQaDgmZLr_77sATCG7l458dAncRooQgC2Dgs?resid=346D6399EC5AB93F!s89c2c25d9c4b4166a0e09992ebffbeec&ithint=file%2Cpptx&e=57gpbZ&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQmR3c0tKUzV4bVFhRGdtWkxyXzc3c0FUQ0c3bDQ1OGRBbmNSb29RZ0MyRGdzP2U9NTdncGJa",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ3hLS2xJU0h6QWVu"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-格雷码-数据结构-V1.0",
                         desc: "格雷码介绍",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQDPRtJsV5AfTqrSznEwoZD1AYBRsjWlhqru1H0Ecb-HwHk?resid=346D6399EC5AB93F!s6cd246cf90574e1faad2ce7130a190f5&ithint=file%2Cpptx&e=hLfZxP&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRRFBSdEpzVjVBZlRxclN6bkV3b1pEMUFZQlJzaldsaHFydTFIMEVjYi1Id0hrP2U9aExmWnhQ" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQDPRtJsV5AfTqrSznEwoZD1AYBRsjWlhqru1H0Ecb-HwHk?resid=346D6399EC5AB93F!s6cd246cf90574e1faad2ce7130a190f5&ithint=file%2Cpptx&e=hLfZxP&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRRFBSdEpzVjVBZlRxclN6bkV3b1pEMUFZQlJzaldsaHFydTFIMEVjYi1Id0hrP2U9aExmWnhQ",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ09NRVBjT3p6Smd3"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-散列表-数据结构-V1.0",
                         desc: "hash函数及hash应用介绍",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQAB4Z79iF7nRpLZ5vCW4XeTAfcQ4XTZMhD9hzx9gNn1Sb0?resid=346D6399EC5AB93F!sfd9ee1015e8846e792d9e6f096e17793&ithint=file%2Cpptx&e=3AhFBs&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQUI0Wjc5aUY3blJwTFo1dkNXNFhlVEFmY1E0WFRaTWhEOWh6eDlnTm4xU2IwP2U9M0FoRkJz" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQAB4Z79iF7nRpLZ5vCW4XeTAfcQ4XTZMhD9hzx9gNn1Sb0?resid=346D6399EC5AB93F!sfd9ee1015e8846e792d9e6f096e17793&ithint=file%2Cpptx&e=3AhFBs&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQUI0Wjc5aUY3blJwTFo1dkNXNFhlVEFmY1E0WFRaTWhEOWh6eDlnTm4xU2IwP2U9M0FoRkJz",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ0pDcE11anFDZ2Vx"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-集合-数据结构-V2.1",
                         desc: "集合 map set介绍",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQA4_JCLmt-oRbg5B7En-rI8AXYM3Ziw56k0f7Qj-R4oITY?resid=346D6399EC5AB93F!s8b90fc38df9a45a8b83907b127fab23c&ithint=file%2Cpptx&e=V20vwd&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQTRfSkNMbXQtb1JiZzVCN0VuLXJJOEFYWU0zWml3NTZrMGY3UWotUjRvSVRZP2U9VjIwdndk" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQA4_JCLmt-oRbg5B7En-rI8AXYM3Ziw56k0f7Qj-R4oITY?resid=346D6399EC5AB93F!s8b90fc38df9a45a8b83907b127fab23c&ithint=file%2Cpptx&e=V20vwd&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQTRfSkNMbXQtb1JiZzVCN0VuLXJJOEFYWU0zWml3NTZrMGY3UWotUjRvSVRZP2U9VjIwdndk",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ0pXb3RnemRhbUZi"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-图-数据结构-V1.4",
                         desc: "图的概念，图的存储及图的遍历",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQBTxBU0TjhuQYz3uUe4Nf6AAf2Mp5BDYv1pACRxozVLYS8?resid=346D6399EC5AB93F!s3415c453384e416e8cf7b947b835fe80&ithint=file%2Cpptx&e=urvNGX&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQlR4QlUwVGpodVFZejN1VWU0TmY2QUFmMk1wNUJEWXYxcEFDUnhvelZMWVM4P2U9dXJ2TkdY" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQBTxBU0TjhuQYz3uUe4Nf6AAf2Mp5BDYv1pACRxozVLYS8?resid=346D6399EC5AB93F!s3415c453384e416e8cf7b947b835fe80&ithint=file%2Cpptx&e=urvNGX&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQlR4QlUwVGpodVFZejN1VWU0TmY2QUFmMk1wNUJEWXYxcEFDUnhvelZMWVM4P2U9dXJ2TkdY",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ0JscnVDU1ZPWWpW"
+                                }
+                            }
                         ]
                     },
                 ]
@@ -762,77 +925,165 @@
                         title: "课件-广度优先搜索优化-搜索-V1.0",
                         desc: "广度优先搜索优化",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/personal/346D6399EC5AB93F/_layouts/15/Doc.aspx?sourcedoc=%7B69fa03c2-78e0-4119-aafc-f6db5578848c%7D&action=default&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRRENBX3BwNEhnWlFhcjg5dHRWZUlTTUFlU1c2T2JMQ2pRX2RIcGE3cExSRm1ZP2U9UlA2SEZV&slrid=a13212a2-70f5-d000-2448-b6fbaf24947b&originalPath=aHR0cHM6Ly9vbmVkcml2ZS5saXZlLmNvbS86cDovZy9wZXJzb25hbC8zNDZENjM5OUVDNUFCOTNGL0lRRENBX3BwNEhnWlFhcjg5dHRWZUlTTUFlU1c2T2JMQ2pRX2RIcGE3cExSRm1ZP3J0aW1lPXl5cWJuVzJ1M2tnJnJlZGVlbT1hSFIwY0hNNkx5OHhaSEoyTG0xekwzQXZZeTh6TkRaRU5qTTVPVVZETlVGQ09UTkdMMGxSUkVOQlgzQndORWhuV2xGaGNqZzVkSFJXWlVsVFRVRmxVMWMyVDJKTVEycFJYMlJJY0dFM2NFeFNSbTFaUDJVOVVsQTJTRVpW&CID=da1911e5-9198-4f2e-a189-a1b32e7d51f3&_SRM=0%3AG%3A65&file=%E8%AF%BE%E4%BB%B6-%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2%E4%BC%98%E5%8C%96-%E6%90%9C%E7%B4%A2-V1.0.pptx" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/personal/346D6399EC5AB93F/_layouts/15/Doc.aspx?sourcedoc=%7B69fa03c2-78e0-4119-aafc-f6db5578848c%7D&action=default&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRRENBX3BwNEhnWlFhcjg5dHRWZUlTTUFlU1c2T2JMQ2pRX2RIcGE3cExSRm1ZP2U9UlA2SEZV&slrid=a13212a2-70f5-d000-2448-b6fbaf24947b&originalPath=aHR0cHM6Ly9vbmVkcml2ZS5saXZlLmNvbS86cDovZy9wZXJzb25hbC8zNDZENjM5OUVDNUFCOTNGL0lRRENBX3BwNEhnWlFhcjg5dHRWZUlTTUFlU1c2T2JMQ2pRX2RIcGE3cExSRm1ZP3J0aW1lPXl5cWJuVzJ1M2tnJnJlZGVlbT1hSFIwY0hNNkx5OHhaSEoyTG0xekwzQXZZeTh6TkRaRU5qTTVPVVZETlVGQ09UTkdMMGxSUkVOQlgzQndORWhuV2xGaGNqZzVkSFJXWlVsVFRVRmxVMWMyVDJKTVEycFJYMlJJY0dFM2NFeFNSbTFaUDJVOVVsQTJTRVpW&CID=da1911e5-9198-4f2e-a189-a1b32e7d51f3&_SRM=0%3AG%3A65&file=%E8%AF%BE%E4%BB%B6-%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2%E4%BC%98%E5%8C%96-%E6%90%9C%E7%B4%A2-V1.0.pptx",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ01OamZIT3JTRnRY"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-深度优先搜索优化-V1.0",
                         desc: "深度优先搜索优化",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQBzrz8g7ZsjSrFv14AxpW6pAYlSQZcHU1ATy-XvOIz2CFE?resid=346D6399EC5AB93F!s203faf739bed4a23b16fd78031a56ea9&ithint=file%2Cpptx&e=MzeG5s&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQnpyejhnN1pzalNyRnYxNEF4cFc2cEFZbFNRWmNIVTFBVHktWHZPSXoyQ0ZFP2U9TXplRzVz" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQBzrz8g7ZsjSrFv14AxpW6pAYlSQZcHU1ATy-XvOIz2CFE?resid=346D6399EC5AB93F!s203faf739bed4a23b16fd78031a56ea9&ithint=file%2Cpptx&e=MzeG5s&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQnpyejhnN1pzalNyRnYxNEF4cFc2cEFZbFNRWmNIVTFBVHktWHZPSXoyQ0ZFP2U9TXplRzVz",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ0ptT05QWWJuZE9Z"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-单源最短路-图论-V1.3",
                         desc: "Ford SPFA dijkstra单源最短路",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQAHD0ipYGztRo9CGGSTnymoAau1oKhphBtXMcrzfVHK9LM?resid=346D6399EC5AB93F!sa9480f076c6046ed8f421864939f29a8&ithint=file%2Cpptx&e=zhet8F&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQUhEMGlwWUd6dFJvOUNHR1NUbnltb0FhdTFvS2hwaEJ0WE1jcnpmVkhLOUxNP2U9emhldDhG" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQAHD0ipYGztRo9CGGSTnymoAau1oKhphBtXMcrzfVHK9LM?resid=346D6399EC5AB93F!sa9480f076c6046ed8f421864939f29a8&ithint=file%2Cpptx&e=zhet8F&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQUhEMGlwWUd6dFJvOUNHR1NUbnltb0FhdTFvS2hwaEJ0WE1jcnpmVkhLOUxNP2U9emhldDhG",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ2hKc2pORnR4UG16"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-多源最短路-图论-V1.1",
                         desc: "floyed 传递闭包",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQAaOSaUqdMET6X1VambOlICAeHAJGX5vRGvp8EnvXusRAg?resid=346D6399EC5AB93F!s9426391ad3a94f04a5f555a99b3a5202&ithint=file%2Cpptx&e=phT0Xz&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQWFPU2FVcWRNRVQ2WDFWYW1iT2xJQ0FlSEFKR1g1dlJHdnA4RW52WHVzUkFnP2U9cGhUMFh6" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQAaOSaUqdMET6X1VambOlICAeHAJGX5vRGvp8EnvXusRAg?resid=346D6399EC5AB93F!s9426391ad3a94f04a5f555a99b3a5202&ithint=file%2Cpptx&e=phT0Xz&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQWFPU2FVcWRNRVQ2WDFWYW1iT2xJQ0FlSEFKR1g1dlJHdnA4RW52WHVzUkFnP2U9cGhUMFh6",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ2xKT3hBUmpZV3J0"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-拓扑排序-图论-V1.4",
                         desc: "关键路径",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQBkk05vcjaMR5qu0yy5KpO0ASa27y-O03lMjAxP3dMS-uc?resid=346D6399EC5AB93F!s6f4e93643672478c9aaed32cb92a93b4&ithint=file%2Cpptx&e=zTfDbr&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQmtrMDV2Y2phTVI1cXUweXk1S3BPMEFTYTI3eS1PMDNsTWpBeFAzZE1TLXVjP2U9elRmRGJy" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQBkk05vcjaMR5qu0yy5KpO0ASa27y-O03lMjAxP3dMS-uc?resid=346D6399EC5AB93F!s6f4e93643672478c9aaed32cb92a93b4&ithint=file%2Cpptx&e=zTfDbr&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQmtrMDV2Y2phTVI1cXUweXk1S3BPMEFTYTI3eS1PMDNsTWpBeFAzZE1TLXVjP2U9elRmRGJy",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ2tIVFhIRmRzTVZN"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-并查集-图论-V2.3",
                         desc: "并查集实现，权值并查集，扩展域并查集",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQC73e8vVhctRILRdFIKFIn4AfIIOgkc64xtjlTgs7E7MVg?resid=346D6399EC5AB93F!s2fefddbb1756442d82d174520a1489f8&ithint=file%2Cpptx&e=1gPmab&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQzczZTh2VmhjdFJJTFJkRklLRkluNEFmSUlPZ2tjNjR4dGpsVGdzN0U3TVZnP2U9MWdQbWFi" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQC73e8vVhctRILRdFIKFIn4AfIIOgkc64xtjlTgs7E7MVg?resid=346D6399EC5AB93F!s2fefddbb1756442d82d174520a1489f8&ithint=file%2Cpptx&e=1gPmab&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQzczZTh2VmhjdFJJTFJkRklLRkluNEFmSUlPZ2tjNjR4dGpsVGdzN0U3TVZnP2U9MWdQbWFi",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ2hSb0tKTkRzeE5v"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-生成树-图论-V1.4",
                         desc: "Prim优先队列实现，次小生成树",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQCX-jbAAM0NT7CDj_L_0o1TAZpSI-6v8iopqeWRh_Q2rMM?resid=346D6399EC5AB93F!sc036fa97cd004f0db0838ff2ffd28d53&ithint=file%2Cpptx&e=rkf2lC&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQ1gtamJBQU0wTlQ3Q0RqX0xfMG8xVEFacFNJLTZ2OGlvcHFlV1JoX1Eyck1NP2U9cmtmMmxD" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQCX-jbAAM0NT7CDj_L_0o1TAZpSI-6v8iopqeWRh_Q2rMM?resid=346D6399EC5AB93F!sc036fa97cd004f0db0838ff2ffd28d53&ithint=file%2Cpptx&e=rkf2lC&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQ1gtamJBQU0wTlQ3Q0RqX0xfMG8xVEFacFNJLTZ2OGlvcHFlV1JoX1Eyck1NP2U9cmtmMmxD",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ2pwZEtGV1R3eGdZ"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-欧拉图及哈密顿图-图论-V2.3",
                         desc: "欧拉图，哈密顿图",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQD7jy3axe0MRZZ_OdFAOMGPAXCjL6cBUrP0hOgkyuvO2wI?resid=346D6399EC5AB93F!sda2d8ffbedc5450c967f39d14038c18f&ithint=file%2Cpptx&e=eZVLmO&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRRDdqeTNheGUwTVJaWl9PZEZBT01HUEFYQ2pMNmNCVXJQMGhPZ2t5dXZPMndJP2U9ZVpWTG1P" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQD7jy3axe0MRZZ_OdFAOMGPAXCjL6cBUrP0hOgkyuvO2wI?resid=346D6399EC5AB93F!sda2d8ffbedc5450c967f39d14038c18f&ithint=file%2Cpptx&e=eZVLmO&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRRDdqeTNheGUwTVJaWl9PZEZBT01HUEFYQ2pMNmNCVXJQMGhPZ2t5dXZPMndJP2U9ZVpWTG1P",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ0NoV1piRnpXTWhx"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-无向图的连通性-图论-V1.0",
                         desc: "dfn/low值计算，tarjan，割点、割边，e-dcc、v-dcc",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQAGSnL7QdjDRqkOmHJGjR-iAXXfmOseWInrbcRqGeMCigE?resid=346D6399EC5AB93F!sfb724a06d84146c3a90e9872468d1fa2&ithint=file%2Cpptx&e=KEXlon&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQUdTbkw3UWRqRFJxa09tSEpHalItaUFYWGZtT3NlV0lucmJjUnFHZU1DaWdFP2U9S0VYbG9u" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQAGSnL7QdjDRqkOmHJGjR-iAXXfmOseWInrbcRqGeMCigE?resid=346D6399EC5AB93F!sfb724a06d84146c3a90e9872468d1fa2&ithint=file%2Cpptx&e=KEXlon&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQUdTbkw3UWRqRFJxa09tSEpHalItaUFYWGZtT3NlV0lucmJjUnFHZU1DaWdFP2U9S0VYbG9u",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ0JrUWVTZmh1TW9L"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-有向图的连通性-图论-V1.0",
                         desc: "强连通分量SCC、2-SAT",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQB4YBK65rkpSa7NCk6VzqoNAZkEA0dmQNxDY322_GQuJWo?resid=346D6399EC5AB93F!sba126078b9e64929aecd0a4e95ceaa0d&ithint=file%2Cpptx&e=OaUssU&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQjRZQks2NXJrcFNhN05DazZWenFvTkFaa0VBMGRtUU54RFkzMjJfR1F1SldvP2U9T2FVc3NVNP2U9a2F3eU5C" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQB4YBK65rkpSa7NCk6VzqoNAZkEA0dmQNxDY322_GQuJWo?resid=346D6399EC5AB93F!sba126078b9e64929aecd0a4e95ceaa0d&ithint=file%2Cpptx&e=OaUssU&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQjRZQks2NXJrcFNhN05DazZWenFvTkFaa0VBMGRtUU54RFkzMjJfR1F1SldvP2U9T2FVc3NVNP2U9a2F3eU5C",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ3pnSG1xRGtYRmxm"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-二分图及其判定-图论-V1.0",
                         desc: "二分图定义及判定方法（染色法）",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQA8GPNftfN2RplA1SflUizHAYF45FiKUZW39alWYGZtmvI?resid=346D6399EC5AB93F!s5ff3183cf3b546769940d527e5522cc7&ithint=file%2Cpptx&e=Yh5k50&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQThHUE5mdGZOMlJwbEExU2ZsVWl6SEFZRjQ1RmlLVVpXMzlhbFdZR1p0bXZJP2U9WWg1azUw" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQA8GPNftfN2RplA1SflUizHAYF45FiKUZW39alWYGZtmvI?resid=346D6399EC5AB93F!s5ff3183cf3b546769940d527e5522cc7&ithint=file%2Cpptx&e=Yh5k50&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQThHUE5mdGZOMlJwbEExU2ZsVWl6SEFZRjQ1RmlLVVpXMzlhbFdZR1p0bXZJP2U9WWg1azUw",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ0p5VkhRc2VvdWJ2"
+                                }
+                            }
                         ]
                     },
                 ],
@@ -841,66 +1092,138 @@
             {
                 title: "普及组J3", children: [
                     {
-                        title: "课件-二分图及其判定-图论-V1.0",
+                        title: "课件-递推算法-动态规划-V1.4",
                         desc: "递推讲解",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQDhedYyoQr5SZGvZbvWSGzOAWN98OVtxUslw6RzB_cpLX0?resid=346D6399EC5AB93F!s32d679e10aa149f991af65bbd6486cce&ithint=file%2Cpptx&e=AotOW5&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRRGhlZFl5b1FyNVNaR3ZaYnZXU0d6T0FXTjk4T1Z0eFVzbHc2UnpCX2NwTFgwP2U9QW90T1c1" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQDhedYyoQr5SZGvZbvWSGzOAWN98OVtxUslw6RzB_cpLX0?resid=346D6399EC5AB93F!s32d679e10aa149f991af65bbd6486cce&ithint=file%2Cpptx&e=AotOW5&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRRGhlZFl5b1FyNVNaR3ZaYnZXU0d6T0FXTjk4T1Z0eFVzbHc2UnpCX2NwTFgwP2U9QW90T1c1",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ1dNWFdlWEFpdXVO"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-贪心算法-动态规划-V1.3",
                         desc: "贪心讲解",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQCMSBUkG9clSpEq6DkK91MkAffbRI4lwdDAj9pr17opVA4?resid=346D6399EC5AB93F!s2415488cd71b4a25912ae8390af75324&ithint=file%2Cpptx&e=vydWJd&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQ01TQlVrRzljbFNwRXE2RGtLOTFNa0FmZmJSSTRsd2REQWo5cHIxN29wVkE0P2U9dnlkV0pk" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQCMSBUkG9clSpEq6DkK91MkAffbRI4lwdDAj9pr17opVA4?resid=346D6399EC5AB93F!s2415488cd71b4a25912ae8390af75324&ithint=file%2Cpptx&e=vydWJd&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQ01TQlVrRzljbFNwRXE2RGtLOTFNa0FmZmJSSTRsd2REQWo5cHIxN29wVkE0P2U9dnlkV0pk",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ2p6eXFDVm9IZ1ZM"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-动态规划基础-动态规划-V1.3",
                         desc: "动态规划基础讲解",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQB5T-aTS7u1Trhukg5HqEerAdyS4OsuOwvRDZOGrsSurgA?resid=346D6399EC5AB93F!s93e64f79bb4b4eb5b86e920e47a847ab&ithint=file%2Cpptx&e=szPN3G&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQjVULWFUUzd1MVRyaHVrZzVIcUVlckFkeVM0T3N1T3d2UkRaT0dyc1N1cmdBP2U9c3pQTjNH" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQB5T-aTS7u1Trhukg5HqEerAdyS4OsuOwvRDZOGrsSurgA?resid=346D6399EC5AB93F!s93e64f79bb4b4eb5b86e920e47a847ab&ithint=file%2Cpptx&e=szPN3G&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQjVULWFUUzd1MVRyaHVrZzVIcUVlckFkeVM0T3N1T3d2UkRaT0dyc1N1cmdBP2U9c3pQTjNH",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ2pTWnF5bWRPV1RZ"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-记忆化搜索-动态规划-V1.2",
                         desc: "记忆化搜索讲解和练习",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQB5T-aTS7u1Trhukg5HqEerAdyS4OsuOwvRDZOGrsSurgA?resid=346D6399EC5AB93F!s93e64f79bb4b4eb5b86e920e47a847ab&ithint=file%2Cpptx&e=szPN3G&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQjVULWFUUzd1MVRyaHVrZzVIcUVlckFkeVM0T3N1T3d2UkRaT0dyc1N1cmdBP2U9c3pQTjNH" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQB5T-aTS7u1Trhukg5HqEerAdyS4OsuOwvRDZOGrsSurgA?resid=346D6399EC5AB93F!s93e64f79bb4b4eb5b86e920e47a847ab&ithint=file%2Cpptx&e=szPN3G&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQjVULWFUUzd1MVRyaHVrZzVIcUVlckFkeVM0T3N1T3d2UkRaT0dyc1N1cmdBP2U9c3pQTjNH",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ0hua1VKQ2djQUdw"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-背包-动态规划-V1.2",
                         desc: "01背包 完全背包 多重背包 混合背包",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQDcKW_9Gp9TSo_miSLCZQvaAYDl1jwLp5tCMNFPueZT3o0?resid=346D6399EC5AB93F!sfd6f29dc9f1a4a538fe68922c2650bda&ithint=file%2Cpptx&e=uA1WBJ&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRRGNLV185R3A5VFNvX21pU0xDWlF2YUFZRGwxandMcDV0Q01ORlB1ZVpUM28wP2U9dUExV0JK" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQDcKW_9Gp9TSo_miSLCZQvaAYDl1jwLp5tCMNFPueZT3o0?resid=346D6399EC5AB93F!sfd6f29dc9f1a4a538fe68922c2650bda&ithint=file%2Cpptx&e=uA1WBJ&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRRGNLV185R3A5VFNvX21pU0xDWlF2YUFZRGwxandMcDV0Q01ORlB1ZVpUM28wP2U9dUExV0JK",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ01BRk1ncWJzbGtr"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-各类型DP-动态规划-V1.2",
                         desc: "线性DP 矩型DP 区间DP",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQB88crqgQUlQY-AXLNu4yreAWZHhWY1210QCVhnfxMFDnI?resid=346D6399EC5AB93F!seacaf17c058141258f805cb36ee32ade&ithint=file%2Cpptx&e=PoZdGk&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQjg4Y3JxZ1FVbFFZLUFYTE51NHlyZUFXWkhoV1kxMjEwUUNWaG5meE1GRG5JP2U9UG9aZEdr" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQB88crqgQUlQY-AXLNu4yreAWZHhWY1210QCVhnfxMFDnI?resid=346D6399EC5AB93F!seacaf17c058141258f805cb36ee32ade&ithint=file%2Cpptx&e=PoZdGk&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQjg4Y3JxZ1FVbFFZLUFYTE51NHlyZUFXWkhoV1kxMjEwUUNWaG5meE1GRG5JP2U9UG9aZEdr",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ1FpV2xvVW1Yc3Nm"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-质数-数学-V1.2",
                         desc: "质数",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQA6pCtnTdwPTYySYvPrND7mAWCavML3nMmypjXi4qWV_ro?resid=346D6399EC5AB93F!s672ba43adc4d4d0f8c9262f3eb343ee6&ithint=file%2Cpptx&e=nmIQnI&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQTZwQ3RuVGR3UFRZeVNZdlByTkQ3bUFXQ2F2TUwzbk1teXBqWGk0cVdWX3JvP2U9bm1JUW5J" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQA6pCtnTdwPTYySYvPrND7mAWCavML3nMmypjXi4qWV_ro?resid=346D6399EC5AB93F!s672ba43adc4d4d0f8c9262f3eb343ee6&ithint=file%2Cpptx&e=nmIQnI&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQTZwQ3RuVGR3UFRZeVNZdlByTkQ3bUFXQ2F2TUwzbk1teXBqWGk0cVdWX3JvP2U9bm1JUW5J",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ2pIU1hUVWt3Q3Zw"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-约数-数学-V1.1",
                         desc: "约数",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQB8aw4xZZj-Q4I3JqNHiuPjAUeWBeKZRxlVWW9H7BuF7v4?resid=346D6399EC5AB93F!s310e6b7c986543fe823726a3478ae3e3&ithint=file%2Cpptx&e=pTft6O&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQjhhdzR4WlpqLVE0STNKcU5IaXVQakFVZVdCZUtaUnhsVldXOUg3QnVGN3Y0P2U9cFRmdDZP" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQB8aw4xZZj-Q4I3JqNHiuPjAUeWBeKZRxlVWW9H7BuF7v4?resid=346D6399EC5AB93F!s310e6b7c986543fe823726a3478ae3e3&ithint=file%2Cpptx&e=pTft6O&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQjhhdzR4WlpqLVE0STNKcU5IaXVQakFVZVdCZUtaUnhsVldXOUg3QnVGN3Y0P2U9cFRmdDZP",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ01hcEhXTm56Z1F0"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-组合数学基础-数学-V1.0",
                         desc: "组合数学：排列 组合 抽屉原理 杨辉三角 二项式定理",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQAYbAjmcW_SSrDzTLUOxiP0AS1m1Kpz3o-r41VAXSaJHQU?resid=346D6399EC5AB93F!se6086c186f714ad2b0f34cb50ec623f4&ithint=file%2Cpptx&e=gAgr5a&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQVliQWptY1dfU1NyRHpUTFVPeGlQMEFTMW0xS3B6M28tcjQxVkFYU2FKSFFVP2U9Z0FncjVh" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQAYbAjmcW_SSrDzTLUOxiP0AS1m1Kpz3o-r41VAXSaJHQU?resid=346D6399EC5AB93F!se6086c186f714ad2b0f34cb50ec623f4&ithint=file%2Cpptx&e=gAgr5a&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQVliQWptY1dfU1NyRHpUTFVPeGlQMEFTMW0xS3B6M28tcjQxVkFYU2FKSFFVP2U9Z0FncjVh",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ0NTUXJsWE1EVWx2"
+                                }
+                            }
                         ]
                     },
                 ]
@@ -911,42 +1234,90 @@
                         title: "课件-分治算法-算法优化-V1.4",
                         desc: "分治算法讲解",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQB4H_BKa5P5Sa4pk5c2rS58AWzE7Mvliq4nMunmiAJixjk?resid=346D6399EC5AB93F!s4af01f78936b49f9ae29939736ad2e7c&ithint=file%2Cpptx&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQjRIX0JLYTVQNVNhNHBrNWMyclM1OEFXekU3TXZsaXE0bk11bm1pQUppeGpr" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQB4H_BKa5P5Sa4pk5c2rS58AWzE7Mvliq4nMunmiAJixjk?resid=346D6399EC5AB93F!s4af01f78936b49f9ae29939736ad2e7c&ithint=file%2Cpptx&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQjRIX0JLYTVQNVNhNHBrNWMyclM1OEFXekU3TXZsaXE0bk11bm1pQUppeGpr",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ3ZrZmtmRGRieExo"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-排序提高-算法优化-V1.5",
                         desc: "归并排序、快速排序、基数排序、技术排序、希尔排序、竞标赛排序",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQB2xJ10VxZdSJOzz35OiZb8ARx6He38MJIUjyI55a9iaYY?resid=346D6399EC5AB93F!s749dc4761657485d93b3cf7e4e8996fc&ithint=file%2Cpptx&e=53FIz4&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQjJ4SjEwVnhaZFNKT3p6MzVPaVpiOEFSeDZIZTM4TUpJVWp5STU1YTlpYVlZP2U9NTNGSXo0" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQB2xJ10VxZdSJOzz35OiZb8ARx6He38MJIUjyI55a9iaYY?resid=346D6399EC5AB93F!s749dc4761657485d93b3cf7e4e8996fc&ithint=file%2Cpptx&e=53FIz4&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQjJ4SjEwVnhaZFNKT3p6MzVPaVpiOEFSeDZIZTM4TUpJVWp5STU1YTlpYVlZP2U9NTNGSXo0",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ2ZieE5NakFKcmRv"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-前缀和-算法优化-V1.3",
                         desc: "一维前缀和、二维前缀和、后缀和讲解",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQAUAl6BJDwZQKIeZyeL8l7-Ad_cj6poNNLvP0Ln71tkFzU?resid=346D6399EC5AB93F!s815e02143c244019a21e67278bf25efe&ithint=file%2Cpptx&e=GeT6Y3&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQVVBbDZCSkR3WlFLSWVaeWVMOGw3LUFkX2NqNnBvTk5MdlAwTG43MXRrRnpVP2U9R2VUNlkz" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQAUAl6BJDwZQKIeZyeL8l7-Ad_cj6poNNLvP0Ln71tkFzU?resid=346D6399EC5AB93F!s815e02143c244019a21e67278bf25efe&ithint=file%2Cpptx&e=GeT6Y3&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQVVBbDZCSkR3WlFLSWVaeWVMOGw3LUFkX2NqNnBvTk5MdlAwTG43MXRrRnpVP2U9R2VUNlkz",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ0N4a0ZZcUpQRFZN"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-二分法和尺取法-算法优化-V1.1",
                         desc: "二分答案、双指针、尺取法讲解",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQDxKsu0I6QgRrh57WbE9xuAAVyGipYlf5Vhyxc1ZFlwcCs?resid=346D6399EC5AB93F!sb4cb2af1a4234620b879ed66c4f71b80&ithint=file%2Cpptx&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRRHhLc3UwSTZRZ1JyaDU3V2JFOXh1QUFWeUdpcFlsZjVWaHl4YzFaRmx3Y0Nz" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQDxKsu0I6QgRrh57WbE9xuAAVyGipYlf5Vhyxc1ZFlwcCs?resid=346D6399EC5AB93F!sb4cb2af1a4234620b879ed66c4f71b80&ithint=file%2Cpptx&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRRHhLc3UwSTZRZ1JyaDU3V2JFOXh1QUFWeUdpcFlsZjVWaHl4YzFaRmx3Y0Nz",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ0FzdEFzU1R3YndK"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-差分-算法优化-V1.5 2",
                         desc: "一维差分、二维差分讲解",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQA2vmHo_kgCTbYL6Hzzvmo5ASF9iB1Th-fqCPaOK8XoDno?resid=346D6399EC5AB93F!se861be3648fe4d02b60be87cf3be6a39&ithint=file%2Cpptx&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQTJ2bUhvX2tnQ1RiWUw2SHp6dm1vNUFTRjlpQjFUaC1mcUNQYU9LOFhvRG5v" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQA2vmHo_kgCTbYL6Hzzvmo5ASF9iB1Th-fqCPaOK8XoDno?resid=346D6399EC5AB93F!se861be3648fe4d02b60be87cf3be6a39&ithint=file%2Cpptx&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQTJ2bUhvX2tnQ1RiWUw2SHp6dm1vNUFTRjlpQjFUaC1mcUNQYU9LOFhvRG5v",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ2prV0NseUxFV2hZ"
+                                }
+                            }
                         ]
                     },
                     {
                         title: "课件-技巧-算法优化-V1.0",
                         desc: "时间复杂度优化、空间复杂度优化、程序调试方法",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQA4PtZCxykgQKLw8l7fr2EgAR3N8mMeE5sg_25lpBvYX4g?resid=346D6399EC5AB93F!s42d63e3829c74020a2f0f25edfaf6120&ithint=file%2Cpptx&e=5INM9r%25u3001&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQTRQdFpDeHlrZ1FLTHc4bDdmcjJFZ0FSM044bU1lRTVzZ18yNWxwQnZZWDRnP2U9NUlOTTlyJXUzMDAx" },
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQA4PtZCxykgQKLw8l7fr2EgAR3N8mMeE5sg_25lpBvYX4g?resid=346D6399EC5AB93F!s42d63e3829c74020a2f0f25edfaf6120&ithint=file%2Cpptx&e=5INM9r%25u3001&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQTRQdFpDeHlrZ1FLTHc4bDdmcjJFZ0FSM044bU1lRTVzZ18yNWxwQnZZWDRnP2U9NUlOTTlyJXUzMDAx",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ0NibXdrV2Rqb0pk"
+                                }
+                            },
                             { type: "video", text: "视频", url: "https://cdn.singera.cn/www.singera.cn/uploads/a311d64c-2837-4e97-bd31-ceb748a7731b.mp4" },
                             { type: "material", text: "素材", url: "https://cyberwhale.net/courseware/素材-技巧-算法优化-V1.0.zip" }
                         ]
@@ -955,7 +1326,15 @@
                         title: "课件-对拍-工具-V2.0",
                         desc: "对拍方法讲解",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/personal/346D6399EC5AB93F/_layouts/15/Doc.aspx?sourcedoc=%7Be3f96a83-6e8f-4ed1-9991-f533a79a1fa6%7D&action=default&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQ0Rhdm5qajI3UlRwbVI5VE9ubWgtbUFjME5WZjVKZHF1Rlhkb0UxRkx5c29NP2U9WjM3cUho&slrid=83f610a2-70c2-d000-2448-b3e975d90986&originalPath=aHR0cHM6Ly9vbmVkcml2ZS5saXZlLmNvbS86cDovZy9wZXJzb25hbC8zNDZENjM5OUVDNUFCOTNGL0lRQ0Rhdm5qajI3UlRwbVI5VE9ubWgtbUFjME5WZjVKZHF1Rlhkb0UxRkx5c29NP3J0aW1lPTlObksxMm1yM2tnJnJlZGVlbT1hSFIwY0hNNkx5OHhaSEoyTG0xekwzQXZZeTh6TkRaRU5qTTVPVVZETlVGQ09UTkdMMGxSUTBSaGRtNXFhakkzVWxSd2JWSTVWRTl1YldndGJVRmpNRTVXWmpWS1pIRjFSbGhrYjBVeFJreDVjMjlOUDJVOVdqTTNjVWhv&CID=8b97c941-bac9-41c6-94d6-94f7aed6b85c&_SRM=0%3AG%3A57&file=%E8%AF%BE%E4%BB%B6-%E5%AF%B9%E6%8B%8D-%E5%B7%A5%E5%85%B7-V2.0.pptx" },
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/personal/346D6399EC5AB93F/_layouts/15/Doc.aspx?sourcedoc=%7Be3f96a83-6e8f-4ed1-9991-f533a79a1fa6%7D&action=default&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQ0Rhdm5qajI3UlRwbVI5VE9ubWgtbUFjME5WZjVKZHF1Rlhkb0UxRkx5c29NP2U9WjM3cUho&slrid=83f610a2-70c2-d000-2448-b3e975d90986&originalPath=aHR0cHM6Ly9vbmVkcml2ZS5saXZlLmNvbS86cDovZy9wZXJzb25hbC8zNDZENjM5OUVDNUFCOTNGL0lRQ0Rhdm5qajI3UlRwbVI5VE9ubWgtbUFjME5WZjVKZHF1Rlhkb0UxRkx5c29NP3J0aW1lPTlObksxMm1yM2tnJnJlZGVlbT1hSFIwY0hNNkx5OHhaSEoyTG0xekwzQXZZeTh6TkRaRU5qTTVPVVZETlVGQ09UTkdMMGxSUTBSaGRtNXFhakkzVWxSd2JWSTVWRTl1YldndGJVRmpNRTVXWmpWS1pIRjFSbGhrYjBVeFJreDVjMjlOUDJVOVdqTTNjVWhv&CID=8b97c941-bac9-41c6-94d6-94f7aed6b85c&_SRM=0%3AG%3A57&file=%E8%AF%BE%E4%BB%B6-%E5%AF%B9%E6%8B%8D-%E5%B7%A5%E5%85%B7-V2.0.pptx",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ3B0UGhSdEFueWh4"
+                                }
+                            },
                             { type: "material", text: "素材", url: "https://cyberwhale.net/courseware/素材-对拍-工具-V2.0.zip" }
                         ]
                     },
@@ -963,7 +1342,15 @@
                         title: "课件-表达式运算-数据结构-V1.1",
                         desc: "前缀表达式、中缀表达式、后缀表达式运算及相互转换",
                         assets: [
-                            { type: "course", text: "课件", url: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQBtrpyXV3C_SJEIGXkzvW0bAbKBtmRc3nV1ijxlRG38k_k?resid=346D6399EC5AB93F!s979cae6d705748bf9108197933bd6d1b&ithint=file%2Cpptx&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQnRycHlYVjNDX1NKRUlHWGt6dlcwYkFiS0J0bVJjM25WMWlqeGxSRzM4a19r" }
+                            {
+                                type: "course",
+                                text: "课件",
+                                urls: {
+                                    microsoft: "https://onedrive.live.com/:p:/g/personal/346D6399EC5AB93F/IQBtrpyXV3C_SJEIGXkzvW0bAbKBtmRc3nV1ijxlRG38k_k?resid=346D6399EC5AB93F!s979cae6d705748bf9108197933bd6d1b&ithint=file%2Cpptx&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3AvYy8zNDZENjM5OUVDNUFCOTNGL0lRQnRycHlYVjNDX1NKRUlHWGt6dlcwYkFiS0J0bVJjM25WMWlqeGxSRzM4a19r",
+                                    google: "",
+                                    tencent: "https://docs.qq.com/slide/DQ2tDQ1pWeEh5Tmpx"
+                                }
+                            }
                         ]
                     },
                 ]
@@ -991,6 +1378,23 @@
             { icon: "📦", tag: "下载", title: "软件下载", text: "赛博鲸鱼软件下载中心", url: "https://cyberwhale.net/download" },
             { icon: "⚙️", tag: "工具", title: "所有工具", text: "赛博鲸鱼工具集", url: "https://cyberwhale.net/tools" }
         ];
+
+        // ========== 服务选择：只影响课件和练习，视频/素材不受影响 ==========
+        let currentService = "microsoft";
+        const serviceUrlKey = {
+            tencent: "urlTencent",
+            google: "urlGoogle",
+            microsoft: "urlMicrosoft"
+        };
+
+        function getAssetUrl(asset) {
+            const serviceSelect = document.getElementById("serviceSelect");
+            const service = serviceSelect ? serviceSelect.value : currentService;
+            if (asset.type !== "course" && asset.type !== "practice") return asset.url || "#";
+            if (asset.urls) return asset.urls[service] || asset.urls.microsoft || asset.url || "#";
+            const key = serviceUrlKey[service];
+            return asset[key] || asset.urlMicrosoft || asset.url || "#";
+        }
 
         // 渲染顶部导航
         function renderNav() {
@@ -1059,7 +1463,7 @@
                     return `<li class="course-item has-children">
                         <button class="course-main" type="button" data-index="${i}"><span>${x.title}</span><span class="arrow">›</span></button>
                         <ul class="sub-list" id="sub-${i}">
-                            ${x.children.length ? x.children.map(c => `<li class="resource-row"><div><div class="resource-title">${c.title}</div><div class="resource-desc">${c.desc || ""}</div></div><div class="resource-actions">${(c.assets || [{ type: "course", text: "课件", url: c.url }]).map(a => `<a class="asset-btn asset-${a.type}" href="${a.url}" target="_blank">【${a.text}】</a>`).join("")}</div></li>`).join("") : `<li class="empty-row">暂无数据</li>`}
+                            ${x.children.length ? x.children.map(c => `<li class="resource-row"><div><div class="resource-title">${c.title}</div><div class="resource-desc">${c.desc || ""}</div></div><div class="resource-actions">${(c.assets || [{ type: "course", text: "课件", url: c.url }]).map(a => `<a class="asset-btn asset-${a.type}" href="${getAssetUrl(a)}" target="_blank" data-service-asset='${JSON.stringify(a).replace(/'/g, "&#39;")}'>【${a.text}】</a>`).join("")}</div></li>`).join("") : `<li class="empty-row">暂无数据</li>`}
                         </ul>
                     </li>`;
                 }
@@ -1071,6 +1475,13 @@
                 btn.addEventListener('click', () => {
                     let li = btn.closest('.course-item');
                     li.classList.toggle('open');
+                });
+            });
+            // 点击资源按钮前，按当前服务重新计算链接，避免切换服务后仍打开旧链接
+            document.querySelectorAll('[data-service-asset]').forEach(link => {
+                link.addEventListener('click', () => {
+                    const asset = JSON.parse(link.getAttribute('data-service-asset'));
+                    link.href = getAssetUrl(asset);
                 });
             });
         }
@@ -1093,6 +1504,13 @@
                 bubbles.appendChild(s);
             }
         }
+
+        const serviceSelect = document.getElementById('serviceSelect');
+        serviceSelect.addEventListener('change', () => {
+            currentService = serviceSelect.value;
+            const activeBtn = document.querySelector('#courseTabs button.active');
+            renderCategoryContent(activeBtn ? parseInt(activeBtn.getAttribute('data-cat-idx')) : 0);
+        });
 
         renderNav();
         renderCourses();
