@@ -1,622 +1,705 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
-<title>CyberWhale · 深海回响</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+    <title>CyberWhale · 深海回响</title>
+    <link rel="shortcut icon" type="image/x-icon"
+        href="https://i.imgs.ovh/2026/05/02/bf29034af039328180ea8abd6d6abba5.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
 
-<link rel="shortcut icon" type="image/x-icon"
-href="https://i.imgs.ovh/2026/05/02/bf29034af039328180ea8abd6d6abba5.png">
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: #061827;
+            color: #fff;
+            overflow-x: hidden
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+        a {
+            text-decoration: none;
+            color: inherit
+        }
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box
-}
+        .top-toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            padding: .85rem 2rem;
+            background: rgba(240, 250, 255, .9);
+            backdrop-filter: blur(16px);
+            box-shadow: 0 4px 26px rgba(0, 0, 0, .12);
+            border-bottom: 1px solid rgba(150, 220, 255, .25)
+        }
 
-body{
-font-family:'Inter',system-ui,-apple-system,sans-serif;
-background:#061827;
-color:#fff;
-overflow-x:hidden
-}
+        .toolbar-container {
+            max-width: 1300px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap
+        }
 
-a{
-text-decoration:none;
-color:inherit
-}
+        .logo-area {
+            font-weight: 800;
+            font-size: 1.35rem;
+            background: linear-gradient(135deg, #008cff, #00d9ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent
+        }
 
-.top-toolbar{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-z-index:100;
-padding:.85rem 2rem;
-background:rgba(240,250,255,.9);
-backdrop-filter:blur(16px);
-box-shadow:0 4px 26px rgba(0,0,0,.12);
-border-bottom:1px solid rgba(150,220,255,.25)
-}
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap
+        }
 
-.toolbar-container{
-max-width:1300px;
-margin:auto;
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:1rem;
-flex-wrap:wrap
-}
+        .nav-item {
+            font-size: .95rem;
+            font-weight: 600;
+            padding: .45rem .9rem;
+            border-radius: 999px;
+            color: #17384a;
+            transition: .25s
+        }
 
-.logo-area{
-font-weight:800;
-font-size:1.35rem;
-background:linear-gradient(135deg,#008cff,#00d9ff);
--webkit-background-clip:text;
-background-clip:text;
-color:transparent
-}
+        .nav-item:hover {
+            background: rgba(0, 140, 255, .12);
+            color: #0070d8
+        }
 
-.nav-links{
-display:flex;
-align-items:center;
-gap:1rem;
-flex-wrap:wrap
-}
+        .lang-select {
+            padding: .45rem .8rem;
+            border-radius: 999px;
+            border: 1px solid rgba(120, 220, 255, .25);
+            background: rgba(255, 255, 255, .82);
+            backdrop-filter: blur(10px);
+            font-weight: 700;
+            color: #17384a;
+            outline: none;
+            cursor: pointer;
+            transition: .25s
+        }
 
-.nav-item{
-font-size:.95rem;
-font-weight:600;
-padding:.45rem .9rem;
-border-radius:999px;
-color:#17384a;
-transition:.25s
-}
+        .lang-select:hover {
+            background: #fff;
+            color: #0070d8
+        }
 
-.nav-item:hover{
-background:rgba(0,140,255,.12);
-color:#0070d8
-}
+        .ocean-wrapper {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            overflow: hidden;
+            background: radial-gradient(circle at 50% 20%, rgba(0, 190, 255, .28), transparent 35%), radial-gradient(circle at 80% 70%, rgba(120, 90, 255, .12), transparent 30%), linear-gradient(145deg, #083d5a, #031827 78%)
+        }
 
-.ocean-wrapper{
-position:relative;
-width:100%;
-min-height:100vh;
-overflow:hidden;
-background:
-radial-gradient(circle at 50% 20%,rgba(0,190,255,.28),transparent 35%),
-radial-gradient(circle at 80% 70%,rgba(120,90,255,.12),transparent 30%),
-linear-gradient(145deg,#083d5a,#031827 78%)
-}
+        .grid-bg {
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(120, 220, 255, .06) 1px, transparent 1px), linear-gradient(90deg, rgba(120, 220, 255, .06) 1px, transparent 1px);
+            background-size: 42px 42px;
+            mask-image: linear-gradient(to bottom, transparent, black 15%, black 80%, transparent);
+            z-index: 1
+        }
 
-.grid-bg{
-position:absolute;
-inset:0;
-background-image:
-linear-gradient(rgba(120,220,255,.06) 1px,transparent 1px),
-linear-gradient(90deg,rgba(120,220,255,.06) 1px,transparent 1px);
-background-size:42px 42px;
-mask-image:linear-gradient(to bottom,transparent,black 15%,black 80%,transparent);
-z-index:1
-}
+        .wave-bg {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 25%;
+            z-index: 2;
+            pointer-events: none;
+            background: repeating-linear-gradient(transparent 0, transparent 29px, rgba(80, 180, 255, .12) 30px)
+        }
 
-.wave-bg{
-position:absolute;
-left:0;
-bottom:0;
-width:100%;
-height:25%;
-z-index:2;
-pointer-events:none;
-background:
-repeating-linear-gradient(
-transparent 0,
-transparent 29px,
-rgba(80,180,255,.12) 30px
-)
-}
+        .whale-canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5
+        }
 
-.whale-canvas{
-position:absolute;
-inset:0;
-width:100%;
-height:100%;
-pointer-events:none;
-z-index:5
-}
+        .hero-content {
+            position: relative;
+            z-index: 20;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 6rem 1.5rem 4rem
+        }
 
-.hero-content{
-position:relative;
-z-index:20;
-min-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-padding:6rem 1.5rem 4rem
-}
+        .badge {
+            font-size: .82rem;
+            padding: .45rem .9rem;
+            border: 1px solid rgba(130, 230, 255, .35);
+            border-radius: 999px;
+            background: rgba(0, 30, 50, .4);
+            color: #c5f6ff;
+            margin-bottom: 1rem
+        }
 
-.badge{
-font-size:.82rem;
-padding:.45rem .9rem;
-border:1px solid rgba(130,230,255,.35);
-border-radius:999px;
-background:rgba(0,30,50,.4);
-color:#c5f6ff;
-margin-bottom:1rem
-}
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffe6c7, #b8f2ff, #70d8ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: fadeUp 1s ease
+        }
 
-.hero-title{
-font-size:4rem;
-font-weight:800;
-background:linear-gradient(135deg,#ffe6c7,#b8f2ff,#70d8ff);
--webkit-background-clip:text;
-background-clip:text;
-color:transparent;
-animation:fadeUp 1s ease
-}
+        .hero-sub {
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            opacity: .9
+        }
 
-.hero-sub{
-font-size:1.1rem;
-margin-top:1rem;
-opacity:.9
-}
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 2rem
+        }
 
-.hero-actions{
-display:flex;
-gap:1rem;
-flex-wrap:wrap;
-justify-content:center;
-margin-top:2rem
-}
+        .btn {
+            padding: .8rem 1.3rem;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: .92rem;
+            transition: .25s;
+            border: 1px solid rgba(160, 235, 255, .3);
+            background: rgba(0, 35, 60, .42);
+            backdrop-filter: blur(10px)
+        }
 
-.btn{
-padding:.8rem 1.3rem;
-border-radius:999px;
-font-weight:700;
-font-size:.92rem;
-transition:.25s;
-border:1px solid rgba(160,235,255,.3);
-background:rgba(0,35,60,.42);
-backdrop-filter:blur(10px)
-}
+        .btn:hover {
+            transform: translateY(-4px);
+            background: rgba(0, 160, 230, .18)
+        }
 
-.btn:hover{
-transform:translateY(-4px);
-background:rgba(0,160,230,.18)
-}
+        .btn.primary {
+            background: linear-gradient(135deg, rgba(0, 150, 255, .65), rgba(0, 220, 255, .3))
+        }
 
-.btn.primary{
-background:linear-gradient(135deg,rgba(0,150,255,.65),rgba(0,220,255,.3))
-}
+        .section {
+            position: relative;
+            z-index: 20;
+            max-width: 1120px;
+            margin: 4rem auto;
+            padding: 3rem 2rem;
+            background: rgba(10, 40, 55, .62);
+            backdrop-filter: blur(18px);
+            border-radius: 2rem;
+            border: 1px solid rgba(160, 230, 255, .18)
+        }
 
-.section{
-position:relative;
-z-index:20;
-max-width:1120px;
-margin:4rem auto;
-padding:3rem 2rem;
-background:rgba(10,40,55,.62);
-backdrop-filter:blur(18px);
-border-radius:2rem;
-border:1px solid rgba(160,230,255,.18)
-}
+        .section-title {
+            text-align: center;
+            font-size: 1.6rem;
+            font-weight: 700
+        }
 
-.section-title{
-text-align:center;
-font-size:1.6rem;
-font-weight:700
-}
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.4rem;
+            margin-top: 2rem
+        }
 
-.card-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-gap:1.4rem;
-margin-top:2rem
-}
+        .card {
+            padding: 1.5rem;
+            border-radius: 1.6rem;
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(180, 230, 255, .16);
+            transition: .3s
+        }
 
-.card{
-padding:1.5rem;
-border-radius:1.6rem;
-background:rgba(255,255,255,.06);
-border:1px solid rgba(180,230,255,.16);
-transition:.3s
-}
+        .card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, .1);
+            border-color: rgba(140, 230, 255, .35)
+        }
 
-.card:hover{
-transform:translateY(-8px);
-background:rgba(255,255,255,.1);
-border-color:rgba(140,230,255,.35)
-}
+        .card-icon {
+            font-size: 2.2rem;
+            margin-bottom: .8rem
+        }
 
-.card-icon{
-font-size:2.2rem;
-margin-bottom:.8rem
-}
+        .card h3 {
+            font-size: 1.05rem;
+            margin-bottom: .4rem
+        }
 
-.card h3{
-font-size:1.05rem;
-margin-bottom:.4rem
-}
+        .card p {
+            font-size: .9rem;
+            line-height: 1.7;
+            opacity: .8
+        }
 
-.card p{
-font-size:.9rem;
-line-height:1.7;
-opacity:.8
-}
+        .card-link {
+            display: inline-block;
+            margin-top: 1rem;
+            font-size: .84rem;
+            color: #9eeeff
+        }
 
-.card-link{
-display:inline-block;
-margin-top:1rem;
-font-size:.84rem;
-color:#9eeeff
-}
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem
+        }
 
-.status-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-gap:1rem;
-margin-top:2rem
-}
+        .status-box {
+            padding: 1.3rem;
+            border-radius: 1.4rem;
+            background: rgba(0, 20, 35, .35);
+            border: 1px solid rgba(100, 220, 255, .14)
+        }
 
-.status-box{
-padding:1.3rem;
-border-radius:1.4rem;
-background:rgba(0,20,35,.35);
-border:1px solid rgba(100,220,255,.14)
-}
+        .status-box strong {
+            font-size: 1.5rem;
+            color: #aef6ff
+        }
 
-.status-box strong{
-font-size:1.5rem;
-color:#aef6ff
-}
+        .status-box span {
+            display: block;
+            margin-top: .4rem;
+            font-size: .82rem;
+            opacity: .72
+        }
 
-.status-box span{
-display:block;
-margin-top:.4rem;
-font-size:.82rem;
-opacity:.72
-}
+        footer {
+            position: relative;
+            z-index: 20;
+            text-align: center;
+            padding: 2rem;
+            font-size: .75rem;
+            opacity: .68
+        }
 
-footer{
-position:relative;
-z-index:20;
-text-align:center;
-padding:2rem;
-font-size:.75rem;
-opacity:.68
-}
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px)
+            }
 
-@keyframes fadeUp{
-from{
-opacity:0;
-transform:translateY(30px)
-}
-to{
-opacity:1;
-transform:translateY(0)
-}
-}
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
 
-@media(max-width:700px){
+        @media(max-width:700px) {
+            .top-toolbar {
+                padding: .8rem 1rem
+            }
 
-.top-toolbar{
-padding:.8rem 1rem
-}
+            .toolbar-container {
+                flex-direction: column
+            }
 
-.toolbar-container{
-flex-direction:column
-}
+            .nav-links {
+                justify-content: center;
+                gap: .5rem
+            }
 
-.nav-links{
-justify-content:center;
-gap:.5rem
-}
+            .hero-title {
+                font-size: 2.4rem
+            }
 
-.hero-title{
-font-size:2.4rem
-}
+            .hero-sub {
+                font-size: 1rem
+            }
 
-.hero-sub{
-font-size:1rem
-}
-
-.section{
-margin:3rem 1rem;
-padding:2rem 1rem
-}
-
-}
-</style>
+            .section {
+                margin: 3rem 1rem;
+                padding: 2rem 1rem
+            }
+        }
+    </style>
 </head>
 
 <body>
-
-<header class="top-toolbar">
-<div class="toolbar-container">
-
-<a href="#" class="logo-area" data-link="home">
-🐋 CyberWhale · 深海回响
-</a>
-
-<nav class="nav-links">
-<a href="#" class="nav-item" data-link="about">✨ About Me</a>
-<a href="#" class="nav-item" data-link="ai">🤖 CyberWhale AI</a>
-<a href="#" class="nav-item" data-link="download">🐋 Software Download</a>
-<a href="#" class="nav-item" data-link="tools">🛠️ All Tools</a>
-</nav>
-
-</div>
-</header>
-
-<main class="ocean-wrapper">
-
-<div class="grid-bg"></div>
-
-<canvas id="whaleCanvas" class="whale-canvas"></canvas>
-
-<div class="wave-bg"></div>
-
-<section class="hero-content">
-
-<div class="badge">
-CYBERWHALE.NET
-</div>
-
-<h1 class="hero-title">
-🐋 深海回响 · CyberWhale
-</h1>
-
-<p class="hero-sub">
-CyberWhale 赛博鲸鱼🐳
-</p>
-
-<div class="hero-actions">
-<a href="#" class="btn primary" data-link="tools">
-进入工具
-</a>
-
-<a href="#" class="btn" data-link="download">
-软件下载
-</a>
-
-<a href="#" class="btn" data-link="about">
-关于页面
-</a>
-</div>
-
-</section>
-
-<section class="section">
-
-<h2 class="section-title">
-站点入口
-</h2>
-
-<div class="card-grid">
-
-<a href="#" class="card" data-link="about">
-<div class="card-icon">✨</div>
-<h3>About Me</h3>
-<p>个人页面。</p>
-<span class="card-link">打开页面 →</span>
-</a>
-
-<a href="#" class="card" data-link="ai">
-<div class="card-icon">🤖</div>
-<h3>CyberWhale AI</h3>
-<p>AI 页面与相关内容。</p>
-<span class="card-link">打开页面 →</span>
-</a>
-
-<a href="#" class="card" data-link="download">
-<div class="card-icon">🐋</div>
-<h3>Software Download</h3>
-<p>软件下载页面。</p>
-<span class="card-link">打开页面 →</span>
-</a>
-
-<a href="#" class="card" data-link="tools">
-<div class="card-icon">🛠️</div>
-<h3>All Tools</h3>
-<p>工具集合页面。</p>
-<span class="card-link">打开页面 →</span>
-</a>
-
-</div>
-
-</section>
-
-<section class="section">
-
-<h2 class="section-title">
-站点状态
-</h2>
-
-<div class="status-grid">
-
-<div class="status-box">
-<strong>01</strong>
-<span>主页在线</span>
-</div>
-
-<div class="status-box">
-<strong>02</strong>
-<span>工具可用</span>
-</div>
-
-<div class="status-box">
-<strong>03</strong>
-<span>页面运行正常</span>
-</div>
-
-<div class="status-box">
-<strong>04</strong>
-<span>深海连接稳定</span>
-</div>
-
-</div>
-
-</section>
-
-<footer>
-© 2026 CyberWhale
-</footer>
-
-</main>
-
-<script>
-(function(){
-
-const SITE_CONFIG={
-home:"https://cyberwhale.net",
-about:"https://cyberwhale.net/about",
-ai:"https://cyberwhale.net/ai",
-download:"https://cyberwhale.net/download",
-tools:"https://cyberwhale.net/tools"
-};
-
-const canvas=document.getElementById("whaleCanvas");
-const ctx=canvas.getContext("2d");
-
-let width=0;
-let height=0;
-let whales=[];
-
-function resizeCanvas(){
-
-const wrap=document.querySelector(".ocean-wrapper");
-
-width=wrap.clientWidth;
-height=wrap.clientHeight;
-
-canvas.width=width;
-canvas.height=height;
-
-}
-
-function initWhales(){
-
-const data=[
-["rgba(60,140,210,.4)",70,.2,.05],
-["rgba(80,180,240,.45)",95,.15,-.03],
-["rgba(40,110,190,.35)",55,.25,.07],
-["rgba(120,200,255,.28)",120,-.1,.02],
-["rgba(30,90,160,.42)",80,.18,-.06]
-];
-
-whales=data.map(item=>({
-color:item[0],
-size:item[1],
-speedX:item[2],
-speedY:item[3],
-x:Math.random()*1.2,
-y:Math.random()*.9,
-phase:Math.random()*Math.PI*2
-}));
-
-}
-
-function drawWhale(w){
-
-const x=w.x*width;
-const y=w.y*height;
-const s=w.size;
-const t=Date.now()*.003+w.phase;
-
-ctx.save();
-
-ctx.translate(x,y);
-
-ctx.beginPath();
-ctx.ellipse(0,0,s*.8,s*.5,0,0,Math.PI*2);
-ctx.fillStyle=w.color;
-ctx.fill();
-
-ctx.beginPath();
-ctx.arc(s*.3,-s*.15,s*.07,0,Math.PI*2);
-ctx.fillStyle="#fff";
-ctx.fill();
-
-ctx.beginPath();
-ctx.arc(s*.32,-s*.18,s*.03,0,Math.PI*2);
-ctx.fillStyle="#020b1a";
-ctx.fill();
-
-ctx.beginPath();
-ctx.moveTo(-s*.7,-s*.3+Math.sin(t)*s*.1);
-ctx.lineTo(-s*1.1,0);
-ctx.lineTo(-s*.7,s*.3+Math.cos(t)*s*.1);
-ctx.fillStyle=w.color;
-ctx.fill();
-
-ctx.restore();
-
-}
-
-function animate(){
-
-ctx.clearRect(0,0,width,height);
-
-whales.forEach(w=>{
-
-w.x+=w.speedX*.006;
-w.y+=w.speedY*.004;
-
-if(w.x>1.1)w.x=-.2;
-if(w.x<-.2)w.x=1.1;
-
-if(w.y>1.05)w.y=-.05;
-if(w.y<-.05)w.y=1.05;
-
-drawWhale(w);
-
-});
-
-requestAnimationFrame(animate);
-
-}
-
-function bindLinks(){
-
-document.querySelectorAll("[data-link]").forEach(el=>{
-
-el.addEventListener("click",e=>{
-
-e.preventDefault();
-
-const key=el.dataset.link;
-
-window.location.href=SITE_CONFIG[key]||"/";
-
-});
-
-});
-
-}
-
-window.addEventListener("resize",resizeCanvas);
-
-resizeCanvas();
-
-initWhales();
-
-animate();
-
-bindLinks();
-
-console.log(
-"%c🐋 CyberWhale · 深海回响",
-"color:#0af;font-size:14px;"
-);
-
-})();
-</script>
-
+    <header class="top-toolbar">
+        <div class="toolbar-container">
+            <a href="#" class="logo-area" data-link="home" data-i18n="logo">🐋 CyberWhale · 深海回响</a>
+            <nav class="nav-links">
+                <a href="#" class="nav-item" data-link="about" data-i18n="nav_about">✨ About Me</a>
+                <a href="#" class="nav-item" data-link="ai" data-i18n="nav_ai">🤖 CyberWhale AI</a>
+                <a href="#" class="nav-item" data-link="download" data-i18n="nav_download">🐋 Software Download</a>
+                <a href="#" class="nav-item" data-link="tools" data-i18n="nav_tools">🛠️ All Tools</a>
+                <select id="langSelect" class="lang-select">
+                    <option value="zh">中文</option>
+                    <option value="en">EN</option>
+                    <option value="fr">FR</option>
+                    <option value="ja">JP</option>
+                    <option value="de">DE</option>
+                </select>
+            </nav>
+        </div>
+    </header>
+    <main class="ocean-wrapper">
+        <div class="grid-bg"></div>
+        <canvas id="whaleCanvas" class="whale-canvas"></canvas>
+        <div class="wave-bg"></div>
+        <section class="hero-content">
+            <div class="badge">CYBERWHALE.NET</div>
+            <h1 class="hero-title" data-i18n="hero_title">🐋 深海回响 · CyberWhale</h1>
+            <p class="hero-sub" data-i18n="hero_sub">CyberWhale 赛博鲸鱼🐳</p>
+            <div class="hero-actions">
+                <a href="#" class="btn primary" data-link="tools" data-i18n="btn_tools">进入工具</a>
+                <a href="#" class="btn" data-link="download" data-i18n="btn_download">软件下载</a>
+                <a href="#" class="btn" data-link="about" data-i18n="btn_about">关于页面</a>
+            </div>
+        </section>
+        <section class="section">
+            <h2 class="section-title" data-i18n="section_entry">站点入口</h2>
+            <div class="card-grid">
+                <a href="#" class="card" data-link="about">
+                    <div class="card-icon">✨</div>
+                    <h3 data-i18n="card_about_title">About Me</h3>
+                    <p data-i18n="card_about_desc">个人页面。</p>
+                    <span class="card-link" data-i18n="open_page">打开页面 →</span>
+                </a>
+                <a href="#" class="card" data-link="ai">
+                    <div class="card-icon">🤖</div>
+                    <h3 data-i18n="card_ai_title">CyberWhale AI</h3>
+                    <p data-i18n="card_ai_desc">AI 页面与相关内容。</p>
+                    <span class="card-link" data-i18n="open_page">打开页面 →</span>
+                </a>
+                <a href="#" class="card" data-link="download">
+                    <div class="card-icon">🐋</div>
+                    <h3 data-i18n="card_download_title">Software Download</h3>
+                    <p data-i18n="card_download_desc">软件下载页面。</p>
+                    <span class="card-link" data-i18n="open_page">打开页面 →</span>
+                </a>
+                <a href="#" class="card" data-link="tools">
+                    <div class="card-icon">🛠️</div>
+                    <h3 data-i18n="card_tools_title">All Tools</h3>
+                    <p data-i18n="card_tools_desc">工具集合页面。</p>
+                    <span class="card-link" data-i18n="open_page">打开页面 →</span>
+                </a>
+            </div>
+        </section>
+        <section class="section">
+            <h2 class="section-title" data-i18n="section_status">站点状态</h2>
+            <div class="status-grid">
+                <div class="status-box">
+                    <strong>01</strong>
+                    <span data-i18n="status_home">主页在线</span>
+                </div>
+                <div class="status-box">
+                    <strong>02</strong>
+                    <span data-i18n="status_tools">工具可用</span>
+                </div>
+                <div class="status-box">
+                    <strong>03</strong>
+                    <span data-i18n="status_page">页面运行正常</span>
+                </div>
+                <div class="status-box">
+                    <strong>04</strong>
+                    <span data-i18n="status_ocean">深海连接稳定</span>
+                </div>
+            </div>
+        </section>
+        <footer data-i18n="footer">© 2026 CyberWhale</footer>
+    </main>
+    <script>
+        const I18N = {
+            zh: {
+                title: "CyberWhale · 深海回响",
+                logo: "🐋 CyberWhale · 深海回响",
+                nav_about: "✨ About Me",
+                nav_ai: "🤖 CyberWhale AI",
+                nav_download: "🐋 Software Download",
+                nav_tools: "🛠️ All Tools",
+                hero_title: "🐋 深海回响 · CyberWhale",
+                hero_sub: "CyberWhale 赛博鲸鱼🐳",
+                btn_tools: "进入工具",
+                btn_download: "软件下载",
+                btn_about: "关于页面",
+                section_entry: "站点入口",
+                card_about_title: "About Me",
+                card_about_desc: "个人页面。",
+                card_ai_title: "CyberWhale AI",
+                card_ai_desc: "AI 页面与相关内容。",
+                card_download_title: "Software Download",
+                card_download_desc: "软件下载页面。",
+                card_tools_title: "All Tools",
+                card_tools_desc: "工具集合页面。",
+                open_page: "打开页面 →",
+                section_status: "站点状态",
+                status_home: "主页在线",
+                status_tools: "工具可用",
+                status_page: "页面运行正常",
+                status_ocean: "深海连接稳定",
+                footer: "© 2026 CyberWhale"
+            },
+            en: {
+                title: "CyberWhale · Deep Sea Echo",
+                logo: "🐋 CyberWhale · Deep Sea Echo",
+                nav_about: "✨ About Me",
+                nav_ai: "🤖 CyberWhale AI",
+                nav_download: "🐋 Software Download",
+                nav_tools: "🛠️ All Tools",
+                hero_title: "🐋 Deep Sea Echo · CyberWhale",
+                hero_sub: "CyberWhale 🐳",
+                btn_tools: "Enter Tools",
+                btn_download: "Software Download",
+                btn_about: "About Page",
+                section_entry: "Site Entry",
+                card_about_title: "About Me",
+                card_about_desc: "Personal page.",
+                card_ai_title: "CyberWhale AI",
+                card_ai_desc: "AI page and related content.",
+                card_download_title: "Software Download",
+                card_download_desc: "Software download page.",
+                card_tools_title: "All Tools",
+                card_tools_desc: "Tool collection page.",
+                open_page: "Open Page →",
+                section_status: "Site Status",
+                status_home: "Homepage Online",
+                status_tools: "Tools Available",
+                status_page: "Page Running Normally",
+                status_ocean: "Deep-sea Connection Stable",
+                footer: "© 2026 CyberWhale"
+            },
+            fr: {
+                title: "CyberWhale · Écho des abysses",
+                logo: "🐋 CyberWhale · Écho des abysses",
+                nav_about: "✨ À propos",
+                nav_ai: "🤖 CyberWhale AI",
+                nav_download: "🐋 Téléchargements",
+                nav_tools: "🛠️ Tous les outils",
+                hero_title: "🐋 Écho des abysses · CyberWhale",
+                hero_sub: "CyberWhale 🐳",
+                btn_tools: "Entrer dans les outils",
+                btn_download: "Téléchargements",
+                btn_about: "À propos",
+                section_entry: "Entrée du site",
+                card_about_title: "À propos",
+                card_about_desc: "Page personnelle.",
+                card_ai_title: "CyberWhale AI",
+                card_ai_desc: "Page IA et contenus associés.",
+                card_download_title: "Téléchargements",
+                card_download_desc: "Page de téléchargement des logiciels.",
+                card_tools_title: "Tous les outils",
+                card_tools_desc: "Collection d'outils.",
+                open_page: "Ouvrir la page →",
+                section_status: "État du site",
+                status_home: "Accueil en ligne",
+                status_tools: "Outils disponibles",
+                status_page: "Page en fonctionnement normal",
+                status_ocean: "Connexion abyssale stable",
+                footer: "© 2026 CyberWhale"
+            },
+            ja: {
+                title: "CyberWhale · 深海のこだま",
+                logo: "🐋 CyberWhale · 深海のこだま",
+                nav_about: "✨ 私について",
+                nav_ai: "🤖 CyberWhale AI",
+                nav_download: "🐋 ソフトウェア",
+                nav_tools: "🛠️ すべてのツール",
+                hero_title: "🐋 深海のこだま · CyberWhale",
+                hero_sub: "CyberWhale 🐳",
+                btn_tools: "ツールへ入る",
+                btn_download: "ダウンロード",
+                btn_about: "概要ページ",
+                section_entry: "サイト入口",
+                card_about_title: "私について",
+                card_about_desc: "個人ページ。",
+                card_ai_title: "CyberWhale AI",
+                card_ai_desc: "AIページと関連コンテンツ。",
+                card_download_title: "ソフトウェア",
+                card_download_desc: "ソフトウェアのダウンロードページ。",
+                card_tools_title: "すべてのツール",
+                card_tools_desc: "ツール集ページ。",
+                open_page: "ページを開く →",
+                section_status: "サイト状態",
+                status_home: "ホームページ稼働中",
+                status_tools: "ツール利用可能",
+                status_page: "ページは正常に動作中",
+                status_ocean: "深海接続は安定",
+                footer: "© 2026 CyberWhale"
+            },
+            de: {
+                title: "CyberWhale · Tiefsee-Echo",
+                logo: "🐋 CyberWhale · Tiefsee-Echo",
+                nav_about: "✨ Über mich",
+                nav_ai: "🤖 CyberWhale AI",
+                nav_download: "🐋 Software-Download",
+                nav_tools: "🛠️ Alle Werkzeuge",
+                hero_title: "🐋 Tiefsee-Echo · CyberWhale",
+                hero_sub: "CyberWhale 🐳",
+                btn_tools: "Werkzeuge öffnen",
+                btn_download: "Software herunterladen",
+                btn_about: "Über-Seite",
+                section_entry: "Seiteneingang",
+                card_about_title: "Über mich",
+                card_about_desc: "Persönliche Seite.",
+                card_ai_title: "CyberWhale AI",
+                card_ai_desc: "KI-Seite und zugehörige Inhalte.",
+                card_download_title: "Software-Download",
+                card_download_desc: "Seite zum Herunterladen von Software.",
+                card_tools_title: "Alle Werkzeuge",
+                card_tools_desc: "Sammlung von Werkzeugen.",
+                open_page: "Seite öffnen →",
+                section_status: "Seitenstatus",
+                status_home: "Startseite online",
+                status_tools: "Werkzeuge verfügbar",
+                status_page: "Seite läuft normal",
+                status_ocean: "Tiefsee-Verbindung stabil",
+                footer: "© 2026 CyberWhale"
+            }
+        };
+        function detectLanguage() {
+            const saved = localStorage.getItem("cw_lang");
+            if (saved && I18N[saved]) return saved;
+            const lang = (navigator.language || "zh").toLowerCase();
+            if (lang.startsWith("zh")) return "zh";
+            if (lang.startsWith("en")) return "en";
+            if (lang.startsWith("fr")) return "fr";
+            if (lang.startsWith("ja")) return "ja";
+            if (lang.startsWith("de")) return "de";
+            return "zh";
+        }
+        function applyLanguage(lang) {
+            document.documentElement.lang = lang === "zh" ? "zh-CN" : lang;
+            document.title = I18N[lang].title;
+            localStorage.setItem("cw_lang", lang);
+            document.querySelectorAll("[data-i18n]").forEach(el => {
+                const key = el.dataset.i18n;
+                if (I18N[lang][key]) el.innerHTML = I18N[lang][key];
+            });
+            const selector = document.getElementById("langSelect");
+            if (selector) selector.value = lang;
+        }
+        (function () {
+            const SITE_CONFIG = {
+                home: "https://cyberwhale.net",
+                about: "https://cyberwhale.net/about",
+                ai: "https://cyberwhale.net/ai",
+                download: "https://cyberwhale.net/download",
+                tools: "https://cyberwhale.net/tools"
+            };
+            const canvas = document.getElementById("whaleCanvas");
+            const ctx = canvas.getContext("2d");
+            let width = 0;
+            let height = 0;
+            let whales = [];
+            function resizeCanvas() {
+                const wrap = document.querySelector(".ocean-wrapper");
+                width = wrap.clientWidth;
+                height = wrap.clientHeight;
+                canvas.width = width;
+                canvas.height = height;
+            }
+            function initWhales() {
+                const data = [
+                    ["rgba(60,140,210,.4)", 70, .2, .05],
+                    ["rgba(80,180,240,.45)", 95, .15, -.03],
+                    ["rgba(40,110,190,.35)", 55, .25, .07],
+                    ["rgba(120,200,255,.28)", 120, -.1, .02],
+                    ["rgba(30,90,160,.42)", 80, .18, -.06]
+                ];
+                whales = data.map(item => ({
+                    color: item[0],
+                    size: item[1],
+                    speedX: item[2],
+                    speedY: item[3],
+                    x: Math.random() * 1.2,
+                    y: Math.random() * .9,
+                    phase: Math.random() * Math.PI * 2
+                }));
+            }
+            function drawWhale(w) {
+                const x = w.x * width;
+                const y = w.y * height;
+                const s = w.size;
+                const t = Date.now() * .003 + w.phase;
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.beginPath();
+                ctx.ellipse(0, 0, s * .8, s * .5, 0, 0, Math.PI * 2);
+                ctx.fillStyle = w.color;
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(s * .3, -s * .15, s * .07, 0, Math.PI * 2);
+                ctx.fillStyle = "#fff";
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(s * .32, -s * .18, s * .03, 0, Math.PI * 2);
+                ctx.fillStyle = "#020b1a";
+                ctx.fill();
+                ctx.beginPath();
+                ctx.moveTo(-s * .7, -s * .3 + Math.sin(t) * s * .1);
+                ctx.lineTo(-s * 1.1, 0);
+                ctx.lineTo(-s * .7, s * .3 + Math.cos(t) * s * .1);
+                ctx.fillStyle = w.color;
+                ctx.fill();
+                ctx.restore();
+            }
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+                whales.forEach(w => {
+                    w.x += w.speedX * .006;
+                    w.y += w.speedY * .004;
+                    if (w.x > 1.1) w.x = -.2;
+                    if (w.x < -.2) w.x = 1.1;
+                    if (w.y > 1.05) w.y = -.05;
+                    if (w.y < -.05) w.y = 1.05;
+                    drawWhale(w);
+                });
+                requestAnimationFrame(animate);
+            }
+            function bindLinks() {
+                document.querySelectorAll("[data-link]").forEach(el => {
+                    el.addEventListener("click", e => {
+                        e.preventDefault();
+                        const key = el.dataset.link;
+                        window.location.href = SITE_CONFIG[key] || "/";
+                    });
+                });
+            }
+            function bindLanguage() {
+                const selector = document.getElementById("langSelect");
+                applyLanguage(detectLanguage());
+                if (selector) {
+                    selector.addEventListener("change", e => {
+                        applyLanguage(e.target.value);
+                    });
+                }
+            }
+            window.addEventListener("resize", resizeCanvas);
+            resizeCanvas();
+            initWhales();
+            animate();
+            bindLinks();
+            bindLanguage();
+            console.log("%c🐋 CyberWhale · 深海回响", "color:#0af;font-size:14px;");
+        })();
+    </script>
 </body>
+
 </html>
