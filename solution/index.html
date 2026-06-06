@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>Cyberwhale Solution</title>
+	<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+	<style>
+		* {
+			box-sizing: border-box
+		}
+
+		body {
+			margin: 0;
+			font-family: Inter, "Segoe UI", Arial, sans-serif;
+			background: radial-gradient(circle at top, #174d73 0, #071827 45%, #020812 100%);
+			color: #eef8ff;
+			min-height: 100vh
+		}
+
+		header {
+			position: sticky;
+			top: 0;
+			z-index: 9;
+			background: rgba(5, 20, 35, .75);
+			backdrop-filter: blur(18px);
+			border-bottom: 1px solid rgba(255, 255, 255, .1)
+		}
+
+		.nav {
+			max-width: 1100px;
+			margin: auto;
+			padding: 16px 22px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center
+		}
+
+		.logo {
+			font-size: 25px;
+			font-weight: 800
+		}
+
+		.logo span {
+			font-size: 32px;
+			margin-right: 8px
+		}
+
+		.btn {
+			border: 1px solid rgba(255, 255, 255, .18);
+			background: rgba(255, 255, 255, .09);
+			color: #eef8ff;
+			border-radius: 999px;
+			padding: 9px 16px;
+			cursor: pointer
+		}
+
+		.btn:hover {
+			background: rgba(255, 255, 255, .18)
+		}
+
+		.hero {
+			max-width: 1100px;
+			margin: auto;
+			padding: 55px 22px 25px
+		}
+
+		.hero h1 {
+			font-size: 46px;
+			margin: 0 0 12px
+		}
+
+		.hero p {
+			color: #b8d8e8;
+			font-size: 18px
+		}
+
+		.card {
+			background: rgba(255, 255, 255, .08);
+			border: 1px solid rgba(255, 255, 255, .12);
+			border-radius: 24px;
+			box-shadow: 0 20px 60px rgba(0, 0, 0, .25)
+		}
+
+		.login {
+			max-width: 430px;
+			margin: 45px auto;
+			padding: 28px
+		}
+
+		.login h2 {
+			margin-top: 0
+		}
+
+		.input {
+			width: 100%;
+			margin: 8px 0 14px;
+			padding: 13px 15px;
+			border-radius: 14px;
+			border: 1px solid rgba(255, 255, 255, .16);
+			background: rgba(0, 0, 0, .22);
+			color: white;
+			outline: none
+		}
+
+		#error {
+			display: none;
+			color: #ffb4b4
+		}
+
+		.tip {
+			color: #a8c9dc;
+			font-size: 14px;
+			line-height: 1.8
+		}
+
+		.main {
+			display: none;
+			max-width: 1100px;
+			margin: auto;
+			padding: 0 22px 60px
+		}
+
+		.top {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			gap: 15px;
+			flex-wrap: wrap;
+			margin: 20px 0
+		}
+
+		.tabs {
+			display: flex;
+			gap: 10px
+		}
+
+		.tab {
+			padding: 9px 15px;
+			border-radius: 999px;
+			background: rgba(255, 255, 255, .08);
+			border: 1px solid rgba(255, 255, 255, .12);
+			cursor: pointer
+		}
+
+		.active {
+			background: rgba(115, 215, 255, .25);
+			border-color: #73d7ff
+		}
+
+		.grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+			gap: 18px
+		}
+
+		.post {
+			padding: 22px;
+			cursor: pointer;
+			transition: .25s
+		}
+
+		.post:hover {
+			transform: translateY(-4px);
+			background: rgba(255, 255, 255, .12)
+		}
+
+		.post h3 {
+			margin: 0 0 10px;
+			font-size: 22px
+		}
+
+		.post p {
+			color: #bfd9e8;
+			line-height: 1.7
+		}
+
+		.time {
+			color: #87adbf;
+			font-size: 13px
+		}
+
+		.tag {
+			display: inline-block;
+			font-size: 12px;
+			color: #06131d;
+			background: #9fe7ff;
+			border-radius: 999px;
+			padding: 5px 10px;
+			margin-bottom: 12px
+		}
+
+		.reader {
+			display: none;
+			max-width: 900px;
+			margin: 0 auto 60px;
+			padding: 30px;
+			line-height: 1.9
+		}
+
+		.reader h1,
+		.reader h2,
+		.reader h3 {
+			color: #fff
+		}
+
+		.reader p {
+			color: #d9eef8
+		}
+
+		.reader a {
+			color: #82dcff
+		}
+
+		.reader pre {
+			background: rgba(0, 0, 0, .35);
+			padding: 16px;
+			border-radius: 14px;
+			overflow: auto
+		}
+
+		.reader code {
+			font-family: Consolas, monospace
+		}
+
+		.reader img {
+			max-width: 100%;
+			border-radius: 14px
+		}
+
+		.reader blockquote {
+			border-left: 4px solid #73d7ff;
+			padding-left: 14px;
+			color: #bdd9e8
+		}
+
+		.empty {
+			text-align: center;
+			color: #a9c7d6;
+			padding: 50px;
+			display: none
+		}
+
+		footer {
+			text-align: center;
+			color: #6f91a5;
+			padding: 35px
+		}
+
+		@media(max-width:650px) {
+			.hero h1 {
+				font-size: 34px
+			}
+
+			.nav {
+				flex-direction: column;
+				align-items: flex-start
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<header>
+		<div class="nav">
+			<div class="logo"><span>🐋</span>Cyberwhale Solution</div>
+			<div>
+				<span id="roleText"></span>
+				<button class="btn" id="logoutBtn" style="display:none" onclick="logout()">退出</button>
+			</div>
+		</div>
+	</header>
+
+	<section class="hero">
+		<h1>深海博客库</h1>
+	</section>
+
+	<section id="loginBox" class="login card">
+		<h2>登录</h2>
+		<input id="user" class="input" placeholder="用户名">
+		<input id="pass" class="input" type="password" placeholder="密码">
+		<button class="btn" onclick="login()">进入</button>
+		<p id="error">用户名或密码错误</p>
+	</section>
+
+	<main id="main" class="main">
+		<div class="top">
+			<div>
+				<h2 style="margin:0">文章列表</h2>
+				<p style="margin:6px 0 0;color:#a8c9dc">点击文章即可读取 Markdown。</p>
+			</div>
+			<div class="tabs" id="tabs">
+				<button class="tab active" onclick="setFilter('all',this)">全部</button>
+				<button class="tab" onclick="setFilter('it',this)">信息学</button>
+				<button class="tab" onclick="setFilter('mate',this)">其他</button>
+			</div>
+		</div>
+		<div id="posts" class="grid"></div>
+		<div id="empty" class="empty card">暂无文章</div>
+	</main>
+
+	<article id="reader" class="reader card">
+		<button class="btn" onclick="backList()">返回列表</button>
+		<div id="content" style="margin-top:20px"></div>
+	</article>
+
+	<footer>© Cyberwhale · Deep Sea Notes</footer>
+
+	<script>
+		const users = {
+			admin: { password: "admin", role: "admin" },
+			it: { password: "it", role: "it" },
+			mate: { password: "mate", role: "mate" }
+		};
+
+		/*
+		以后你只需要在这里加文章。
+		file 写你的 Markdown 路径。
+		信息学：/solution/it/xxx.md
+		其他：/solution/mate/xxx.md
+		*/
+		const posts = [
+			{
+				title: "1414 家谱题目题解",
+				file: "/solution/it/1414.md",
+				type: "it",
+				date: "2026-06-06",
+				desc: "结构体 + 递归查找祖先。"
+			},
+			{
+				title: "并查集笔记",
+				file: "/solution/it/并查集笔记.md",
+				type: "it",
+				date: "2026-06-06",
+				desc: "find、join、路径压缩。"
+			},
+			{
+				title: "Cyberwhale 随笔",
+				file: "/solution/mate/cyberwhale.md",
+				type: "mate",
+				date: "2026-06-06",
+				desc: "一些非信息学内容。"
+			}
+		];
+
+		let currentUser = JSON.parse(localStorage.getItem("cw_solution_user") || "null");
+		let filter = "all";
+
+		function login() {
+			let u = document.getElementById("user").value.trim();
+			let p = document.getElementById("pass").value;
+			if (users[u] && users[u].password === p) {
+				currentUser = { name: u, role: users[u].role };
+				localStorage.setItem("cw_solution_user", JSON.stringify(currentUser));
+				showMain();
+			} else document.getElementById("error").style.display = "block";
+		}
+
+		function logout() {
+			localStorage.removeItem("cw_solution_user");
+			currentUser = null;
+			document.getElementById("loginBox").style.display = "block";
+			document.getElementById("main").style.display = "none";
+			document.getElementById("reader").style.display = "none";
+			document.getElementById("logoutBtn").style.display = "none";
+			document.getElementById("roleText").innerText = "";
+		}
+
+		function canRead(post) {
+			return currentUser.role === "admin" || currentUser.role === post.type;
+		}
+
+		function showMain() {
+			document.getElementById("loginBox").style.display = "none";
+			document.getElementById("main").style.display = "block";
+			document.getElementById("reader").style.display = "none";
+			document.getElementById("logoutBtn").style.display = "inline-block";
+			document.getElementById("tabs").style.display = currentUser.role === "admin" ? "flex" : "none";
+			renderPosts();
+		}
+
+		function setFilter(f, el) {
+			filter = f;
+			document.querySelectorAll(".tab").forEach(x => x.classList.remove("active"));
+			el.classList.add("active");
+			renderPosts();
+		}
+
+		function renderPosts() {
+			let box = document.getElementById("posts");
+			box.innerHTML = "";
+			let list = posts.filter(p => canRead(p) && (currentUser.role !== "admin" || filter === "all" || p.type === filter));
+			document.getElementById("empty").style.display = list.length ? "none" : "block";
+			list.forEach(p => {
+				let div = document.createElement("div");
+				div.className = "post card";
+				div.innerHTML = `
+			${currentUser.role === "admin" ? `<span class="tag">${p.type === "it" ? "信息学" : "其他"}</span>` : ""}
+			<h3>${p.title}</h3>
+			<p>${p.desc}</p>
+			<div class="time">${p.date}</div>
+		`;
+				div.onclick = () => openPost(p);
+				box.appendChild(div);
+			});
+		}
+
+		async function openPost(post) {
+			if (!canRead(post)) return;
+			document.getElementById("main").style.display = "none";
+			document.getElementById("reader").style.display = "block";
+			document.getElementById("content").innerHTML = "<p>正在加载...</p>";
+			try {
+				let res = await fetch(post.file);
+				if (!res.ok) throw new Error("404");
+				let md = await res.text();
+				document.getElementById("content").innerHTML = marked.parse(md);
+			} catch (e) {
+				document.getElementById("content").innerHTML = "<h2>加载失败</h2><p>请检查 Markdown 文件路径是否正确。</p><p>" + post.file + "</p>";
+			}
+		}
+
+		function backList() {
+			document.getElementById("reader").style.display = "none";
+			document.getElementById("main").style.display = "block";
+		}
+
+		if (currentUser) showMain();
+	</script>
+</body>
+
+</html>
