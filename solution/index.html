@@ -292,7 +292,7 @@
 			</div>
 			<div class="tabs" id="tabs">
 				<button class="tab active" onclick="setFilter('all',this)">全部</button>
-				<button class="tab" onclick="setFilter('it',this)">信息学</button>
+				<button class="tab" onclick="setFilter('it',this)">信息学基地题解</button>
 				<button class="tab" onclick="setFilter('mate',this)">其他</button>
 			</div>
 		</div>
@@ -309,7 +309,7 @@
 
 	<script>
 		const users = {
-			admin: { password: "admin", role: "admin" },
+			admin: { password: "Anywhere3S", role: "admin" },
 			it: { password: "it", role: "it" },
 			mate: { password: "mate", role: "mate" }
 		};
@@ -322,26 +322,19 @@
 		*/
 		const posts = [
 			{
-				title: "1414 家谱题目题解",
+				title: "1414 题解",
 				file: "/solution/it/1414.md",
 				type: "it",
 				date: "2026-06-06",
 				desc: "结构体 + 递归查找祖先。"
 			},
 			{
-				title: "并查集笔记",
-				file: "/solution/it/并查集笔记.md",
+				title: "5050 题解",
+				file: "/solution/it/5050.md",
 				type: "it",
 				date: "2026-06-06",
-				desc: "find、join、路径压缩。"
+				desc: "Dijkstra。"
 			},
-			{
-				title: "Cyberwhale 随笔",
-				file: "/solution/mate/cyberwhale.md",
-				type: "mate",
-				date: "2026-06-06",
-				desc: "一些非信息学内容。"
-			}
 		];
 
 		let currentUser = JSON.parse(localStorage.getItem("cw_solution_user") || "null");
