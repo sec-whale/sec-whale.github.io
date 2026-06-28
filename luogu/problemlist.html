@@ -4631,3 +4631,34 @@ html {
   margin-top: 0;
 }
 </style><div id="mount" style="display: block;"><div hidden="" id="immersive-translate-popup-overlay" class="immersive-translate-popup-overlay" style="z-index: 2147483647; background-color: rgba(0, 0, 0, 0.5);"><div class="immersive-translate-popup-wrapper" style="position: fixed; top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%);"></div></div></div></template></div></html>
+<style>
+body {
+    padding-bottom: 0 !important;
+}
+
+div[style*="position: fixed"][style*="bottom"],
+div[style*="position:fixed"][style*="bottom"],
+div[style*="bottom: 0px"],
+div[style*="bottom:0"] {
+    position: relative !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    width: auto !important;
+}
+</style>
+
+<script>
+setInterval(function(){
+    document.querySelectorAll('div').forEach(function(div){
+        var text=div.innerText||'';
+        if(text.includes('多选')&&text.includes('共')&&text.includes('页')){
+            div.style.position='relative';
+            div.style.bottom='auto';
+            div.style.left='auto';
+            div.style.right='auto';
+            div.style.width='auto';
+        }
+    });
+},300);
+</script>
